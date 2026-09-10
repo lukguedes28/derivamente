@@ -1338,7 +1338,10 @@ class Component extends DCLogic {
 
   resumeLb() {
     const v = document.querySelector('.pj-lb-video');
-    if (!v || !this.state.lb) return;
+    if (!v || !this.state.lb) { this.lbStarted = null; return; }
+    const key = v.currentSrc || v.src;
+    if (!key || this.lbStarted === key) return;
+    this.lbStarted = key;
     v.volume = 1;
     if (v.paused) { v.muted = false; const p = v.play(); if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); }); }
   }
@@ -1564,7 +1567,7 @@ class Component extends DCLogic {
             href: p.href || '',
             isLink: !!p.href && !(p.hrefs && p.hrefs.length > 1),
             linkLabel: p.linkLabel || 'YouTube',
-            postSlides: p.covers && p.covers.length ? p.covers : (p.group && p.group.length ? p.group : (p.video ? [p.video] : (p.slides || null))),
+            postSlides: (p.covers && p.covers.some(Boolean)) ? p.covers : (p.group && p.group.length ? p.group : (p.video ? [p.video] : (p.slides || null))),
             hrefs: p.hrefs || null,
             parts: p.parts || null,
             selo: p.selo || '',
