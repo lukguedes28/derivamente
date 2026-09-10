@@ -269,7 +269,7 @@ a:hover { color: #232323; }
                 <sc-for list="{{ p.slides }}" as="sl" hint-placeholder-count="3">
                   <span class="pj-idx-slide">
                     <sc-if value="{{ sl.isVideo }}" hint-placeholder-val="{{ false }}">
-                      <video class="pj-idx-video" preload="none" data-vsrc="{{ sl.src }}" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline"></video>
+                      <video class="pj-idx-video" preload="none" data-lazy="{{ sl.src }}" muted="muted" loop="loop" playsinline="playsinline"></video>
                     </sc-if>
                     <sc-if value="{{ sl.isImage }}" hint-placeholder-val="{{ true }}">
                       <image-slot id="{{ sl.id }}" shape="rect" data-vsrc="{{ sl.src }}" placeholder="{{ sl.ph }}"></image-slot>
@@ -751,57 +751,57 @@ const CASES = [
 const catBy = (id) => CATS.find((c) => c.id === id) || { subs: [] };
 
 const CLOTHING = [
-  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-1', img: 'img/design/clothing-1.png',
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-1', img: 'img/design/clothing-1.jpg',
     title: 'RoboCop', year: '20—', role: 'Design de estampa', page: null,
     legenda: 'Camiseta com pôster do filme reinterpretado em estampa.', resumo: 'Camiseta com pôster do filme reinterpretado em estampa.', tags: ['Estampa', 'Cultura pop'] },
-  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-2', img: 'img/design/clothing-2.png',
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-2', img: 'img/design/clothing-2.jpg',
     title: 'Enough', year: '20—', role: 'Design de estampa', page: null,
     legenda: 'Lettering em script com estrelas — peça autoral.', resumo: 'Lettering em script com estrelas — peça autoral.', tags: ['Lettering', 'Autoral'] },
-  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-3', img: 'img/design/clothing-3.png',
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-3', img: 'img/design/clothing-3.jpg',
     title: 'Chuck Timely & The Hourglass', year: '20—', role: 'Merch de banda', page: null,
     legenda: 'Merch de álbum com tracklist nas costas.', resumo: 'Merch de álbum com tracklist nas costas.', tags: ['Merch', 'Música'] },
-  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-4', img: 'img/design/clothing-4.png',
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-4', img: 'img/design/clothing-4.jpg',
     title: 'BAIT — O espírito habita em vós', year: '20—', role: 'Identidade aplicada', page: null,
     legenda: 'Frente e costas para a marca BAIT.', resumo: 'Frente e costas para a marca BAIT.', tags: ['Identidade', 'Streetwear'] }
 ];
 
 const STICKERS = [
-  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-1', img: 'img/design/sticker-1.png',
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-1', img: 'img/design/sticker-1.jpg',
     title: 'Enough — Blãnk', year: '2024', role: 'Design de stickers', page: null,
     legenda: 'Cartela de adesivos do lançamento Enough, colados em muro.', resumo: 'Cartela de adesivos do lançamento Enough.', tags: ['Sticker', 'Blãnk'] },
-  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-2', img: 'img/design/sticker-2.png',
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-2', img: 'img/design/sticker-2.jpg',
     title: 'Chuck Timely & The Hourglass', year: '20—', role: 'Design de stickers', page: null,
     legenda: 'Bumper stickers do álbum, em rosa e amarelo.', resumo: 'Bumper stickers do álbum.', tags: ['Sticker', 'Música'] },
-  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-3', img: 'img/design/sticker-3.png',
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-3', img: 'img/design/sticker-3.jpg',
     title: 'The 1975', year: '20—', role: 'Design de stickers', page: null,
     legenda: 'Série de adesivos com versos da banda.', resumo: 'Série de adesivos com versos da banda.', tags: ['Sticker', 'Cultura pop'] },
-  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-4', img: 'img/design/sticker-4.png',
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-4', img: 'img/design/sticker-4.jpg',
     title: 'Atlética IBMEC', year: '2023.2', role: 'Design de stickers', page: null,
     legenda: 'Adesivos do mascote para a torcida.', resumo: 'Adesivos do mascote para a torcida.', tags: ['Sticker', 'Mascote'] }
 ];
 
 const IDVISUAL = [
-  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-mdc', img: 'img/design/id-mdc.png',
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-mdc', img: 'img/design/id-mdc.jpg',
     title: 'Manchete Disco Club', year: '2026', role: 'Identidade visual', page: null,
     legenda: 'Estudo de logotipo do MDC: variações, ícone e assinaturas até a versão final.',
     resumo: 'Estudo de logotipo do MDC: variações, ícone e assinaturas até a versão final.',
     tags: ["Logotipo","Estudo","Manchete"] },
-  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-blank', img: 'img/design/id-blank.png',
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-blank', img: 'img/design/id-blank.jpg',
     title: 'Blãnk.', year: '2024', role: 'Identidade visual', page: null,
     legenda: 'Logotipo do Blãnk, projeto musical anterior ao Manchete: tipografia com ruído e aberração cromática.',
     resumo: 'Logotipo do Blãnk, projeto musical anterior ao Manchete: tipografia com ruído e aberração cromática.',
     tags: ["Logotipo","Música"] },
-  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-bossa', img: 'img/design/id-bossa.png',
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-bossa', img: 'img/design/id-bossa.jpg',
     title: 'Bossa', year: '2026', role: 'Identidade visual', page: null,
     legenda: 'Logo de agência de publicidade criada em trabalho de faculdade. As curvas nasceram da arquitetura de Oscar Niemeyer — traduzir aquela visão única em letra.',
     resumo: 'Logo de agência de publicidade criada em trabalho de faculdade. As curvas nasceram da arquitetura de Oscar Niemeyer — traduzir aquela visão única em letra.',
     tags: ["Logotipo","Faculdade","Arquitetura"] },
-  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-bait', img: 'img/design/id-bait.png',
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-bait', img: 'img/design/id-bait.jpg',
     title: 'Bait', year: '2026', role: 'Identidade visual', page: null,
     legenda: 'Marca para a célula religiosa de um amigo. Bait significa casa em hebraico — parti da forma da letra B hebraica e busquei o calor de um lugar de acolhimento em linguagem jovem.',
     resumo: 'Marca para a célula religiosa de um amigo. Bait significa casa em hebraico — parti da forma da letra B hebraica e busquei o calor de um lugar de acolhimento em linguagem jovem.',
     tags: ["Logotipo","Hebraico","Comunidade"] },
-  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-fullforce', img: 'img/design/id-fullforce.png',
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-fullforce', img: 'img/design/id-fullforce.jpg',
     title: 'Full Force Energy Drink', year: '2026', role: 'Identidade visual · packaging', page: null,
     legenda: 'Trabalho de faculdade: criar uma marca de energético do zero, do logotipo com punho e raio até a aplicação na lata.',
     resumo: 'Trabalho de faculdade: criar uma marca de energético do zero, do logotipo com punho e raio até a aplicação na lata.',
@@ -988,26 +988,26 @@ const FILMES = [
 ];
 
 const CAPAS = [
-  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-thnks', img: 'img/design/capa-thnks.png',
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-thnks', img: 'img/design/capa-thnks.jpg',
     title: 'THNKS FR LL TH MSS — MDC', year: '2026', role: 'Capa de álbum', page: null,
     legenda: 'Capa do próximo álbum do Manchete Disco Club, ainda em produção.', resumo: 'Capa do próximo álbum do Manchete Disco Club, ainda em produção.', tags: ["Manchete","Álbum","Em produção"] },
-  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-jftr', img: 'img/design/capa-jftr.png',
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-jftr', img: 'img/design/capa-jftr.jpg',
     title: 'JFTR (Just For The Record) — MDC', year: '2026', role: 'Capa de álbum', page: null,
     legenda: 'Capa do primeiro EP do Manchete Disco Club, que firma a transição do Blãnk para o novo nome: reúne as antigas faixas do Blãnk e duas inéditas.', resumo: 'Capa do primeiro EP do Manchete Disco Club, que firma a transição do Blãnk para o novo nome: reúne as antigas faixas do Blãnk e duas inéditas.', tags: ["Manchete","EP","Transição"] },
-  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-enough', img: 'img/design/capa-enough.png',
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-enough', img: 'img/design/capa-enough.jpg',
     title: 'Enough — Blãnk', year: '2024', role: 'Capa de álbum', page: null,
     legenda: 'Última capa do Blãnk, já com a identidade renovada. O álbum não está mais nas plataformas.', resumo: 'Última capa do Blãnk, já com a identidade renovada. O álbum não está mais nas plataformas.', tags: ["Blãnk","Single"] },
-  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-seasons', img: 'img/design/capa-seasons.png',
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-seasons', img: 'img/design/capa-seasons.jpg',
     title: 'Seasons — Blãnk', year: '2024', role: 'Capa de álbum', page: null,
     legenda: 'Capa do Blãnk com a identidade antiga. Fora das plataformas.', resumo: 'Capa do Blãnk com a identidade antiga. Fora das plataformas.', tags: ["Blãnk","Identidade antiga"] },
-  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-clear', img: 'img/design/capa-clear.png',
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-clear', img: 'img/design/capa-clear.jpg',
     title: 'Clear — Blãnk', year: '2024', role: 'Capa de álbum', page: null,
     legenda: 'Primeira capa do Blãnk, com a identidade visual original do projeto. Fora das plataformas.', resumo: 'Primeira capa do Blãnk, com a identidade visual original do projeto. Fora das plataformas.', tags: ["Blãnk","Identidade antiga"] },
 ];
 
 const POSTS = [
   { key: 'design', sub: 'posts', subLabel: 'Posts', slot: 'dz-post-bir27',
-    img: 'img/design/post-bir27-1.png',
+    img: 'img/design/post-bir27-1.jpg',
     title: 'BiR27 — Biomedicina in Rio', year: '20—', role: 'Aplicação de identidade', page: null,
     legenda: 'Identidade do cliente aplicada em peças: cartões, publicação, papelaria, sinalização, bandeiras e credenciais. A identidade não é minha — o trabalho foi torná-la palpável.',
     resumo: 'A pedido do cliente, peguei a identidade existente do BiR27 — cores, tipografia e logo — e a transformei em peças palpáveis: cartões, publicação, papelaria, fachada, bandeiras, mural e credenciais. A criação da identidade não é minha; o trabalho aqui é de aplicação e desdobramento.',
@@ -1028,7 +1028,7 @@ const POSTS = [
     tags: ['Carrossel', 'Eight', 'Saúde'],
     slides: [1,2,3].map((n) => 'img/design/post-eight-cirurgias-' + n + '.jpg') },
   { key: 'design', sub: 'posts', subLabel: 'Posts', slot: 'dz-post-origem-sabor',
-    img: 'img/design/post-origem-sabor-1.png',
+    img: 'img/design/post-origem-sabor-1.jpg',
     title: 'O sabor do marketing', year: '2026', role: 'Direção de arte · Origem', page: null,
     legenda: 'Carrossel de 9 telas para a Origem sobre food marketing: colagem com fruta, papel rasgado e etiquetas.',
     resumo: 'Carrossel de 9 telas para a Origem sobre food marketing: como a comida virou linguagem de conexão para marcas de moda, beleza e varejo.',
@@ -1042,64 +1042,64 @@ const ARTES = [
     legenda: 'Trabalho de faculdade em Marketing: campanha para uma série fictícia da Netflix a partir do 1984 de Orwell.',
     resumo: 'Trabalho de faculdade em Marketing: campanha para uma série fictícia da Netflix a partir do 1984 de Orwell.',
     tags: ["Poster art","Campanha","Faculdade"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-spiderman2', img: 'img/design/arte-spiderman2.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-spiderman2', img: 'img/design/arte-spiderman2.jpg',
     title: 'Spider-Man — Brand New Day', year: '2026', role: 'Poster art', page: null,
     legenda: 'Pôster em duotone vermelho com trama de teia desenhada à mão.', resumo: 'Pôster em duotone vermelho com trama de teia desenhada à mão.', tags: ["Poster art","Marvel"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-postfolio', img: 'img/design/arte-postfolio.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-postfolio', img: 'img/design/arte-postfolio.jpg',
     title: 'Postfólio @deriva.mente', year: '2026', role: 'Poster art', page: null,
     legenda: 'Capa de série do perfil: pasta de arquivo em rosa e vermelho.', resumo: 'Capa de série do perfil: pasta de arquivo em rosa e vermelho.', tags: ["Poster art","Deriva.Mente"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-doom', img: 'img/design/arte-doom.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-doom', img: 'img/design/arte-doom.jpg',
     title: 'Avengers: Doomsday — DOOM', year: '2026', role: 'Poster art', page: null,
     legenda: 'Duotone verde com tipografia comprimida atrás da figura.', resumo: 'Duotone verde com tipografia comprimida atrás da figura.', tags: ["Poster art","Marvel"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-control-eye', img: 'img/design/arte-control-eye.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-control-eye', img: 'img/design/arte-control-eye.jpg',
     title: 'The Grumes — Control (olho)', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz de single: tipografia condensada sobre macro de íris.', resumo: 'Cartaz de single: tipografia condensada sobre macro de íris.', tags: ["Poster art","Música"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-odisseia', img: 'img/design/arte-odisseia.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-odisseia', img: 'img/design/arte-odisseia.jpg',
     title: 'A Odisseia', year: '2026', role: 'Poster art', page: null,
     legenda: 'Releitura do filme de Nolan em colagem azul e laranja.', resumo: 'Releitura do filme de Nolan em colagem azul e laranja.', tags: ["Poster art","Cinema"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-webelong', img: 'img/design/arte-webelong.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-webelong', img: 'img/design/arte-webelong.jpg',
     title: 'We Belong Together — Tour', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz de show com bloco de letra e texto corrido ao fundo.', resumo: 'Cartaz de show com bloco de letra e texto corrido ao fundo.', tags: ["Poster art","Show"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-terminei', img: 'img/design/arte-terminei.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-terminei', img: 'img/design/arte-terminei.jpg',
     title: 'Terminei! (só falta ajeitar uma coisinha)', year: '2026', role: 'Poster art', page: null,
     legenda: 'Peça bem-humorada sobre o processo criativo.', resumo: 'Peça bem-humorada sobre o processo criativo.', tags: ["Poster art","Autoral"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-mdc-boasvindas', img: 'img/design/arte-mdc-boasvindas.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-mdc-boasvindas', img: 'img/design/arte-mdc-boasvindas.jpg',
     title: 'MDC — Boas vindas', year: '2026', role: 'Poster art', page: null,
     legenda: 'Peça de boas-vindas do Manchete Disco Club em azul cromado.', resumo: 'Peça de boas-vindas do Manchete Disco Club em azul cromado.', tags: ["Poster art","Manchete"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-marianne', img: 'img/design/arte-marianne.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-marianne', img: 'img/design/arte-marianne.jpg',
     title: 'Fontaines D.C. — Marianne', year: '2026', role: 'Poster art', page: null,
     legenda: 'Lettering gótico sobre gradiente azul.', resumo: 'Lettering gótico sobre gradiente azul.', tags: ["Poster art","Música"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-realidade', img: 'img/design/arte-realidade.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-realidade', img: 'img/design/arte-realidade.jpg',
     title: 'A realidade é um alívio', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz sobre ansiedade: cérebro em magenta sobre vermelho.', resumo: 'Cartaz sobre ansiedade: cérebro em magenta sobre vermelho.', tags: ["Poster art","Autoral"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-terra', img: 'img/design/arte-terra.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-terra', img: 'img/design/arte-terra.jpg',
     title: 'Isso aqui tá uma p*rra', year: '2026', role: 'Poster art', page: null,
     legenda: 'Perspectiva cósmica sobre problemas terrestres.', resumo: 'Perspectiva cósmica sobre problemas terrestres.', tags: ["Poster art","Autoral"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-alien', img: 'img/design/arte-alien.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-alien', img: 'img/design/arte-alien.jpg',
     title: 'Alien', year: '2026', role: 'Poster art', page: null,
     legenda: 'Releitura minimalista em verde fosforescente.', resumo: 'Releitura minimalista em verde fosforescente.', tags: ["Poster art","Cinema"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-keyboard', img: 'img/design/arte-keyboard.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-keyboard', img: 'img/design/arte-keyboard.jpg',
     title: 'Why you have such CTRL', year: '2026', role: 'Poster art', page: null,
     legenda: 'Peça tipográfica montada com teclas de teclado.', resumo: 'Peça tipográfica montada com teclas de teclado.', tags: ["Poster art","Tipografia"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-balu', img: 'img/design/arte-balu.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-balu', img: 'img/design/arte-balu.jpg',
     title: 'Balu Brigada — Bedhead', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz de faixa em duotone azul.', resumo: 'Cartaz de faixa em duotone azul.', tags: ["Poster art","Música"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-mdc-poster', img: 'img/design/arte-mdc-poster.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-mdc-poster', img: 'img/design/arte-mdc-poster.jpg',
     title: 'Manchete Disco Club — Thnks fr ll th mss', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz monocromático azul com lettering em script.', resumo: 'Cartaz monocromático azul com lettering em script.', tags: ["Poster art","Manchete"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-chuck', img: 'img/design/arte-chuck.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-chuck', img: 'img/design/arte-chuck.jpg',
     title: 'Chuck Timely & The Hourglass', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz do projeto em amarelo e magenta, com espelhamento.', resumo: 'Cartaz do projeto em amarelo e magenta, com espelhamento.', tags: ["Poster art","Música"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-lanternas', img: 'img/design/arte-lanternas.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-lanternas', img: 'img/design/arte-lanternas.jpg',
     title: 'Lanternas', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz da série em verde com halftone pesado.', resumo: 'Cartaz da série em verde com halftone pesado.', tags: ["Poster art","Série"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-xmen', img: 'img/design/arte-xmen.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-xmen', img: 'img/design/arte-xmen.jpg',
     title: 'Astonishing X-Men', year: '2026', role: 'Poster art', page: null,
     legenda: 'Elenco em halftone amarelo e preto com logo em vermelho.', resumo: 'Elenco em halftone amarelo e preto com logo em vermelho.', tags: ["Poster art","Marvel"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-grumes', img: 'img/design/arte-grumes.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-grumes', img: 'img/design/arte-grumes.jpg',
     title: 'The Grumes — Control (banda)', year: '2026', role: 'Poster art', page: null,
     legenda: 'Versão fotográfica do cartaz, em blocos preto e branco.', resumo: 'Versão fotográfica do cartaz, em blocos preto e branco.', tags: ["Poster art","Música"] },
-  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-djo', img: 'img/design/arte-djo.png',
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-djo', img: 'img/design/arte-djo.jpg',
     title: 'Djo — Delete Ya', year: '2026', role: 'Poster art', page: null,
     legenda: 'Cartaz editorial em amarelo com letra da faixa.', resumo: 'Cartaz editorial em amarelo com letra da faixa.', tags: ["Poster art","Música"] }
 ];
@@ -1190,7 +1190,7 @@ class Component extends DCLogic {
       }
     }
     this.applySrcs = () => {
-      document.querySelectorAll('[data-vsrc]').forEach((el) => {
+      document.querySelectorAll('[data-vsrc]:not(.pj-idx-video)').forEach((el) => {
         const v = el.getAttribute('data-vsrc');
         if (!v || v.indexOf('{{') !== -1) return;
         el.removeAttribute('data-vsrc');
@@ -1349,7 +1349,11 @@ class Component extends DCLogic {
       v.loop = true;
       v.playsInline = true;
       const ativo = !!v.closest('.pj-idx-row[data-open="1"]');
-      if (ativo) { if (v.paused) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); } }
+      if (ativo) {
+        const lazy = v.getAttribute('data-lazy');
+        if (lazy && !v.src) { v.src = lazy; v.load(); }
+        if (v.paused) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+      }
       else if (!v.paused) { v.pause(); v.currentTime = 0; }
     });
   }
