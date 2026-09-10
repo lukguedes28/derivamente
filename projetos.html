@@ -235,7 +235,7 @@ a:hover { color: #232323; }
   <section style="padding:clamp(48px,9vw,120px) clamp(16px,4vw,64px) 40px;border-bottom:1px solid #232323">
     <p style="margin:0 0 24px;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#002DD9">Índice de trabalhos</p>
     <h1 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(3rem,11vw,9rem);line-height:0.9;letter-spacing:-0.01em;color:#002DD9">Projetos</h1>
-    <p style="max-width:52ch;margin:28px 0 0;font-size:clamp(0.85rem,1vw,0.95rem);line-height:1.7;letter-spacing:0.02em">Quatro frentes de trabalho, um mesmo método: pensar a imagem como linguagem. Os estudos de caso entram aqui aos poucos.</p>
+    <p style="max-width:52ch;margin:28px 0 0;font-size:clamp(0.85rem,1vw,0.95rem);line-height:1.7;letter-spacing:0.02em">Três frentes de trabalho, um mesmo método: pensar a imagem como linguagem. Os estudos de caso entram aqui aos poucos.</p>
   </section>
 
   <div style="position:sticky;top:var(--dm-bar-top,70px);transition:top 320ms cubic-bezier(0.22,1,0.36,1);z-index:15;background:#FFFCEE;border-bottom:1px solid #232323;padding:14px clamp(16px,4vw,64px);display:flex;gap:10px;flex-wrap:wrap">
@@ -1178,6 +1178,17 @@ class Component extends DCLogic {
 
   componentDidMount() {
     document.body.classList.add('js-reveal');
+    const hash = (location.hash || '').replace('#', '');
+    if (hash) {
+      const cat = CATS.find((c) => c.id === hash && !c.oculto);
+      if (cat) {
+        this.state = Object.assign({}, this.state, { filter: cat.key });
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+        }, 700);
+      }
+    }
     this.applySrcs = () => {
       document.querySelectorAll('[data-vsrc]').forEach((el) => {
         const v = el.getAttribute('data-vsrc');

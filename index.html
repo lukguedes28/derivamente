@@ -27,6 +27,7 @@ a:hover { color: var(--dm-yellow,#FFBF00); }
 @keyframes dm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes dm-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes dm-logo { from { opacity: 0; transform: translate(-50%,-50%) scale(1.05); } to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+.hm-prev { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; pointer-events: none; background: #0B0E18; }
 @keyframes dm-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 .js-reveal [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1); }
 .js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
@@ -138,8 +139,8 @@ a:hover { color: var(--dm-yellow,#FFBF00); }
         <a href="projetos.html#filmmaking" data-reveal="" style="display:flex;flex-direction:column;color:var(--dm-proj-ink,#FFFCEE);transition:opacity 500ms ease,transform 500ms ease;position:relative" style-hover="transform:translateY(-10px)">
           <span style="align-self:flex-start;display:flex;align-items:center;gap:8px;padding:7px 20px 6px;border:1px solid var(--dm-proj-line,rgba(255,252,238,0.45));border-bottom:0;border-radius:10px 14px 0 0;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--dm-red,#FF0000);color:#232323;transform:translateY(1px)">{{ p.cat }}</span>
           <span style="display:flex;flex-direction:column;border:1px solid var(--dm-proj-line,rgba(255,252,238,0.45));border-radius:0 10px 10px 10px;overflow:hidden;transition:border-color 240ms,box-shadow 240ms cubic-bezier(0.22,1,0.36,1)" style-hover="border-color:var(--dm-red,#FF0000);box-shadow:10px 12px 0 var(--dm-red,#FF0000)">
-            <span style="position:relative;display:block;aspect-ratio:16/9;border-bottom:1px solid var(--dm-proj-line,rgba(255,252,238,0.45))">
-              <image-slot id="{{ p.slot }}" shape="rect" placeholder="{{ p.ph }}"></image-slot>
+            <span class="hm-film" style="position:relative;display:block;aspect-ratio:9/16;overflow:hidden;border-bottom:1px solid var(--dm-proj-line,rgba(255,252,238,0.45))">
+              <video class="hm-prev" data-vsrc="{{ p.video }}" preload="metadata" muted="muted" loop="loop" playsinline="playsinline"></video>
             </span>
             <span style="padding:16px 18px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px">
               <span style="display:flex;flex-direction:column;gap:8px;min-width:0">
@@ -293,11 +294,28 @@ class Component extends DCLogic {
       if (!v || v.indexOf('{{') !== -1) return;
       el.removeAttribute('data-vsrc');
       el.setAttribute('src', v);
+      if (el.tagName === 'VIDEO') { try { el.load(); } catch (err) {} }
     });
   }
 
   componentDidMount() {
     this.applyTheme();
+    this.onOver = (e) => {
+      const a = e.target.closest && e.target.closest('a');
+      if (!a) return;
+      const v = a.querySelector('.hm-prev');
+      if (!v) return;
+      v.muted = true; v.currentTime = 0;
+      const p = v.play(); if (p && p.catch) p.catch(() => {});
+    };
+    this.onOut = (e) => {
+      const a = e.target.closest && e.target.closest('a');
+      if (!a || (e.relatedTarget && a.contains(e.relatedTarget))) return;
+      const v = a.querySelector('.hm-prev');
+      if (v) { v.pause(); v.currentTime = 0; }
+    };
+    document.addEventListener('mouseover', this.onOver, true);
+    document.addEventListener('mouseout', this.onOut, true);
     this.applySrcs();
     this.srcTimer = setInterval(() => this.applySrcs(), 300);
     document.body.classList.add('js-reveal');
@@ -354,6 +372,8 @@ class Component extends DCLogic {
 
   componentWillUnmount() {
     clearInterval(this.srcTimer);
+    document.removeEventListener('mouseover', this.onOver, true);
+    document.removeEventListener('mouseout', this.onOut, true);
     if (this.io) this.io.disconnect();
     if (this.titleIo) this.titleIo.disconnect();
     window.removeEventListener('scroll', this.onScroll);
@@ -383,9 +403,9 @@ class Component extends DCLogic {
         { n: '03', title: 'Terminei!', cat: 'Cartaz', slot: 'home-design-3', ph: 'cartaz 3:4', src: 'img/terminei.png' }
       ],
       filmHighlights: [
-        { n: '01', title: 'Projeto a definir', cat: 'Videoclipe', slot: 'home-film-1', ph: 'still 16:9' },
-        { n: '02', title: 'Projeto a definir', cat: 'Branded content', slot: 'home-film-2', ph: 'still 16:9' },
-        { n: '03', title: 'Projeto a definir', cat: 'Curta / doc', slot: 'home-film-3', ph: 'still 16:9' }
+        { n: '01', title: 'Not a Creator Yet — corte', cat: 'Cortes · NYB', slot: 'home-film-1', ph: 'still 9:16', src: 'img/film/still-nyb-corte-1.png', video: 'img/film/nyb-corte-1.mp4' },
+        { n: '02', title: 'Campanha — Silva Gym', cat: 'Campanha', slot: 'home-film-2', ph: 'still 9:16', src: 'img/film/still-silvagym.png', video: 'img/film/camp-silvagym.mp4' },
+        { n: '03', title: 'Deriva.Mente — Delete Ya', cat: 'Autoral', slot: 'home-film-3', ph: 'still 9:16', src: 'img/film/still-delete-ya.png', video: 'img/film/dm-delete-ya.mp4' }
       ]
     };
   }
