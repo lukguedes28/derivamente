@@ -228,9 +228,9 @@ a:hover { color: #FF00EE; }
               <div class="exp-folder" style="order:2;--fd:{{ exp.accent }}">
                 <span class="fd-tab"></span>
                 <span class="fd-back"></span>
-                <span class="fd-art fd-a1"><image-slot id="{{ exp.a1 }}" shape="rect" src="{{ exp.s1 }}" placeholder="+"></image-slot></span>
-                <span class="fd-art fd-a2"><image-slot id="{{ exp.a2 }}" shape="rect" src="{{ exp.s2 }}" placeholder="+"></image-slot></span>
-                <span class="fd-art fd-a3"><image-slot id="{{ exp.a3 }}" shape="rect" src="{{ exp.s3 }}" placeholder="+"></image-slot></span>
+                <span class="fd-art fd-a1"><image-slot id="{{ exp.a1 }}" shape="rect" data-vsrc="{{ exp.s1 }}" placeholder="+"></image-slot></span>
+                <span class="fd-art fd-a2"><image-slot id="{{ exp.a2 }}" shape="rect" data-vsrc="{{ exp.s2 }}" placeholder="+"></image-slot></span>
+                <span class="fd-art fd-a3"><image-slot id="{{ exp.a3 }}" shape="rect" data-vsrc="{{ exp.s3 }}" placeholder="+"></image-slot></span>
                 <span class="fd-front"></span>
                 <span class="fd-hint">Artes</span>
               </div>
@@ -411,14 +411,14 @@ a:hover { color: #FF00EE; }
             <span class="int-label" style="color:#FF00EE">Música</span>
             <span class="int-row">
               <span class="int-item"><span class="int-cell"><image-slot id="int-musica-1" shape="rect" src="img/int-musica-1.jpeg" placeholder="álbum"></image-slot></span><span class="int-cap">1975 — BFIFL</span></span>
-              <span class="int-item"><span class="int-cell"><image-slot id="int-musica-2" shape="rect" src="img/int-musica-2.png" placeholder="álbum"></image-slot></span><span class="int-cap">MANCHETE DISCO CLUB — JFTR</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-musica-2" shape="rect" src="img/int-musica-2-min.jpg" placeholder="álbum"></image-slot></span><span class="int-cap">MANCHETE DISCO CLUB — JFTR</span></span>
               <span class="int-item"><span class="int-cell"><image-slot id="int-musica-3" shape="rect" src="img/int-musica-3b.jpeg" placeholder="álbum"></image-slot></span><span class="int-cap">HARRY STYLES — KATTDO</span></span>
             </span>
           </span>
           <span class="int-panel p-fotografia" style="--int:#FFBF00">
             <span class="int-label" style="color:#FFBF00">Fotografia</span>
             <span class="int-row">
-              <span class="int-cell"><image-slot id="int-fotografia-1" shape="rect" src="img/int-foto-1.jpg" placeholder="foto"></image-slot></span>
+              <span class="int-cell"><image-slot id="int-fotografia-1" shape="rect" src="img/int-foto-1-min.jpg" placeholder="foto"></image-slot></span>
               <span class="int-cell"><image-slot id="int-fotografia-2" shape="rect" src="img/int-foto-2.jpg" placeholder="foto"></image-slot></span>
               <span class="int-cell"><image-slot id="int-fotografia-3" shape="rect" src="img/int-foto-3.jpg" placeholder="foto"></image-slot></span>
             </span>
@@ -427,9 +427,9 @@ a:hover { color: #FF00EE; }
           <span class="int-panel p-cinema" style="--int:#FF0000">
             <span class="int-label" style="color:#FF0000">Cinema</span>
             <span class="int-row">
-              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-1" shape="rect" fit="contain" src="img/int-cinema-1.png" placeholder="filme"></image-slot></span><span class="int-cap">DE VOLTA PARA O FUTURO</span></span>
-              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-2" shape="rect" fit="contain" src="img/int-cinema-2.png" placeholder="filme"></image-slot></span><span class="int-cap">GIGANTE DE FERRO</span></span>
-              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-3" shape="rect" fit="contain" src="img/int-cinema-3.png" placeholder="filme"></image-slot></span><span class="int-cap">DUNA — PARTE 2</span></span>
+              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-1" shape="rect" fit="contain" src="img/int-cinema-1-min.jpg" placeholder="filme"></image-slot></span><span class="int-cap">DE VOLTA PARA O FUTURO</span></span>
+              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-2" shape="rect" fit="contain" src="img/int-cinema-2-min.jpg" placeholder="filme"></image-slot></span><span class="int-cap">GIGANTE DE FERRO</span></span>
+              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-3" shape="rect" fit="contain" src="img/int-cinema-3-min.jpg" placeholder="filme"></image-slot></span><span class="int-cap">DUNA — PARTE 2</span></span>
             </span>
           </span>
           <span class="int-panel p-design" style="--int:#002DD9">
@@ -473,7 +473,7 @@ a:hover { color: #FF00EE; }
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 const ITEMS = [
-  { year: '2017', org: 'Escola Zion — Design Gráfico', short: 'Escola Zion', thumb: 'img/escola-zion.png', tag: 'Formação', text: 'Início dos estudos em Design e aprendizado das bases do Photoshop — a primeira gramática visual.' },
+  { year: '2017', org: 'Escola Zion — Design Gráfico', short: 'Escola Zion', thumb: 'img/escola-zion-min.jpg', tag: 'Formação', text: 'Início dos estudos em Design e aprendizado das bases do Photoshop — a primeira gramática visual.' },
   { year: '2021', org: 'MK Academy — Edição de Vídeo', short: 'MK Academy', thumb: 'img/mk-academy.jpg', tag: 'Formação', text: 'Curso de Edição de Vídeo. A imagem passa a ter tempo, ritmo e corte.' },
   { year: '2021', org: 'UVA — Curso Tecnólogo · Cinema & Audiovisual', short: 'UVA', thumb: 'img/uva.webp', tag: 'Graduação', text: 'Início da graduação em Cinema e Audiovisual (técnologo) — narrativa, direção e linguagem cinematográfica.' },
   { year: '2023', org: 'IBMEC — Publicidade e Propaganda', short: 'IBMEC', thumb: 'img/ibmec.jpeg', tag: 'Graduação', text: 'Transição para Publicidade e Propaganda: juntar repertório visual com estratégia e mercado.' },
@@ -570,7 +570,18 @@ class Component extends DCLogic {
     curtain.style.animation = 'dm-curtain 2500ms cubic-bezier(0.05,0.85,0.2,1) forwards';
   }
 
+  applySrcs() {
+    document.querySelectorAll('[data-vsrc]').forEach((el) => {
+      const v = el.getAttribute('data-vsrc');
+      if (!v || v.indexOf('{{') !== -1) return;
+      el.removeAttribute('data-vsrc');
+      el.setAttribute('src', v);
+    });
+  }
+
   componentDidMount() {
+    this.applySrcs();
+    this.srcTimer = setInterval(() => this.applySrcs(), 300);
     document.body.classList.add('js-reveal');
     this.headerMotion();
     this.motionReady = false;
@@ -661,7 +672,7 @@ class Component extends DCLogic {
     });
   }
 
-  componentDidUpdate() { this.observe();  this.splitTitles(); }
+  componentDidUpdate() { try { this.applySrcs(); } catch (err) {} this.observe();  this.splitTitles(); }
   headerMotion() {
     const h = document.querySelector('[data-header]');
     if (!h) return;
@@ -682,6 +693,7 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    clearInterval(this.srcTimer);
     if (this.io) this.io.disconnect();
     if (this.titleIo) this.titleIo.disconnect();
     window.removeEventListener('scroll', this.onScroll);

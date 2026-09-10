@@ -148,7 +148,7 @@ a:hover { color: #232323; }
 @media (max-width: 620px) { .pj-gal-nav { width: 36px; height: 36px; } }
 .pj-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,240px), 1fr)); gap: clamp(10px,1.4vw,18px); }
 .pj-row-wrap { position: relative; }
-.pj-row-view { overflow: hidden; padding: 0 26px 26px; margin: 0 -26px -26px; }
+.pj-row-view { overflow: hidden; padding: 0 26px 26px; margin: 0 -26px -26px; -webkit-mask-image: linear-gradient(to right, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%); mask-image: linear-gradient(to right, transparent 0, #000 26px, #000 calc(100% - 26px), transparent 100%); }
 .pj-row-track { display: flex; align-items: flex-start; gap: clamp(10px,1.4vw,18px); transition: transform 620ms cubic-bezier(0.22,1,0.36,1); }
 .pj-row-track > .pj-tile { flex: 0 0 calc((100% - 2 * clamp(10px,1.4vw,18px)) / 3); }
 @media (max-width: 860px) { .pj-row-track > .pj-tile { flex: 0 0 calc((100% - clamp(10px,1.4vw,18px)) / 2); } }
@@ -704,35 +704,35 @@ const MUSIC = [
 
 const CASES = [
   {
-    key: 'cases', slot: 'pj-case-derivamente', tint: '#FFBF00', img: 'img/slots/pj-case-derivamente.png', imgWide: 'img/slots/pj-case-derivamente-wide.png', gal: ['img/slots/pj-case-derivamente-wide.png', 'img/slots/pj-case-derivamente-g2.png', 'img/slots/pj-case-derivamente-g3.mp4'], title: 'Deriva.Mente', year: '2026',
+    key: 'cases', slot: 'pj-case-derivamente', tint: '#FFBF00', img: 'img/slots/pj-case-derivamente.jpg', imgWide: 'img/slots/pj-case-derivamente-wide.jpg', gal: ['img/slots/pj-case-derivamente-wide.jpg', 'img/slots/pj-case-derivamente-g2.jpg', 'img/slots/pj-case-derivamente-g3.mp4'], title: 'Deriva.Mente', year: '2026',
     role: 'Projeto autoral', page: null, subLabel: 'Identidade visual',
     credito: 'Projeto integralmente meu',
     resumo: 'Meu espaço para mostrar o lado profissional sem abrir mão da veia artística. O perfil vive de cultura pop, conteúdo de design e — em breve — filmmaking, com poster arts de filmes como principal linguagem. Experimental e informativo ao mesmo tempo, pensado para atrair quem se interessa pela minha forma de ler o mundo.',
     frentes: ['Identidade visual', 'Conceito', 'Conteúdo']
   },
   {
-    key: 'cases', slot: 'pj-case-manchete', tint: '#FF00EE', img: 'img/slots/pj-case-manchete-preview.png', imgWide: '', gal: ['img/slots/pj-case-manchete-g1.png', 'img/slots/pj-case-manchete-g2.png', 'img/slots/pj-case-manchete-g3.mp4'], title: 'Manchete Disco Club', year: '2026',
+    key: 'cases', slot: 'pj-case-manchete', tint: '#FF00EE', img: 'img/slots/pj-case-manchete-preview.jpg', imgWide: '', gal: ['img/slots/pj-case-manchete-g1.jpg', 'img/slots/pj-case-manchete-g2.jpg', 'img/slots/pj-case-manchete-g3.mp4'], title: 'Manchete Disco Club', year: '2026',
     role: 'Projeto autoral · direção criativa', page: null, subLabel: 'Identidade visual',
     credito: 'Projeto integralmente meu · sucessor do Blãnk (2024)',
     resumo: 'Meu projeto musical atual. Nasceu como Blãnk em 2024, de forma amadora: eu tinha conceito e pouca noção da parte burocrática. Ao entender melhor o meio, reestruturei tudo e mudei o nome. Identidade visual, conteúdo, produção fonográfica e toda a base são criados por mim.',
     frentes: ['Identidade visual', 'Capas', 'Produção fonográfica']
   },
   {
-    key: 'cases', slot: 'pj-case-tedx', tint: '#FF0000', img: 'img/slots/pj-case-tedx-preview.png', imgWide: '', gal: ['img/slots/pj-case-tedx-g1.png', 'img/slots/pj-case-tedx-g2.png', 'img/slots/pj-case-tedx-g3.png'], title: 'TEDx IBMEC', year: '2025',
+    key: 'cases', slot: 'pj-case-tedx', tint: '#FF0000', img: 'img/slots/pj-case-tedx-preview.jpg', imgWide: '', gal: ['img/slots/pj-case-tedx-g1.jpg', 'img/slots/pj-case-tedx-g2.jpg', 'img/slots/pj-case-tedx-g3.jpg'], title: 'TEDx IBMEC', year: '2025',
     role: 'Design · edição de vídeo', page: null, subLabel: 'Multi-frente',
     credito: 'Design em equipe · brindes, decoração e vídeos de anúncio sob minha responsabilidade',
     resumo: 'Projeto completo do evento, com o design dividido entre várias pessoas. Cuidei da caracterização de brindes e de itens de decoração, além de editar os vídeos de anúncio do evento.',
     frentes: ['Brindes', 'Decoração', 'Design', 'Impressos', 'Peças digitais', 'Edição de vídeo']
   },
   {
-    key: 'cases', slot: 'pj-case-atletica', tint: '#15BF00', img: 'img/slots/pj-case-atletica-preview.png', imgWide: '', gal: ['img/slots/pj-case-atletica-g1.png', 'img/slots/pj-case-atletica-g2.png', 'img/slots/pj-case-atletica-g3.mp4'], title: 'Atlética IBMEC', year: '2023.2',
+    key: 'cases', slot: 'pj-case-atletica', tint: '#15BF00', img: 'img/slots/pj-case-atletica-preview.jpg', imgWide: '', gal: ['img/slots/pj-case-atletica-g1.jpg', 'img/slots/pj-case-atletica-g2.jpg', 'img/slots/pj-case-atletica-g3.mp4'], title: 'Atlética IBMEC', year: '2023.2',
     role: 'Diretor audiovisual', page: null, subLabel: 'Multi-frente',
     credito: 'Identidade visual em colaboração · direção audiovisual sob minha responsabilidade',
     resumo: 'Rebranding feito em colaboração e desdobrado em conteúdo. Minha frente principal era o audiovisual, como diretor; nos posts, contribuí com peças individuais dentro da linha criada em equipe.',
     frentes: ['Direção audiovisual', 'Rebranding', 'Design posts']
   },
   {
-    key: 'cases', slot: 'pj-case-nyb', tint: '#15BF00', img: 'img/slots/pj-case-nyb-preview.png', imgWide: '', gal: ['img/slots/pj-case-nyb-g1.mp4', 'img/slots/pj-case-nyb-g2.mp4', 'img/slots/pj-case-nyb-g3.mp4'],
+    key: 'cases', slot: 'pj-case-nyb', tint: '#15BF00', img: 'img/slots/pj-case-nyb-preview.jpg', imgWide: '', gal: ['img/slots/pj-case-nyb-g1.mp4', 'img/slots/pj-case-nyb-g2.mp4', 'img/slots/pj-case-nyb-g3.mp4'],
     title: 'Not Yet Brasil', year: '2026.1',
     role: 'Editor de vídeo · design', page: null, subLabel: 'Multi-frente',
     credito: 'Edição de vídeo como frente principal · demandas de design em paralelo',
@@ -740,7 +740,7 @@ const CASES = [
     frentes: ['Edição de vídeo', 'YouTube', 'Reels', 'Gestão de canais', 'Institucional', 'Design']
   },
   {
-    key: 'cases', slot: 'pj-case-origem', tint: '#FFBF00', img: 'img/slots/pj-case-origem-preview.png', imgWide: '', gal: ['img/slots/pj-case-origem-g1.png', 'img/slots/pj-case-origem-g2.png', 'img/slots/pj-case-origem-g3.png'], title: 'Origem', year: '2026',
+    key: 'cases', slot: 'pj-case-origem', tint: '#FFBF00', img: 'img/slots/pj-case-origem-preview.jpg', imgWide: '', gal: ['img/slots/pj-case-origem-g1.jpg', 'img/slots/pj-case-origem-g2.jpg', 'img/slots/pj-case-origem-g3.jpg'], title: 'Origem', year: '2026',
     role: 'Diretor de arte', page: null, subLabel: 'Design',
     credito: 'Direção de arte no núcleo da agência-escola da ESPM',
     resumo: 'Direção de arte na agência-escola da ESPM: reformulação da presença visual, rebranding do perfil principal, linha de posts e apresentações institucionais.',
@@ -1334,7 +1334,7 @@ class Component extends DCLogic {
     });
   }
 
-  componentDidUpdate() { try { this.applySrcs(); } catch (err) {} try { this.observe(); } catch (err) {} try { this.splitTitles(); } catch (err) {} requestAnimationFrame(() => { this.animateOpenTitle(); this.playVideos(); this.resumeLb(); }); }
+  componentDidUpdate() { try { this.applySrcs(); } catch (err) {} try { this.observe(); } catch (err) {} try { this.splitTitles(); } catch (err) {} requestAnimationFrame(() => { try { this.animateOpenTitle(); } catch (err) {} try { this.playVideos(); } catch (err) {} try { this.resumeLb(); } catch (err) {} }); }
 
   resumeLb() {
     const v = document.querySelector('.pj-lb-video');
