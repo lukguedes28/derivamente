@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preload" href="fonts/Workbench-Variable.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="fonts/OCRB.otf" as="font" type="font/otf" crossorigin="anonymous">
+<link rel="preload" href="fonts/EndlessSunriseAlternative.otf" as="font" type="font/otf" crossorigin="anonymous">
+<link rel="preload" href="fonts/Monofett.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="fonts/Jersey20.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<style>
+@font-face { font-family: "Workbench"; src: url("fonts/Workbench-Variable.ttf") format("truetype-variations"); font-weight: 100 900; font-display: block; }
+@font-face { font-family: "OCRB"; src: url("fonts/OCRB.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "EndlessSunrise"; src: url("fonts/EndlessSunriseAlternative.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "Monofett"; src: url("fonts/Monofett.ttf") format("truetype"); font-display: block; }
+@font-face { font-family: "Jersey"; src: url("fonts/Jersey20.ttf") format("truetype"); font-display: block; }
+html, body { margin: 0; padding: 0; background: #FFFCEE; }
+a { color: #002DD9; text-decoration: none; }
+a:hover { color: #FF00EE; }
+.js-reveal [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1); }
+.js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+.js-reveal .dm-split .dm-ch { display: inline-block; opacity: 0; transform: translateY(0.45em); transition: opacity 420ms cubic-bezier(0.22,1,0.36,1), transform 420ms cubic-bezier(0.22,1,0.36,1); }
+.js-reveal .dm-split.is-in .dm-ch { opacity: 1; transform: none; }
+.js-reveal .dm-type .dm-ch { transform: none; transition: opacity 1ms linear; }
+.js-reveal .dm-type .dm-caret { display: inline-block; width: 0.06em; min-width: 3px; height: 0.82em; margin-left: 0.08em; vertical-align: -0.06em; background: currentColor; opacity: 0; }
+.js-reveal .dm-type.is-in .dm-caret { animation: dm-blink 640ms steps(1) infinite; }
+@keyframes dm-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes dm-wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes dm-curtain { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+.exp-body { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 540ms cubic-bezier(0.22,1,0.36,1), opacity 380ms ease; }
+[data-open="1"] .exp-body { max-height: 900px; opacity: 1; overflow: visible; }
+.exp-arrow { display: inline-block; font-size: 0.9rem; line-height: 1; transition: transform 300ms cubic-bezier(0.22,1,0.36,1); }
+[data-open="1"] .exp-arrow { transform: rotate(180deg); }
+.exp-folder { position: relative; width: clamp(200px,24vw,320px); aspect-ratio: 1/1; margin-left: auto; margin-right: clamp(28px,5vw,90px); align-self: start; flex: 0 0 auto; }
+.exp-folder .fd-tab { position: absolute; left: 4%; top: 22%; width: 44%; height: 16%; background: var(--fd,#FFBF00); border: 1px solid #232323; border-bottom: 0; border-radius: 5px 8px 0 0; z-index: 1; }
+.exp-folder .fd-back { position: absolute; left: 4%; top: 34%; right: 4%; bottom: 12%; background: #FFFCEE; border: 1px solid #232323; border-radius: 3px 8px 3px 3px; z-index: 1; }
+.exp-folder .fd-front { position: absolute; left: 4%; top: 46%; right: 4%; bottom: 12%; background: var(--fd,#FFBF00); border: 1px solid #232323; border-radius: 3px 3px 6px 6px; z-index: 4; transition: transform 420ms cubic-bezier(0.22,1,0.36,1); transform-origin: bottom center; }
+.exp-folder:hover .fd-front { transform: rotate(-3deg) translateY(4%); }
+.exp-folder .fd-art { position: absolute; left: 50%; bottom: 18%; width: 68%; aspect-ratio: 3/4; background: #FFFCEE; border: 1px solid #232323; box-shadow: 3px 3px 0 rgba(35,35,35,0.35); opacity: 0; transform: translate(-50%,6%) rotate(0deg) scale(0.9); transform-origin: bottom center; transition: transform 460ms cubic-bezier(0.22,1,0.36,1), opacity 240ms ease; z-index: 2; overflow: hidden; }
+.exp-folder:hover .fd-art { opacity: 1; }
+.exp-folder:hover .fd-a1 { transform: translate(-102%,-52%) rotate(-17deg) scale(1.04); }
+.exp-folder:hover .fd-a2 { transform: translate(-50%,-72%) rotate(0deg) scale(1.04); }
+.exp-folder:hover .fd-a3 { transform: translate(2%,-52%) rotate(17deg) scale(1.04); }
+.exp-folder .fd-hint { position: absolute; left: 0; right: 0; bottom: -2%; text-align: center; font-size: 0.56rem; letter-spacing: 0.14em; text-transform: uppercase; color: #232323; opacity: 0.65; transition: opacity 240ms; z-index: 5; }
+.exp-folder:hover .fd-hint { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .exp-folder:hover .fd-art { transform: translate(-50%,-48%) rotate(0deg); } }
+.soft { cursor: default; }
+.soft .soft-arrow { display: inline-block; opacity: 0.55; transition: opacity 220ms ease, transform 300ms cubic-bezier(0.22,1,0.36,1); }
+.soft:hover .soft-arrow { opacity: 1; transform: rotate(180deg); }
+.soft { position: relative; }
+.soft:hover { z-index: 6; }
+.soft .soft-desc { display: block; overflow: hidden; max-height: 0; opacity: 0; transition: max-height 420ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease; }
+.soft:hover .soft-desc { max-height: 260px; opacity: 1; }
+.soft-list:hover .soft { padding-top: 9px !important; padding-bottom: 9px !important; }
+.soft-list:hover .soft:hover { padding-top: clamp(16px,2vw,22px) !important; padding-bottom: clamp(16px,2vw,22px) !important; }
+.int-chip { cursor: default; }
+.int-stage { position: relative; display: block; width: 100%; min-height: clamp(230px,24vw,330px); margin-top: 34px; }
+.int-panel { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity 220ms ease, transform 340ms cubic-bezier(0.22,1,0.36,1); }
+.int-label { font-family: OCRB, monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; }
+.int-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(14px,1.8vw,28px); align-items: start; }
+.int-item { display: flex; flex-direction: column; gap: 7px; }
+.int-cap { font-family: OCRB, monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.35; }
+.int-cell { display: block; width: 100%; aspect-ratio: 1/1; height: auto; border: 1px solid #232323; box-shadow: 6px 6px 0 var(--int,#232323); }
+.int-cell.int-cell-poster { width: 100%; height: auto; aspect-ratio: 3/4; }
+#int-jogos-2::part(image), #int-jogos-3::part(image) { top: 66% !important; }
+.int-hint { position: absolute; top: 26px; left: 0; font-family: OCRB, monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: #232323; opacity: 0.5; transition: opacity 200ms; }
+.c-musica:hover ~ .int-stage .p-musica { opacity: 1; transform: none; pointer-events: auto; }
+.c-fotografia:hover ~ .int-stage .p-fotografia { opacity: 1; transform: none; pointer-events: auto; }
+.c-cinema:hover ~ .int-stage .p-cinema { opacity: 1; transform: none; pointer-events: auto; }
+.c-design:hover ~ .int-stage .p-design { opacity: 1; transform: none; pointer-events: auto; }
+.c-quadrinhos:hover ~ .int-stage .p-quadrinhos { opacity: 1; transform: none; pointer-events: auto; }
+.c-jogos:hover ~ .int-stage .p-jogos { opacity: 1; transform: none; pointer-events: auto; }
+.c-musica:hover ~ .int-stage .int-hint,
+.c-fotografia:hover ~ .int-stage .int-hint,
+.c-cinema:hover ~ .int-stage .int-hint,
+.c-design:hover ~ .int-stage .int-hint,
+.c-quadrinhos:hover ~ .int-stage .int-hint,
+.c-jogos:hover ~ .int-stage .int-hint { opacity: 0; }
+.int-stage:hover .int-hint { opacity: 0; }
+.exp-open { display: none; }
+[data-open="1"] .exp-open { display: inline; }
+[data-open="1"] .exp-closed { display: none; }
+@keyframes dm-ch-in { from { opacity: 0; transform: translateY(0.45em); } to { opacity: 1; transform: none; } }
+@keyframes dm-ch-type { from { opacity: 0; } to { opacity: 1; } }
+.dm-inst { position: relative; display: inline-block; z-index: 1; transform-origin: left bottom; transition: transform 300ms cubic-bezier(0.22,1,0.36,1), color 300ms; cursor: default; }
+.dm-inst:hover { transform: scale(1.055); color: #002DD9; z-index: 9; }
+.dm-inst .dm-thumb { position: absolute; left: 0; top: calc(100% + 14px); width: clamp(150px,16vw,210px); aspect-ratio: 4/3; border: 1px solid #232323; background: #232323; box-shadow: 8px 8px 0 #FF00EE; opacity: 0; will-change: opacity, transform; transform: translateY(-10px) rotate(-2.5deg) scale(0.96); transform-origin: left top; pointer-events: auto; transition: opacity 160ms cubic-bezier(0.22,1,0.36,1), transform 340ms cubic-bezier(0.22,1,0.36,1); z-index: 6; }
+.dm-inst:hover .dm-thumb { opacity: 1; transform: none; }
+.dm-inst .dm-thumb image-slot { opacity: 1 !important; display: block; width: 100%; height: 100%; }
+.dm-inst:hover .dm-thumb { opacity: 1 !important; }
+.dm-inst .dm-underline { position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left center; transition: transform 340ms cubic-bezier(0.05,0.85,0.2,1); }
+.dm-inst:hover .dm-underline { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .dm-inst:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .js-reveal .dm-split .dm-ch { opacity: 1 !important; transform: none !important; } .js-reveal .dm-type .dm-caret { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1 !important; transform: none !important; } * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#FFFCEE;color:#232323;font-family:OCRB,monospace;min-height:100vh">
+
+  <header data-header="" style="position:sticky;top:0;z-index:20;transition:transform 320ms cubic-bezier(0.22,1,0.36,1);will-change:transform;background:#002DD9;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px clamp(16px,4vw,64px);flex-wrap:wrap">
+    <a href="index.html" style="font-family:EndlessSunrise,cursive;font-size:1.9rem;line-height:1;color:#FFFCEE" style-hover="color:#FF00EE">Deriva.Mente</a>
+    <nav style="display:flex;gap:clamp(16px,3vw,40px);flex-wrap:wrap">
+      <a href="index.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FFBF00">Home</a>
+      <a href="sobre.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FF00EE;border-bottom:1px solid #FF00EE;padding-bottom:2px">Sobre mim</a>
+      <a href="projetos.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FFBF00">Projetos</a>
+      <a href="contato.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#15BF00">Contato</a>
+    </nav>
+  </header>
+
+  <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,4vw,64px);align-items:end;padding:clamp(48px,8vw,110px) clamp(16px,4vw,64px) clamp(40px,5vw,64px);border-bottom:1px solid #232323">
+    <div>
+      <p style="margin:0 0 20px;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FF00EE">Lucas Guedes · Designer &amp; Filmmaker</p>
+      <h1 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(2.6rem,9vw,7rem);line-height:0.92;color:#002DD9">Sobre mim</h1>
+      <p style="max-width:56ch;margin:28px 0 0;font-size:clamp(0.88rem,1.05vw,1rem);line-height:1.75;letter-spacing:0.02em">Seis anos de experiência com design gráfico e audiovisual: foco em identidade visual, direção de arte e filmmaking. <br><br>Comecei pelo Photoshop, passei pelo cinema e hoje trabalho no ponto onde imagem, som e estratégia se encontram. Criei o deriva.mente como uma forma de me expressar e um espaço para mostrar meu trabalho.&nbsp;<br><br>Atualmente curso publicidade na ESPM e trabalho como freelancer. Acredito que, quando boas ideias encontram o formato certo, ganham o poder de transformar pessoas.&nbsp;<br><br><br><br><br><br></p>
+    </div>
+    <div style="position:relative;aspect-ratio:4/5;border:1px solid #232323;background:#FFFCEE">
+      <image-slot id="sobre-retrato" shape="rect" src="img/slots/sobre-retrato.webp" placeholder="retrato / autorretrato — 4:5"></image-slot>
+    </div>
+  </section>
+
+
+  <section data-screen-label="Informações rápidas" style="background:#FFFCEE;color:#232323;border-bottom:1px solid #232323;padding:clamp(36px,5vw,64px) clamp(16px,4vw,64px) clamp(44px,6vw,76px);overflow:hidden">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:clamp(28px,4vw,44px)">
+      <span style="font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:#002DD9">Ficha rápida</span>
+      <span data-rule="" style="flex:1;height:1px;background:#232323;transform:scaleX(0);transform-origin:left center"></span>
+      <span style="font-family:Jersey,monospace;font-size:1.1rem;letter-spacing:0.08em;color:#002DD9">2017 — 2026</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,34px);align-items:stretch">
+      <div data-reveal="" style="flex:1 1 240px;min-width:0;position:relative;background:#FFFCEE;border:1px solid #232323;border-radius:2px;padding:clamp(20px,2.6vw,30px);display:flex;flex-direction:column;gap:12px;transform:rotate(-1.4deg);box-shadow:9px 9px 0 #FF00EE;transition:transform 300ms cubic-bezier(0.22,1,0.36,1),box-shadow 300ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:rotate(0deg) translateY(-6px);box-shadow:14px 14px 0 #FF00EE">
+        <span style="position:absolute;top:0;left:0;right:0;height:8px;background:#FF00EE"></span>
+        <span style="margin-top:8px;font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;color:#002DD9">Anos de prática</span>
+        <span style="display:flex;align-items:flex-end;gap:10px">
+          <span style="font-family:Monofett,monospace;font-size:clamp(3.6rem,9vw,7rem);line-height:0.78;color:#232323">06</span>
+          <span style="font-family:Jersey,monospace;font-size:1.1rem;color:#FF00EE;padding-bottom:0.5em">anos</span>
+        </span>
+        <span style="font-size:0.72rem;letter-spacing:0.06em;line-height:1.6">Design gráfico e audiovisual, do Photoshop à direção de arte.</span>
+      </div>
+
+      <div data-reveal="" style="flex:1 1 240px;min-width:0;position:relative;background:#FFFCEE;border:1px solid #232323;border-radius:2px;padding:clamp(20px,2.6vw,30px);display:flex;flex-direction:column;gap:12px;transform:rotate(0.9deg);box-shadow:9px 9px 0 #FFBF00;transition:transform 300ms cubic-bezier(0.22,1,0.36,1),box-shadow 300ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:rotate(0deg) translateY(-6px);box-shadow:14px 14px 0 #FFBF00">
+        <span style="position:absolute;top:0;left:0;right:0;height:8px;background:#FFBF00"></span>
+        <span style="margin-top:8px;font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;color:#002DD9">Frentes de trabalho</span>
+        <span style="display:flex;align-items:flex-end;gap:10px">
+          <span style="font-family:Monofett,monospace;font-size:clamp(3.6rem,9vw,7rem);line-height:0.78;color:#232323">04</span>
+          <span style="font-family:Jersey,monospace;font-size:1.1rem;color:#002DD9;padding-bottom:0.5em">frentes</span>
+        </span>
+        <span style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid #232323;border-radius:999px;padding:5px 11px">Design</span>
+          <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid #232323;border-radius:999px;padding:5px 11px">Filmmaking</span>
+          <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid #232323;border-radius:999px;padding:5px 11px">Músicas</span>
+          <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid #232323;border-radius:999px;padding:5px 11px">Marketing</span>
+        </span>
+      </div>
+
+      <div data-reveal="" style="flex:1 1 240px;min-width:0;position:relative;background:#002DD9;color:#FFFCEE;border:1px solid #232323;border-radius:2px;padding:clamp(20px,2.6vw,30px);display:flex;flex-direction:column;justify-content:space-between;gap:14px;transform:rotate(-0.7deg);box-shadow:9px 9px 0 #15BF00;transition:transform 300ms cubic-bezier(0.22,1,0.36,1),box-shadow 300ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:rotate(0deg) translateY(-6px);box-shadow:14px 14px 0 #15BF00">
+        <span style="position:absolute;top:0;left:0;right:0;height:8px;background:#15BF00"></span>
+        <span style="margin-top:8px;font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;color:#15BF00">Base</span>
+        <span style="font-family:Monofett,monospace;font-size:clamp(2rem,4.6vw,3.2rem);line-height:0.9;color:#FFFCEE">CARIOCA</span>
+        <span style="font-size:0.72rem;letter-spacing:0.06em;line-height:1.6">Rio de Janeiro · Brasil</span>
+    </div>
+  </section>
+  
+
+  <section style="padding:clamp(40px,6vw,88px) clamp(16px,4vw,64px);border-bottom:1px solid #232323">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:40px">
+      <h2 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.8rem,4.6vw,3rem);line-height:1;color:#232323">Trajetória</h2>
+      <p style="margin:0;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#002DD9">Clique num ano para abrir</p>
+    </div>
+
+    <div style="position:relative;padding-bottom:12px;overflow-x:auto">
+      <div style="position:relative;display:grid;grid-template-columns:repeat(5,1fr) 0;gap:0;padding-right:80px;min-width:min(100%,760px)">
+        <div style="position:absolute;left:8px;right:88px;top:19px;height:1px;background:#232323"></div>
+        <sc-for list="{{ timeline }}" as="item" hint-placeholder-count="6">
+          <button type="button" onClick="{{ item.pick }}" style="position:relative;flex:0 1 auto;background:transparent;border:0;padding:0;cursor:pointer;font-family:OCRB,monospace;text-align:left;display:flex;flex-direction:column;gap:14px;align-items:flex-start;width:{{ item.w }}">
+            <span style="width:16px;height:16px;border-radius:50%;border:1px solid #232323;margin-top:12px;background:{{ item.dot }};transition:transform 220ms cubic-bezier(0.22,1,0.36,1)"></span>
+            <span style="font-family:Jersey,monospace;font-size:1.6rem;line-height:1;color:{{ item.ink }}">{{ item.year }}</span>
+            <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:{{ item.ink }};max-width:{{ item.mw }};line-height:1.4;white-space:{{ item.wsp }}">{{ item.org }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div data-tl-panel="" style="margin-top:36px;border:1px solid #232323;border-left:6px solid #FF00EE;border-radius:0 22px 22px 0;padding:clamp(20px,3vw,36px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px;align-items:start;background:#FFFCEE;position:relative">
+      <span data-tl-curtain="" style="position:absolute;top:-1px;bottom:-1px;left:-1px;right:-1px;background:#FFFCEE;transform-origin:right center;transform:scaleX(0);pointer-events:none;z-index:8;border-radius:0 22px 22px 0"></span>
+      <div>
+        <div style="font-family:Jersey,monospace;font-size:clamp(2.4rem,7vw,4.4rem);line-height:0.9;color:#002DD9">{{ panelYear }}</div>
+        <div style="font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:#FF00EE;margin-top:8px">{{ activeTag }}</div>
+      </div>
+      <div style="grid-column:span 2;min-width:0">
+        <h3 style="margin:0 0 12px;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.1rem,2.4vw,1.7rem);line-height:1.15">{{ panelOrg }}</h3>
+        <p style="margin:0;max-width:60ch;font-size:clamp(0.85rem,1vw,0.95rem);line-height:1.7;letter-spacing:0.02em">{{ panelText }}</p>
+      </div>
+    </div>
+  </section><section style="padding:clamp(40px,6vw,88px) clamp(16px,4vw,64px);border-bottom:1px solid #232323;background:#002DD9;color:#FFFCEE">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:36px">
+      <h2 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.8rem,4.6vw,3rem);line-height:1;color:#FFFCEE">Experiências</h2>
+      <p style="margin:0;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFBF00">Clique num card para abrir</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <sc-for list="{{ experiencias }}" as="exp" hint-placeholder-count="3">
+        <article data-reveal="" data-open="{{ exp.open }}" style="position:relative;background:{{ exp.accent }};color:{{ exp.ink }};border:1px solid #232323;border-radius:3px;transition:transform 260ms cubic-bezier(0.22,1,0.36,1),box-shadow 260ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:translateY(-5px);box-shadow:12px 12px 0 #FFFCEE">
+          <button type="button" onClick="{{ exp.toggle }}" style="width:100%;background:transparent;border:0;cursor:pointer;text-align:left;font-family:OCRB,monospace;color:inherit;padding:clamp(22px,3vw,34px) clamp(20px,2.8vw,36px);display:flex;flex-direction:column;gap:16px">
+            <span style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 20px">
+              <span style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                <span style="font-family:Monofett,monospace;font-size:clamp(2rem,5.4vw,3.6rem);line-height:0.9">{{ exp.org }}</span>
+                <span style="font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase">{{ exp.role }} · {{ exp.context }}</span>
+              </span>
+              <span style="display:flex;align-items:center;gap:10px;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap">
+                <span class="exp-closed">Expandir</span>
+                <span class="exp-open">Fechar</span>
+                <span class="exp-arrow">↓</span>
+              </span>
+            </span>
+            <span style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ exp.tags }}" as="tag" hint-placeholder-count="5">
+                <span style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:6px 13px">{{ tag.t }}</span>
+              </sc-for>
+            </span>
+          </button>
+          <div class="exp-body">
+            <div style="margin:0 clamp(20px,2.8vw,36px) clamp(22px,2.8vw,34px);background:#FFFCEE;color:#232323;border:1px solid #232323;padding:clamp(18px,2.4vw,28px);display:flex;flex-wrap:wrap;gap:clamp(18px,2.6vw,34px)">
+              <div class="exp-folder" style="order:2;--fd:{{ exp.accent }}">
+                <span class="fd-tab"></span>
+                <span class="fd-back"></span>
+                <span class="fd-art fd-a1"><image-slot id="{{ exp.a1 }}" shape="rect" src="{{ exp.s1 }}" placeholder="+"></image-slot></span>
+                <span class="fd-art fd-a2"><image-slot id="{{ exp.a2 }}" shape="rect" src="{{ exp.s2 }}" placeholder="+"></image-slot></span>
+                <span class="fd-art fd-a3"><image-slot id="{{ exp.a3 }}" shape="rect" src="{{ exp.s3 }}" placeholder="+"></image-slot></span>
+                <span class="fd-front"></span>
+                <span class="fd-hint">Artes</span>
+              </div>
+              <div style="order:1;flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:14px">
+              <p style="margin:0;max-width:74ch;font-size:clamp(0.82rem,1vw,0.92rem);line-height:1.75;letter-spacing:0.02em">{{ exp.lead }}</p>
+              <sc-for list="{{ exp.paras }}" as="para" hint-placeholder-count="2">
+                <p style="margin:0;max-width:74ch;font-size:clamp(0.8rem,0.95vw,0.9rem);line-height:1.75;letter-spacing:0.02em">{{ para.t }}</p>
+              </sc-for>
+              </div>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding:clamp(40px,6vw,88px) clamp(16px,4vw,64px);border-bottom:1px solid #232323">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)">
+      <div>
+        <h2 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.8rem,4.6vw,3rem);line-height:1;color:#232323">Hard skills</h2>
+        <p style="margin:14px 0 0;max-width:46ch;font-family:OCRB,monospace;font-size:clamp(0.82rem,1vw,0.92rem);line-height:1.7;letter-spacing:0.02em">As ferramentas que uso todo dia, agrupadas pelo tipo de problema que resolvem.</p>
+      </div>
+      <p style="margin:0;font-family:OCRB,monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:#002DD9">Arraste o ícone de cada programa</p>
+    </div>
+
+    <div style="position:relative;background:#232323;border-radius:26px;padding:clamp(14px,2vw,22px);box-shadow:inset 0 0 0 1px rgba(255,252,238,0.25), 14px 14px 0 #002DD9">
+      <div style="position:relative;overflow:hidden;border-radius:30px/44px;background:radial-gradient(120% 130% at 50% 45%, #14201A 0%, #0C120F 62%, #070A08 100%);padding:clamp(22px,3.4vw,40px) clamp(18px,3vw,36px);color:#EAF7EE">
+        <div style="position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(to bottom, rgba(0,0,0,0.42) 0 1px, transparent 1px 3px);opacity:0.55;z-index:3"></div>
+        <div style="position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 90px 30px rgba(0,0,0,0.75);border-radius:30px/44px;z-index:4"></div>
+        <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg, rgba(255,252,238,0.10) 0%, rgba(255,252,238,0) 42%);z-index:5"></div>
+
+        <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:clamp(18px,2.4vw,28px);font-family:OCRB,monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:#8FE3A8">
+          <span>C:\ deriva.mente\ toolkit</span>
+          <span>12 programas · ativo</span>
+        </div>
+
+        <div style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:clamp(16px,2.4vw,30px);align-items:start">
+      <div data-reveal="" style="display:flex;flex-direction:column;min-width:0">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.82rem,1.2vw,1rem);line-height:1;letter-spacing:0.08em;text-transform:uppercase;color:#FFBF00">Imagem</span>
+          <span data-rule="" style="flex:1;height:1px;background:#FFBF00;opacity:0.6;transform:scaleX(0);transform-origin:left center"></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FFBF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-photoshop" shape="rect" src="img/slots/hs-photoshop.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Photoshop</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FFBF00;box-shadow:0 0 8px #FFBF00"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FFBF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-illustrator" shape="rect" src="img/slots/hs-illustrator.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Illustrator</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FFBF00;box-shadow:0 0 8px #FFBF00"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FFBF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-lightroom" shape="rect" src="img/slots/hs-lightroom.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Lightroom</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FFBF00;box-shadow:0 0 8px #FFBF00"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FFBF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-canva" shape="rect" src="img/slots/hs-canva.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Canva</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FFBF00;box-shadow:0 0 8px #FFBF00"></span>
+        </div>
+        </div>
+      </div>
+      <div data-reveal="" style="display:flex;flex-direction:column;min-width:0">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.82rem,1.2vw,1rem);line-height:1;letter-spacing:0.08em;text-transform:uppercase;color:#FF5A5A">Movimento &amp; som</span>
+          <span data-rule="" style="flex:1;height:1px;background:#FF5A5A;opacity:0.6;transform:scaleX(0);transform-origin:left center"></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FFFCEE;color:#232323;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-premiere" shape="rect" src="img/slots/hs-premiere.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Premiere</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FF0000;box-shadow:0 0 8px #FF0000"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FFFCEE;color:#232323;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-capcut" shape="rect" src="img/slots/hs-capcut.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">CapCut</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FF0000;box-shadow:0 0 8px #FF0000"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FF00EE;color:#FFFCEE;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-logic" shape="rect" src="img/slots/hs-logic.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Logic Pro</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FF00EE;box-shadow:0 0 8px #FF00EE"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#FF00EE;color:#FFFCEE;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-ableton" shape="rect" src="img/slots/hs-ableton.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Ableton</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#FF00EE;box-shadow:0 0 8px #FF00EE"></span>
+        </div>
+        </div>
+      </div>
+      <div data-reveal="" style="display:flex;flex-direction:column;min-width:0">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.82rem,1.2vw,1rem);line-height:1;letter-spacing:0.08em;text-transform:uppercase;color:#3BE06A">Fluxo</span>
+          <span data-rule="" style="flex:1;height:1px;background:#3BE06A;opacity:0.6;transform:scaleX(0);transform-origin:left center"></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#15BF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-claude" shape="rect" src="img/slots/hs-claude.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Claude</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#15BF00;box-shadow:0 0 8px #15BF00"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#15BF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-office" shape="rect" src="img/slots/hs-office.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Pacote Office</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#15BF00;box-shadow:0 0 8px #15BF00"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#15BF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-chatgpt" shape="rect" src="img/slots/hs-chatgpt.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">ChatGPT</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#15BF00;box-shadow:0 0 8px #15BF00"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:3px;transition:background 200ms cubic-bezier(0.22,1,0.36,1),padding-left 200ms cubic-bezier(0.22,1,0.36,1),color 200ms" style-hover="background:#15BF00;color:#0C120F;padding-left:18px">
+          <div style="width:62px;height:62px;border-radius:3px"><image-slot id="hs-gemini" shape="rect" src="img/slots/hs-gemini.webp" placeholder="+"></image-slot></div>
+          <span style="font-family:OCRB,monospace;font-size:clamp(0.7rem,0.9vw,0.82rem);letter-spacing:0.04em">Gemini</span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#15BF00;box-shadow:0 0 8px #15BF00"></span>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0;border-bottom:1px solid #232323">
+    <div style="padding:clamp(32px,5vw,72px) clamp(16px,4vw,64px);border-right:1px solid #232323">
+      <h2 style="margin:0 0 32px;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1;color:#FF00EE">Soft skills</h2>
+      <div data-soft-reserve="" style="display:block">
+      <ul class="soft-list" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+        <li class="soft" style="list-style:none;background:#FF00EE;color:#232323;border:1px solid #232323;border-radius:18px;padding:clamp(16px,2vw,22px) clamp(18px,2.2vw,26px);transition:transform 260ms cubic-bezier(0.22,1,0.36,1),filter 260ms cubic-bezier(0.22,1,0.36,1),padding 420ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:translateY(-4px);filter:drop-shadow(9px 9px 0 #232323)">
+          <span style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px">
+            <span style="font-family:Jersey,monospace;font-size:1rem;line-height:1;opacity:0.75">01</span>
+            <span style="font-family:OCRB,monospace;font-size:clamp(0.9rem,1.5vw,1.1rem);letter-spacing:0.03em;line-height:1.3">Proatividade</span>
+            <span class="soft-arrow" style="font-family:OCRB,monospace;font-size:0.9rem">↓</span>
+          </span>
+          <span class="soft-desc"><span style="display:block;padding-top:12px;font-family:OCRB,monospace;font-size:clamp(0.74rem,0.95vw,0.86rem);line-height:1.65;letter-spacing:0.02em;max-width:52ch">Não esperar a ideia chegar pronta. Buscar caminhos e fazer acontecer.</span></span>
+        </li>
+        <li class="soft" style="list-style:none;background:#FFBF00;color:#232323;border:1px solid #232323;border-radius:18px;padding:clamp(16px,2vw,22px) clamp(18px,2.2vw,26px);transition:transform 260ms cubic-bezier(0.22,1,0.36,1),filter 260ms cubic-bezier(0.22,1,0.36,1),padding 420ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:translateY(-4px);filter:drop-shadow(9px 9px 0 #232323)">
+          <span style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px">
+            <span style="font-family:Jersey,monospace;font-size:1rem;line-height:1;opacity:0.75">02</span>
+            <span style="font-family:OCRB,monospace;font-size:clamp(0.9rem,1.5vw,1.1rem);letter-spacing:0.03em;line-height:1.3">Visão interdisciplinar</span>
+            <span class="soft-arrow" style="font-family:OCRB,monospace;font-size:0.9rem">↓</span>
+          </span>
+          <span class="soft-desc"><span style="display:block;padding-top:12px;font-family:OCRB,monospace;font-size:clamp(0.74rem,0.95vw,0.86rem);line-height:1.65;letter-spacing:0.02em;max-width:52ch">Conectar design, audiovisual e comunicação para pensar além de uma única área.</span></span>
+        </li>
+        <li class="soft" style="list-style:none;background:#15BF00;color:#232323;border:1px solid #232323;border-radius:18px;padding:clamp(16px,2vw,22px) clamp(18px,2.2vw,26px);transition:transform 260ms cubic-bezier(0.22,1,0.36,1),filter 260ms cubic-bezier(0.22,1,0.36,1),padding 420ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:translateY(-4px);filter:drop-shadow(9px 9px 0 #232323)">
+          <span style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px">
+            <span style="font-family:Jersey,monospace;font-size:1rem;line-height:1;opacity:0.75">03</span>
+            <span style="font-family:OCRB,monospace;font-size:clamp(0.9rem,1.5vw,1.1rem);letter-spacing:0.03em;line-height:1.3">Adaptabilidade</span>
+            <span class="soft-arrow" style="font-family:OCRB,monospace;font-size:0.9rem">↓</span>
+          </span>
+          <span class="soft-desc"><span style="display:block;padding-top:12px;font-family:OCRB,monospace;font-size:clamp(0.74rem,0.95vw,0.86rem);line-height:1.65;letter-spacing:0.02em;max-width:52ch">Entender o contexto e encontrar a melhor forma de trabalhar com ele.</span></span>
+        </li>
+        <li class="soft" style="list-style:none;background:#002DD9;color:#FFFCEE;border:1px solid #232323;border-radius:18px;padding:clamp(16px,2vw,22px) clamp(18px,2.2vw,26px);transition:transform 260ms cubic-bezier(0.22,1,0.36,1),filter 260ms cubic-bezier(0.22,1,0.36,1),padding 420ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:translateY(-4px);filter:drop-shadow(9px 9px 0 #232323)">
+          <span style="display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px">
+            <span style="font-family:Jersey,monospace;font-size:1rem;line-height:1;opacity:0.75">04</span>
+            <span style="font-family:OCRB,monospace;font-size:clamp(0.9rem,1.5vw,1.1rem);letter-spacing:0.03em;line-height:1.3">Resiliência criativa</span>
+            <span class="soft-arrow" style="font-family:OCRB,monospace;font-size:0.9rem">↓</span>
+          </span>
+          <span class="soft-desc"><span style="display:block;padding-top:12px;font-family:OCRB,monospace;font-size:clamp(0.74rem,0.95vw,0.86rem);line-height:1.65;letter-spacing:0.02em;max-width:52ch">Saber recomeçar, testar outros caminhos e continuar criando quando algo não funciona.</span></span>
+        </li>
+      </ul>
+      </div>
+    </div>
+    <div style="padding:clamp(32px,5vw,72px) clamp(16px,4vw,64px)">
+      <h2 style="margin:0 0 32px;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.6rem,4vw,2.4rem);line-height:1;color:#232323">Interesses</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:10px 12px">
+        <span class="int-chip c-musica" style="border:1px solid #232323;border-radius:999px;padding:10px 20px;font-family:OCRB,monospace;font-size:0.76rem;letter-spacing:0.04em;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF00EE;border-color:#FF00EE;color:#FFFCEE;transform:translateY(-3px)">Música</span>
+        <span class="int-chip c-fotografia" style="border:1px solid #232323;border-radius:999px;padding:10px 20px;font-family:OCRB,monospace;font-size:0.76rem;letter-spacing:0.04em;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FFBF00;border-color:#FFBF00;color:#232323;transform:translateY(-3px)">Fotografia</span>
+        <span class="int-chip c-cinema" style="border:1px solid #232323;border-radius:999px;padding:10px 20px;font-family:OCRB,monospace;font-size:0.76rem;letter-spacing:0.04em;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF0000;border-color:#FF0000;color:#FFFCEE;transform:translateY(-3px)">Cinema</span>
+        <span class="int-chip c-design" style="border:1px solid #232323;border-radius:999px;padding:10px 20px;font-family:OCRB,monospace;font-size:0.76rem;letter-spacing:0.04em;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#002DD9;border-color:#002DD9;color:#FFFCEE;transform:translateY(-3px)">Design &amp; arte</span>
+        <span class="int-chip c-quadrinhos" style="border:1px solid #232323;border-radius:999px;padding:10px 20px;font-family:OCRB,monospace;font-size:0.76rem;letter-spacing:0.04em;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF00EE;border-color:#FF00EE;color:#FFFCEE;transform:translateY(-3px)">Quadrinhos</span>
+        <span class="int-chip c-jogos" style="border:1px solid #232323;border-radius:999px;padding:10px 20px;font-family:OCRB,monospace;font-size:0.76rem;letter-spacing:0.04em;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FFBF00;border-color:#FFBF00;color:#232323;transform:translateY(-3px)">Jogos de tabuleiro</span>
+        <span class="int-stage">
+          <span class="int-panel p-musica" style="--int:#FF00EE">
+            <span class="int-label" style="color:#FF00EE">Música</span>
+            <span class="int-row">
+              <span class="int-item"><span class="int-cell"><image-slot id="int-musica-1" shape="rect" src="img/int-musica-1.jpeg" placeholder="álbum"></image-slot></span><span class="int-cap">1975 — BFIFL</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-musica-2" shape="rect" src="img/int-musica-2.png" placeholder="álbum"></image-slot></span><span class="int-cap">MANCHETE DISCO CLUB — JFTR</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-musica-3" shape="rect" src="img/int-musica-3b.jpeg" placeholder="álbum"></image-slot></span><span class="int-cap">HARRY STYLES — KATTDO</span></span>
+            </span>
+          </span>
+          <span class="int-panel p-fotografia" style="--int:#FFBF00">
+            <span class="int-label" style="color:#FFBF00">Fotografia</span>
+            <span class="int-row">
+              <span class="int-cell"><image-slot id="int-fotografia-1" shape="rect" src="img/int-foto-1.jpg" placeholder="foto"></image-slot></span>
+              <span class="int-cell"><image-slot id="int-fotografia-2" shape="rect" src="img/int-foto-2.jpg" placeholder="foto"></image-slot></span>
+              <span class="int-cell"><image-slot id="int-fotografia-3" shape="rect" src="img/int-foto-3.jpg" placeholder="foto"></image-slot></span>
+            </span>
+            <span class="int-cap" style="max-width:none">Fotos tiradas por mim.</span>
+          </span>
+          <span class="int-panel p-cinema" style="--int:#FF0000">
+            <span class="int-label" style="color:#FF0000">Cinema</span>
+            <span class="int-row">
+              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-1" shape="rect" fit="contain" src="img/int-cinema-1.png" placeholder="filme"></image-slot></span><span class="int-cap">DE VOLTA PARA O FUTURO</span></span>
+              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-2" shape="rect" fit="contain" src="img/int-cinema-2.png" placeholder="filme"></image-slot></span><span class="int-cap">GIGANTE DE FERRO</span></span>
+              <span class="int-item"><span class="int-cell int-cell-poster"><image-slot id="int-cinema-3" shape="rect" fit="contain" src="img/int-cinema-3.png" placeholder="filme"></image-slot></span><span class="int-cap">DUNA — PARTE 2</span></span>
+            </span>
+          </span>
+          <span class="int-panel p-design" style="--int:#002DD9">
+            <span class="int-label" style="color:#002DD9">Design &amp; arte</span>
+            <span class="int-row">
+              <span class="int-item"><span class="int-cell"><image-slot id="int-design-1" shape="rect" src="img/int-design-1.jpg" placeholder="peça"></image-slot></span><span class="int-cap">POP ART — ANDY WARHOL</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-design-2" shape="rect" src="img/int-design-2.jpg" placeholder="peça"></image-slot></span><span class="int-cap">ALL TYPE POSTERS</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-design-3" shape="rect" src="img/int-design-3.jpg" placeholder="peça"></image-slot></span><span class="int-cap">OVERSETT TEXT POSTERS</span></span>
+            </span>
+          </span>
+          <span class="int-panel p-quadrinhos" style="--int:#FF00EE">
+            <span class="int-label" style="color:#FF00EE">Quadrinhos</span>
+            <span class="int-row">
+              <span class="int-item"><span class="int-cell"><image-slot id="int-quadrinhos-1" shape="rect" src="img/int-quadrinhos-1.png" placeholder="HQ"></image-slot></span><span class="int-cap">SCOTT PILGRIM</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-quadrinhos-2" shape="rect" src="img/int-quadrinhos-2.jpeg" placeholder="HQ"></image-slot></span><span class="int-cap">SAGA</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-quadrinhos-3" shape="rect" src="img/int-quadrinhos-3.webp" placeholder="HQ"></image-slot></span><span class="int-cap">X-MEN</span></span>
+            </span>
+          </span>
+          <span class="int-panel p-jogos" style="--int:#FFBF00">
+            <span class="int-label" style="color:#FFBF00">Jogos de tabuleiro</span>
+            <span class="int-row">
+              <span class="int-item"><span class="int-cell"><image-slot id="int-jogos-1" shape="rect" src="img/int-jogos-1.webp" placeholder="jogo"></image-slot></span><span class="int-cap">ZOMBICIDE</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-jogos-2" shape="rect" src="img/int-jogos-2.webp" placeholder="jogo"></image-slot></span><span class="int-cap">PEGA EM 6</span></span>
+              <span class="int-item"><span class="int-cell"><image-slot id="int-jogos-3" shape="rect" src="img/int-jogos-3.jpg" placeholder="jogo"></image-slot></span><span class="int-cap">COUP</span></span>
+            </span>
+          </span>
+          <span class="int-hint">Passe o mouse numa categoria</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#002DD9;color:#FFFCEE;padding:clamp(40px,6vw,80px) clamp(16px,4vw,64px);display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <div>
+      <p style="margin:0 0 12px;font-family:OCRB,monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase">Próximo passo</p>
+      <a href="projetos.html" style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.6rem,4vw,2.6rem);color:#FFFCEE;line-height:1" style-hover="color:#FFBF00">Ver os projetos</a>
+    </div>
+    <p style="margin:0;font-family:OCRB,monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,252,238,0.8)">Deriva.Mente · Lucas Guedes · 2026</p>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const ITEMS = [
+  { year: '2017', org: 'Escola Zion — Design Gráfico', short: 'Escola Zion', thumb: 'img/escola-zion.png', tag: 'Formação', text: 'Início dos estudos em Design e aprendizado das bases do Photoshop — a primeira gramática visual.' },
+  { year: '2021', org: 'MK Academy — Edição de Vídeo', short: 'MK Academy', thumb: 'img/mk-academy.jpg', tag: 'Formação', text: 'Curso de Edição de Vídeo. A imagem passa a ter tempo, ritmo e corte.' },
+  { year: '2021', org: 'UVA — Curso Tecnólogo · Cinema & Audiovisual', short: 'UVA', thumb: 'img/uva.webp', tag: 'Graduação', text: 'Início da graduação em Cinema e Audiovisual (técnologo) — narrativa, direção e linguagem cinematográfica.' },
+  { year: '2023', org: 'IBMEC — Publicidade e Propaganda', short: 'IBMEC', thumb: 'img/ibmec.jpeg', tag: 'Graduação', text: 'Transição para Publicidade e Propaganda: juntar repertório visual com estratégia e mercado.' },
+  { year: '2025', org: 'ESPM — Publicidade e Propaganda', short: 'ESPM', thumb: 'img/espm.jpeg', tag: 'Graduação', text: 'Transferência para a ESPM, dando continuidade à graduação em Publicidade e Propaganda.' },
+  { year: '2026—', org: '???', short: '???', thumb: 'img/futuro.webp', tag: 'A seguir', text: 'Tudo o que temos de decidir é o que fazer com o tempo que nos é dado.' },
+];
+
+const EXPS = [
+  {
+    org: 'Origem',
+    role: 'Diretor de Arte',
+    context: 'Agência-escola da ESPM',
+    accent: '#FFBF00',
+    ink: '#232323',
+    lead: 'Atuação como Diretor de Arte na Origem, um dos núcleos da agência-escola da ESPM. Responsável principalmente pela criação de conteúdo para redes sociais, participando ativamente da reformulação da presença visual da agência e do rebranding de seu perfil principal.',
+    paras: ['O trabalho envolvia desenvolver peças e soluções visuais que trouxessem maior consistência e personalidade para a comunicação da Origem.'],
+    tags: ['Direção de arte', 'Social media', 'Identidade visual', 'Rebranding', 'Design gráfico']
+  },
+  {
+    org: 'Eight',
+    role: 'Estagiário de Design',
+    context: 'Agência · produção em escala',
+    accent: '#FF00EE',
+    ink: '#232323',
+    lead: 'Experiência focada em produção de conteúdo digital em alto volume, atendendo uma carteira de aproximadamente 10 clientes.',
+    paras: [
+      'A rotina envolvia trabalhar com um cliente por dia e produzir, em média, 15 peças para redes sociais, seguindo identidades visuais, templates e diretrizes previamente estabelecidas pela empresa.',
+      'Foi uma experiência importante para desenvolver agilidade, consistência visual e capacidade de adaptação a diferentes marcas, trabalhando dentro de processos e padrões de produção bem definidos.'
+    ],
+    tags: ['Design gráfico', 'Social media', 'Produção de conteúdo', 'Desdobramento de identidade', 'Produção em escala']
+  },
+  {
+    org: 'Not Yet Brasil',
+    role: 'Editor de Vídeo',
+    context: 'PJ / Freelancer',
+    accent: '#15BF00',
+    ink: '#232323',
+    lead: 'Atuação como Editor de Vídeo na produção de conteúdos para os canais oficiais da Not Yet Brasil e para integrantes da empresa, com foco principalmente nos conteúdos do CMO e da CEO.',
+    paras: [
+      'Responsável pela edição de Reels, vídeos para YouTube e outros formatos digitais, adaptando linguagem, ritmo e narrativa para diferentes plataformas.',
+      'Além do audiovisual, participei de demandas de design, principalmente na criação e desenvolvimento visual de apresentações, tanto institucionais quanto destinadas a projetos e clientes externos.',
+      'A experiência conecta diretamente minhas duas principais áreas de atuação: design e audiovisual, permitindo trabalhar a comunicação desde sua construção visual até ritmo, montagem e narrativa.'
+    ],
+    tags: ['Edição de vídeo', 'Reels', 'YouTube', 'Motion / conteúdo digital', 'Apresentações', 'Design gráfico']
+  }
+];
+
+function chars(text, mode, offset) {
+  const anim = mode === 'type' ? 'dm-ch-type 1ms linear' : 'dm-ch-in 420ms cubic-bezier(0.22,1,0.36,1)';
+  const step = mode === 'type' ? 16 : 55;
+  let n = offset || 0;
+  const out = [];
+  text.split(/(\s+)/).forEach((word, wi) => {
+    if (!word) return;
+    if (/^\s+$/.test(word)) { out.push(' '); return; }
+    out.push(React.createElement('span', { key: 'w' + wi, style: { display: 'inline-block', whiteSpace: 'nowrap' } },
+      Array.from(word).map((ch, ci) => {
+        const st = { display: 'inline-block', opacity: 0, animation: anim + ' ' + (n * step + 260) + 'ms forwards' };
+        n += 1;
+        return React.createElement('span', { key: ci, style: st }, ch);
+      })
+    ));
+  });
+  return out;
+}
+
+class Component extends DCLogic {
+  state = { active: 4, openExp: {} };
+
+  reserveSoft() {
+    const box = document.querySelector('[data-soft-reserve]');
+    if (!box) return;
+    box.style.minHeight = '';
+    const base = box.getBoundingClientRect().height;
+    let extra = 0;
+    box.querySelectorAll('.soft-desc').forEach((d) => {
+      const inner = d.firstElementChild;
+      if (inner) extra = Math.max(extra, inner.getBoundingClientRect().height);
+    });
+    box.style.minHeight = Math.ceil(base + extra + 18) + 'px';
+  }
+
+  wipePanel() {
+    const el = document.querySelector('[data-tl-panel]');
+    if (!el) return;
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.clipPath = 'none';
+    el.style.animation = 'none';
+    const curtain = el.querySelector('[data-tl-curtain]');
+    if (!curtain) return;
+    curtain.style.animation = 'none';
+    void curtain.offsetWidth;
+    curtain.style.animation = 'dm-curtain 2500ms cubic-bezier(0.05,0.85,0.2,1) forwards';
+  }
+
+  componentDidMount() {
+    document.body.classList.add('js-reveal');
+    this.headerMotion();
+    this.motionReady = false;
+    const go = () => { this.motionReady = true; this.splitTitles(); this.observe(); this.sweep(); this.wipePanel(); this.reserveSoft(); };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
+    this.observe();
+    this.onScroll = () => this.sweep();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this.onResizeSoft = () => this.reserveSoft();
+    window.addEventListener('resize', this.onResizeSoft);
+  }
+  sweep() {
+    if (!this.motionReady) return;
+    const h = window.innerHeight;
+    document.querySelectorAll('[data-rule]:not([data-rule-done])').forEach((r) => {
+      if (r.getBoundingClientRect().top < h * 0.92) {
+        r.setAttribute('data-rule-done', '1');
+        r.style.transition = 'transform 2000ms cubic-bezier(0.05,0.85,0.2,1)';
+        requestAnimationFrame(() => { r.style.transform = 'scaleX(1)'; });
+      }
+    });
+    document.querySelectorAll('.dm-split:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 || r.bottom < 0) { (el.dmStart || (() => el.classList.add('is-in')))(); }
+    });
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 && r.bottom > -80) el.classList.add('is-in');
+    });
+  }
+
+  splitTitles() {
+    if (!this.motionReady) return;
+    const targets = document.querySelectorAll('#dc-root h1, #dc-root h2, #dc-root [data-split]');
+    targets.forEach((el) => {
+      if (el.dataset.dmSplit) return;
+      const text = el.textContent;
+      if (!text || !text.trim()) return;
+      el.dataset.dmSplit = '1';
+      el.classList.add('dm-split');
+      const typing = el.hasAttribute('data-split');
+      if (typing) el.classList.add('dm-type');
+      const step = typing ? 65 : 35;
+      el.textContent = '';
+      let n = 0;
+      text.split(/(\s+)/).forEach((word) => {
+        if (!word) return;
+        if (/^\s+$/.test(word)) { el.appendChild(document.createTextNode(' ')); return; }
+        const w = document.createElement('span');
+        w.style.display = 'inline-block';
+        w.style.whiteSpace = 'nowrap';
+        Array.from(word).forEach((ch) => {
+          const c = document.createElement('span');
+          c.className = 'dm-ch';
+          c.textContent = ch;
+          c.style.transitionDelay = (n * step) + 'ms';
+          n += 1;
+          w.appendChild(c);
+        });
+        el.appendChild(w);
+      });
+      if (typing) {
+        const caret = document.createElement('span');
+        caret.className = 'dm-caret';
+        el.appendChild(caret);
+      }
+      if (!this.titleIo) {
+        this.titleIo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { (e.target.dmStart || (() => e.target.classList.add('is-in')))(); this.titleIo.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      }
+      const start = () => {
+        el.classList.add('is-in');
+        if (typing) {
+          const rule = el.parentElement && el.parentElement.querySelector('[data-rule]');
+          if (rule) {
+            rule.style.transition = 'transform 2000ms cubic-bezier(0.05,0.85,0.2,1)';
+            requestAnimationFrame(() => { rule.style.transform = 'scaleX(1)'; });
+          }
+          setTimeout(() => { const c = el.querySelector('.dm-caret'); if (c) c.remove(); }, 3000);
+        }
+      };
+      el.dmStart = start;
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.95) start();
+      else this.titleIo.observe(el);
+    });
+  }
+
+  componentDidUpdate() { this.observe();  this.splitTitles(); }
+  headerMotion() {
+    const h = document.querySelector('[data-header]');
+    if (!h) return;
+    let last = window.scrollY;
+    let hidden = false;
+    const show = () => { if (hidden) { hidden = false; h.style.transform = 'none'; } };
+    const hide = () => { if (!hidden) { hidden = true; h.style.transform = 'translateY(-105%)'; } };
+    this.onHeaderScroll = () => {
+      const y = window.scrollY;
+      if (y < 90) show();
+      else if (y > last + 6) hide();
+      else if (y < last - 6) show();
+      last = y;
+    };
+    this.onHeaderMove = (e) => { if (e.clientY < 90) show(); };
+    window.addEventListener('scroll', this.onHeaderScroll, { passive: true });
+    window.addEventListener('mousemove', this.onHeaderMove, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+    if (this.titleIo) this.titleIo.disconnect();
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onHeaderScroll);
+    window.removeEventListener('mousemove', this.onHeaderMove);
+    window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('resize', this.onResizeSoft);
+  }
+
+  observe() {
+    if (!this.motionReady) return;
+    if (!this.io) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el, i) => {
+      el.style.transitionDelay = (i % 5) * 70 + 'ms';
+      this.io.observe(el);
+    });
+  }
+
+  renderVals() {
+    const a = this.state.active;
+    const cur = ITEMS[a];
+    return {
+      timeline: ITEMS.map((it, i) => ({
+        year: it.year,
+        org: it.short || it.org,
+        w: i === ITEMS.length - 1 ? '0px' : 'auto',
+        mw: i === ITEMS.length - 1 ? 'none' : '12ch',
+        wsp: i === ITEMS.length - 1 ? 'nowrap' : 'normal',
+        dot: i === a ? '#FF00EE' : '#FFFCEE',
+        ink: i === a ? '#FF00EE' : '#232323',
+        pick: () => this.setState({ active: i }, () => this.wipePanel())
+      })),
+      activeTag: cur.tag,
+      panelYear: React.createElement('span', { key: 'y' + a, style: { display: 'inline-block' } }, chars(cur.year, 'rise', 0)),
+      panelOrg: (() => {
+        const parts = cur.org.split(' — ');
+        const name = parts[0];
+        const rest = parts.length > 1 ? ' — ' + parts.slice(1).join(' — ') : '';
+        return React.createElement('span', { key: 'o' + a, style: { display: 'inline-block' } }, [
+          React.createElement('span', { key: 'inst', className: 'dm-inst' }, [
+            React.createElement('span', { key: 'n' }, chars(name, 'type', 0)),
+            React.createElement('span', { key: 'u', className: 'dm-underline' }),
+            React.createElement('span', { key: 'th', className: 'dm-thumb' },
+              React.createElement('image-slot', { id: 'tl-thumb-' + a, shape: 'rect', src: cur.thumb || null, placeholder: 'logo / foto' })
+            )
+          ]),
+          rest ? React.createElement('span', { key: 'r' }, chars(rest, 'type', name.length)) : null
+        ]);
+      })(),
+      panelText: React.createElement('span', { key: 't' + a, style: { display: 'inline-block' } }, chars(cur.text, 'type', 14)),
+      experiencias: EXPS.map((e, i) => {
+        const open = !!this.state.openExp[i];
+        return {
+          org: e.org,
+          ink: e.ink,
+          a1: 'exp-' + i + '-art-1',
+          a2: 'exp-' + i + '-art-2',
+          a3: 'exp-' + i + '-art-3',
+          s1: 'img/slots/exp-' + i + '-art-1.webp',
+          s2: 'img/slots/exp-' + i + '-art-2.webp',
+          s3: 'img/slots/exp-' + i + '-art-3.webp',
+          role: e.role,
+          context: e.context,
+          lead: e.lead,
+          accent: e.accent,
+          open: open ? '1' : '0',
+          paras: e.paras.map((t, k) => ({ t, k })),
+          tags: e.tags.map((t) => ({ t })),
+          toggle: () => this.setState((st) => ({ openExp: Object.assign({}, st.openExp, { [i]: !st.openExp[i] }) }))
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

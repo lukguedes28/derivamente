@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preload" href="fonts/Workbench-Variable.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/OCRB.otf" as="font" type="font/otf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/EndlessSunriseAlternative.otf" as="font" type="font/otf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/Jersey20.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<style>
+@font-face { font-family: "Workbench"; src: url("fonts/Workbench-Variable.ttf") format("truetype-variations"); font-weight: 100 900; font-display: block; }
+@font-face { font-family: "OCRB"; src: url("fonts/OCRB.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "EndlessSunrise"; src: url("fonts/EndlessSunriseAlternative.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "Jersey"; src: url("fonts/Jersey20.ttf") format("truetype"); font-display: block; }
+html, body { margin: 0; padding: 0; background: #002DD9; }
+a { color: #FFFCEE; text-decoration: none; }
+a:hover { color: #15BF00; }
+@keyframes dm-spin { to { transform: rotate(360deg); } }
+.js-reveal [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 500ms ease, transform 500ms ease; }
+.js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+.js-reveal .dm-split .dm-ch { display: inline-block; opacity: 0; transform: translateY(0.45em); transition: opacity 420ms cubic-bezier(0.22,1,0.36,1), transform 420ms cubic-bezier(0.22,1,0.36,1); }
+.js-reveal .dm-split.is-in .dm-ch { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .js-reveal [data-reveal] { opacity: 1 !important; transform: none !important; } .js-reveal .dm-split .dm-ch { opacity: 1 !important; transform: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#002DD9;color:#FFFCEE;font-family:OCRB,monospace;min-height:100vh;display:flex;flex-direction:column">
+
+  <header data-header="" style="position:sticky;top:0;z-index:30;transition:transform 320ms cubic-bezier(0.22,1,0.36,1);will-change:transform;background:#002DD9;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px clamp(16px,4vw,64px);flex-wrap:wrap;border-bottom:1px solid rgba(255,252,238,0.3)">
+    <a href="index.html" style="font-family:EndlessSunrise,cursive;font-size:1.9rem;line-height:1;color:#FFFCEE" style-hover="color:#15BF00">Deriva.Mente</a>
+    <nav style="display:flex;gap:clamp(16px,3vw,40px);flex-wrap:wrap">
+      <a href="index.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FFBF00">Home</a>
+      <a href="sobre.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FF00EE">Sobre mim</a>
+      <a href="projetos.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FFBF00">Projetos</a>
+      <a href="contato.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#15BF00;border-bottom:1px solid #15BF00;padding-bottom:2px">Contato</a>
+    </nav>
+  </header>
+
+  <section style="flex:1;padding:clamp(48px,8vw,110px) clamp(16px,4vw,64px) clamp(32px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,5vw,72px);align-items:start">
+    <div>
+      <p style="margin:0 0 20px;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#15BF00">Aberto para projetos e colaborações</p>
+      <h1 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(2.8rem,10vw,8rem);line-height:0.9">Contato</h1>
+      <p style="max-width:46ch;margin:28px 0 0;font-size:clamp(0.88rem,1.05vw,1rem);line-height:1.75;letter-spacing:0.02em">Identidade visual, direção de arte, videoclipe, campanha ou trilha — me conte o que você quer construir e eu respondo com um caminho.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,252,238,0.35)">
+      <a data-reveal="" href="mailto:Lukguedes28@gmail.com" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF0000;padding-left:18px;color:#FFFCEE">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">E-mail</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem);min-width:0;overflow-wrap:anywhere">Lukguedes28@gmail.com</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://wa.me/5521982095118" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#15BF00;padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">WhatsApp</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">(21) 98209-5118</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://instagram.com/deriva.mente" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF00EE;padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">Instagram</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">@deriva.mente</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://instagram.com/luk_guedes" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF00EE;padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">Pessoal</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">@luk_guedes</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://www.linkedin.com/in/lucas-guedes-almeida" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FFBF00;padding-left:18px;color:#232323">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">LinkedIn</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">Lucas Guedes Almeida</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <p style="margin:28px 0 0;font-size:0.7rem;letter-spacing:0.06em;line-height:1.7;color:rgba(255,252,238,0.8)">ATÉ MAIS E OBRIGADO PELOS PEIXES.</p>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid rgba(255,252,238,0.3);padding:24px clamp(16px,4vw,64px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <span style="font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase">Deriva.Mente · Lucas Guedes</span>
+    <span style="font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,252,238,0.75)">Designer gráfico &amp; filmmaker</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  componentDidMount() {
+    document.body.classList.add('js-reveal');
+    this.headerMotion();
+    this.motionReady = false;
+    const go = () => { this.motionReady = true; this.splitTitles(); this.observe(); this.sweep(); };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
+    this.onScroll = () => this.sweep();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+  }
+
+  headerMotion() {
+    const h = document.querySelector('[data-header]');
+    if (!h) return;
+    let last = window.scrollY;
+    let hidden = false;
+    const show = () => { if (hidden) { hidden = false; h.style.transform = 'none'; } };
+    const hide = () => { if (!hidden) { hidden = true; h.style.transform = 'translateY(-105%)'; } };
+    this.onHeaderScroll = () => {
+      const y = window.scrollY;
+      if (y < 90) show();
+      else if (y > last + 6) hide();
+      else if (y < last - 6) show();
+      last = y;
+    };
+    this.onHeaderMove = (e) => { if (e.clientY < 90) show(); };
+    window.addEventListener('scroll', this.onHeaderScroll, { passive: true });
+    window.addEventListener('mousemove', this.onHeaderMove, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+    if (this.titleIo) this.titleIo.disconnect();
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onHeaderScroll);
+    window.removeEventListener('mousemove', this.onHeaderMove);
+    window.removeEventListener('resize', this.onScroll);
+  }
+
+  observe() {
+    if (!this.motionReady) return;
+    if (!this.io) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el, i) => {
+      el.style.transitionDelay = (i % 5) * 100 + 'ms';
+      this.io.observe(el);
+    });
+  }
+
+  sweep() {
+    if (!this.motionReady) return;
+    const h = window.innerHeight;
+    document.querySelectorAll('.dm-split:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 || r.bottom < 0) { (el.dmStart || (() => el.classList.add('is-in')))(); }
+    });
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 && r.bottom > -80) el.classList.add('is-in');
+    });
+  }
+
+  splitTitles() {
+    if (!this.motionReady) return;
+    document.querySelectorAll('#dc-root h1, #dc-root h2').forEach((el) => {
+      if (el.dataset.dmSplit) return;
+      const text = el.textContent;
+      if (!text || !text.trim()) return;
+      el.dataset.dmSplit = '1';
+      el.classList.add('dm-split');
+      el.textContent = '';
+      let n = 0;
+      text.split(/(\s+)/).forEach((word) => {
+        if (!word) return;
+        if (/^\s+$/.test(word)) { el.appendChild(document.createTextNode(' ')); return; }
+        const w = document.createElement('span');
+        w.style.display = 'inline-block';
+        w.style.whiteSpace = 'nowrap';
+        Array.from(word).forEach((ch) => {
+          const c = document.createElement('span');
+          c.className = 'dm-ch';
+          c.textContent = ch;
+          c.style.transitionDelay = (n * 35) + 'ms';
+          n += 1;
+          w.appendChild(c);
+        });
+        el.appendChild(w);
+      });
+      if (!this.titleIo) {
+        this.titleIo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.titleIo.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      }
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.95) el.classList.add('is-in');
+      else this.titleIo.observe(el);
+    });
+  }
+}
+</script>
+</body>
+</html></a>
+    <nav style="display:flex;gap:clamp(16px,3vw,40px);flex-wrap:wrap">
+      <a href="index.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FFBF00">Home</a>
+      <a href="sobre.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FF00EE">Sobre mim</a>
+      <a href="projetos.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FFBF00">Projetos</a>
+      <a href="contato.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#15BF00;border-bottom:1px solid #15BF00;padding-bottom:2px">Contato</a>
+    </nav>
+  </header>
+
+  <section style="flex:1;padding:clamp(48px,8vw,110px) clamp(16px,4vw,64px) clamp(32px,4vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,5vw,72px);align-items:start">
+    <div>
+      <p style="margin:0 0 20px;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#15BF00">Aberto para projetos e colaborações</p>
+      <h1 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(2.8rem,10vw,8rem);line-height:0.9">Contato</h1>
+      <p style="max-width:46ch;margin:28px 0 0;font-size:clamp(0.88rem,1.05vw,1rem);line-height:1.75;letter-spacing:0.02em">Identidade visual, direção de arte, videoclipe, campanha ou trilha — me conte o que você quer construir e eu respondo com um caminho.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,252,238,0.35)">
+      <a data-reveal="" href="mailto:Lukguedes28@gmail.com" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF0000;padding-left:18px;color:#FFFCEE">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">E-mail</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem);min-width:0;overflow-wrap:anywhere">Lukguedes28@gmail.com</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://wa.me/5521982095118" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#15BF00;padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">WhatsApp</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">(21) 98209-5118</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://instagram.com/deriva.mente" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF00EE;padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">Instagram</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">@deriva.mente</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://instagram.com/luk_guedes" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF00EE;padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">Pessoal</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">@luk_guedes</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <a data-reveal="" href="https://www.linkedin.com/in/lucas-guedes-almeida" target="_blank" rel="noopener" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FFBF00;padding-left:18px;color:#232323">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">LinkedIn</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">Lucas Guedes Almeida</span>
+        <span style="font-size:1rem">↗</span>
+      </a>
+      <p style="margin:28px 0 0;font-size:0.7rem;letter-spacing:0.06em;line-height:1.7;color:rgba(255,252,238,0.8)">ATÉ MAIS E OBRIGADO PELOS PEIXES.</p>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid rgba(255,252,238,0.3);padding:24px clamp(16px,4vw,64px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <span style="font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase">Deriva.Mente · Lucas Guedes</span>
+    <span style="font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,252,238,0.75)">Designer gráfico &amp; filmmaker</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  componentDidMount() {
+    document.body.classList.add('js-reveal');
+    this.headerMotion();
+    this.motionReady = false;
+    const go = () => { this.motionReady = true; this.splitTitles(); this.observe(); this.sweep(); };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
+    this.onScroll = () => this.sweep();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+  }
+
+  headerMotion() {
+    const h = document.querySelector('[data-header]');
+    if (!h) return;
+    let last = window.scrollY;
+    let hidden = false;
+    const show = () => { if (hidden) { hidden = false; h.style.transform = 'none'; } };
+    const hide = () => { if (!hidden) { hidden = true; h.style.transform = 'translateY(-105%)'; } };
+    this.onHeaderScroll = () => {
+      const y = window.scrollY;
+      if (y < 90) show();
+      else if (y > last + 6) hide();
+      else if (y < last - 6) show();
+      last = y;
+    };
+    this.onHeaderMove = (e) => { if (e.clientY < 90) show(); };
+    window.addEventListener('scroll', this.onHeaderScroll, { passive: true });
+    window.addEventListener('mousemove', this.onHeaderMove, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.io) this.io.disconnect();
+    if (this.titleIo) this.titleIo.disconnect();
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onHeaderScroll);
+    window.removeEventListener('mousemove', this.onHeaderMove);
+    window.removeEventListener('resize', this.onScroll);
+  }
+
+  observe() {
+    if (!this.motionReady) return;
+    if (!this.io) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el, i) => {
+      el.style.transitionDelay = (i % 5) * 100 + 'ms';
+      this.io.observe(el);
+    });
+  }
+
+  sweep() {
+    if (!this.motionReady) return;
+    const h = window.innerHeight;
+    document.querySelectorAll('.dm-split:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 || r.bottom < 0) { (el.dmStart || (() => el.classList.add('is-in')))(); }
+    });
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 && r.bottom > -80) el.classList.add('is-in');
+    });
+  }
+
+  splitTitles() {
+    if (!this.motionReady) return;
+    document.querySelectorAll('#dc-root h1, #dc-root h2').forEach((el) => {
+      if (el.dataset.dmSplit) return;
+      const text = el.textContent;
+      if (!text || !text.trim()) return;
+      el.dataset.dmSplit = '1';
+      el.classList.add('dm-split');
+      el.textContent = '';
+      let n = 0;
+      text.split(/(\s+)/).forEach((word) => {
+        if (!word) return;
+        if (/^\s+$/.test(word)) { el.appendChild(document.createTextNode(' ')); return; }
+        const w = document.createElement('span');
+        w.style.display = 'inline-block';
+        w.style.whiteSpace = 'nowrap';
+        Array.from(word).forEach((ch) => {
+          const c = document.createElement('span');
+          c.className = 'dm-ch';
+          c.textContent = ch;
+          c.style.transitionDelay = (n * 35) + 'ms';
+          n += 1;
+          w.appendChild(c);
+        });
+        el.appendChild(w);
+      });
+      if (!this.titleIo) {
+        this.titleIo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.titleIo.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      }
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.95) el.classList.add('is-in');
+      else this.titleIo.observe(el);
+    });
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preload" href="fonts/Workbench-Variable.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/OCRB.otf" as="font" type="font/otf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/EndlessSunriseAlternative.otf" as="font" type="font/otf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/Monofett.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/Jersey20.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<style>
+@font-face { font-family: "Workbench"; src: url("fonts/Workbench-Variable.ttf") format("truetype-variations"); font-weight: 100 900; font-display: block; }
+@font-face { font-family: "OCRB"; src: url("fonts/OCRB.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "EndlessSunrise"; src: url("fonts/EndlessSunriseAlternative.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "Monofett"; src: url("fonts/Monofett.ttf") format("truetype"); font-display: block; }
+@font-face { font-family: "Jersey"; src: url("fonts/Jersey20.ttf") format("truetype"); font-display: block; }
+html, body { margin: 0; padding: 0; background: #FFFCEE; }
+a { color: #002DD9; text-decoration: none; }
+a:hover { color: #232323; }
+.js-reveal [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1); }
+.js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+.js-reveal .dm-split .dm-ch { display: inline-block; opacity: 0; transform: translateY(0.45em); transition: opacity 420ms cubic-bezier(0.22,1,0.36,1), transform 420ms cubic-bezier(0.22,1,0.36,1); }
+.js-reveal .dm-split.is-in .dm-ch { opacity: 1; transform: none; }
+.js-reveal .dm-type .dm-ch { transform: none; transition: opacity 1ms linear; }
+.js-reveal .dm-type .dm-caret { display: inline-block; width: 0.06em; min-width: 3px; height: 0.82em; margin-left: 0.08em; vertical-align: -0.06em; background: currentColor; opacity: 0; }
+.js-reveal .dm-type.is-in .dm-caret { animation: dm-blink 640ms steps(1) infinite; }
+@keyframes dm-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.pj-grid-3 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.pj-grid-auto { grid-template-columns: repeat(auto-fill, minmax(min(100%,280px), 1fr)); }
+@media (max-width: 1180px) { .pj-grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 860px) { .pj-grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px) { .pj-grid-3 { grid-template-columns: 1fr; } }
+.pj-meta { opacity: 0; transform: translateY(8px) scale(0.9); transition: opacity 240ms ease, transform 420ms cubic-bezier(0.22,1,0.36,1); }
+.pj-meta.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .pj-meta { opacity: 1 !important; transform: none !important; } }
+.pj-card { position: relative; display: flex; flex-direction: column; transition: transform 260ms cubic-bezier(0.22,1,0.36,1), filter 260ms cubic-bezier(0.22,1,0.36,1); }
+.pj-card:not(.pj-case):hover { transform: translateY(-8px); filter: drop-shadow(11px 12px 0 var(--acc,#232323)); }
+.pj-tab { align-self: flex-start; max-width: 100%; display: flex; align-items: center; gap: 8px; padding: 8px 20px 7px; border: 1px solid var(--line,#232323); border-bottom: 0; border-radius: 10px 14px 0 0; background: var(--tabbg,#FFFCEE); color: var(--tabink,#232323); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; transform: translateY(1px); }
+.pj-shell { color: #232323; display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--line,#232323); border-radius: 0 10px 10px 10px; overflow: hidden; background: var(--card,#FFFCEE); }
+.pj-cover { position: relative; display: block; overflow: hidden; min-height: 0; border-bottom: 1px solid var(--line,#232323); }
+.pj-cover > image-slot, .pj-case-media > span > image-slot { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+.pj-case-media > span { position: relative; }
+.pj-cover.r43 { aspect-ratio: 4/3; }
+.pj-cover.r169 { aspect-ratio: 16/9; }
+.pj-cover.r11 { aspect-ratio: 1/1; }
+.pj-arrow { display: inline-block; transition: transform 300ms cubic-bezier(0.22,1,0.36,1); }
+[data-open="1"] .pj-arrow { transform: rotate(180deg); }
+.pj-body { display: block; overflow: hidden; max-height: 0; opacity: 0; transition: max-height 460ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease; }
+[data-open="1"] .pj-body { max-height: 2200px; opacity: 1; }
+.pj-case { position: relative; transition: transform 460ms cubic-bezier(0.22,1,0.36,1), filter 460ms cubic-bezier(0.22,1,0.36,1), opacity 420ms ease; }
+.pj-cases:has(.pj-case[data-open="1"]) .pj-case { opacity: 0.55; transform: scale(0.97); }
+.pj-cases .pj-case.pj-case[data-open="1"] { grid-column: 1 / -1; opacity: 1 !important; transform: none !important; z-index: 6; filter: drop-shadow(11px 12px 0 var(--acc,#232323)); }
+.pj-cases .pj-case:hover { opacity: 1; }
+.pj-case .pj-body { max-height: 0; opacity: 0; background: #FFFCEE; color: #232323; transition: max-height 620ms cubic-bezier(0.22,1,0.36,1), opacity 420ms ease; }
+.pj-case[data-open="1"] .pj-body { max-height: 820px; opacity: 1; }
+.pj-case[data-open="1"] .pj-shell { background: #FFFCEE; }
+.pj-cover-wide { display: none; aspect-ratio: 21/9; }
+.pj-case[data-open="1"] .pj-cover-thumb { display: none; }
+.pj-case[data-open="1"] .pj-cover-wide { display: block; }
+.pj-case-media { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(12px,1.6vw,22px); }
+.pj-case-media > span { display: block; aspect-ratio: 16/10; border: 1px solid #232323; border-radius: 3px; overflow: hidden; }
+@media (max-width: 700px) { .pj-case .pj-body { left: 0; right: 0; } .pj-case-media { grid-template-columns: 1fr; } }
+
+.pj-idx { display: flex; flex-direction: column; border-top: 1px solid rgba(255,252,238,0.45); }
+.pj-idx-row { position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,252,238,0.45); cursor: pointer; transition: background 320ms cubic-bezier(0.22,1,0.36,1), color 320ms ease; }
+.pj-idx-row[data-open="1"] { color: #FFFCEE; border-bottom-color: transparent; }
+.pj-idx-row[data-open="1"] .pj-idx-bg { opacity: 1; }
+.pj-idx-row[data-open="1"] .pj-idx-bg::after { background: none; }
+.pj-idx-row[data-open="1"] .pj-idx-head::before { content: ''; position: absolute; left: 0; right: 0; top: -160px; bottom: 0; background: linear-gradient(180deg, rgba(4,6,14,0) 0%, rgba(4,6,14,0.42) 52%, rgba(4,6,14,0.94) 100%); z-index: -1; }
+.pj-idx-row[data-open="1"] .pj-idx-n, .pj-idx-row[data-open="1"] .pj-idx-plus { opacity: 0; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span { display: inline-flex !important; animation: pj-chip-in 420ms cubic-bezier(0.22,1,0.36,1) both; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span:nth-child(1) { animation-delay: 180ms; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span:nth-child(2) { animation-delay: 280ms; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span:nth-child(3) { animation-delay: 380ms; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span:nth-child(4) { animation-delay: 480ms; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span:nth-child(5) { animation-delay: 580ms; }
+@keyframes pj-chip-in { from { opacity: 0; transform: translateY(10px) scale(0.94); } to { opacity: 1; transform: none; } }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span { font-size: 0.62rem; padding: 9px 20px; }
+.pj-idx-row[data-open="1"] .pj-idx-title { font-size: clamp(1.6rem,3.6vw,3rem); }
+.pj-idx-title .pj-ch { display: inline-block; }
+.pj-idx-title .pj-ch.is-anim { animation: pj-ch-in 420ms cubic-bezier(0.22,1,0.36,1) both; }
+@keyframes pj-ch-in { from { opacity: 0; transform: translateY(0.42em); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pj-idx-title .pj-ch.is-anim { animation: none; } }
+.pj-idx-row[data-open="1"] .pj-idx-head { align-items: center; padding-bottom: clamp(20px,2.8vw,32px); grid-template-columns: auto minmax(0,auto) minmax(0,1fr) auto auto; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes { flex-wrap: wrap; overflow: visible; }
+.pj-idx-row[data-open="1"] .pj-idx-frentes > span { flex: 0 0 auto; }
+.pj-idx-row[data-open="1"] .pj-idx-grow { height: clamp(260px,34vw,520px); }
+.pj-idx-row:hover:not([data-open="1"]) { color: #FFFCEE; }
+.pj-idx-head { position: relative; z-index: 2; display: grid; grid-template-columns: auto minmax(0,1.6fr) minmax(0,1.15fr) auto auto; align-items: baseline; gap: clamp(14px,2.4vw,34px); padding: clamp(18px,2.6vw,30px) clamp(4px,1.6vw,26px); transition: padding 380ms cubic-bezier(0.22,1,0.36,1); }
+.pj-idx-row:hover .pj-idx-head { padding-left: clamp(14px,2.6vw,42px); }
+.pj-idx-n { font-family: Jersey, monospace; font-size: clamp(0.95rem,1.4vw,1.2rem); opacity: 0.7; }
+.pj-idx-title { font-family: Workbench, sans-serif; font-variation-settings: 'SCAN' 0, 'BLED' 0; font-size: clamp(1.35rem,3vw,2.5rem); line-height: 1; letter-spacing: 0.01em; text-transform: uppercase; min-width: 0; text-wrap: balance; }
+.pj-idx-frentes { display: flex; flex-wrap: nowrap; justify-content: flex-end; gap: 5px; min-width: 0; }
+.pj-idx-frentes > span:nth-child(n+4) { display: none; }
+.pj-idx-frentes > span { font-family: OCRB, monospace; font-size: 0.56rem; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid currentColor; border-radius: 999px; padding: 4px 9px; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pj-idx-year { font-family: Jersey, monospace; font-size: clamp(1rem,1.6vw,1.35rem); white-space: nowrap; }
+.pj-idx-plus { font-family: OCRB, monospace; font-size: 1rem; transition: transform 380ms cubic-bezier(0.22,1,0.36,1); }
+.pj-idx-row[data-open="1"] .pj-idx-plus { transform: rotate(45deg); }
+.pj-idx-media { position: relative; display: block; }
+.pj-idx-track { position: absolute; inset: 0; display: flex; transition: transform 620ms cubic-bezier(0.22,1,0.36,1); }
+.pj-idx-slide { position: relative; flex: 0 0 100%; height: 100%; }
+.pj-idx-slide > image-slot { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pj-idx-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pj-idx-gal { position: absolute; inset: 0; z-index: 5; opacity: 0; pointer-events: none; transition: opacity 280ms ease; }
+.pj-idx-row[data-open="1"] .pj-idx-media:hover .pj-idx-gal { opacity: 1; pointer-events: auto; }
+.pj-idx-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%; border: 0; background: rgba(4,6,14,0.34); backdrop-filter: blur(2px); color: #FFFCEE; font-family: OCRB, monospace; font-size: 0.9rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 200ms, color 200ms; }
+.pj-idx-nav:first-of-type { left: clamp(12px,1.6vw,22px); }
+.pj-idx-nav:last-of-type { right: clamp(12px,1.6vw,22px); }
+.pj-idx-nav:hover { background: rgba(255,252,238,0.92); color: #232323; }
+.pj-idx-dots { position: absolute; top: clamp(14px,2vw,22px); right: clamp(14px,2vw,26px); display: flex; gap: 7px; }
+.pj-idx-dots > button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 1px solid rgba(255,252,238,0.8); background: transparent; cursor: pointer; transition: background 220ms, transform 220ms cubic-bezier(0.22,1,0.36,1); }
+.pj-idx-dots > button[data-on="1"] { background: #FFFCEE; transform: scale(1.3); }
+.pj-idx-bg { position: absolute; inset: 0; z-index: 0; opacity: 0; pointer-events: none; transition: opacity 520ms ease; }
+.pj-idx-bg-open { opacity: 0; z-index: 1; }
+.pj-idx-row[data-open="1"] .pj-idx-bg-open { opacity: 1; pointer-events: auto; }
+.pj-idx-row[data-open="1"] .pj-idx-bg-prev { opacity: 0; }
+.pj-idx-bg > image-slot { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pj-idx-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,10,40,0.10) 0%, rgba(0,8,30,0.30) 42%, rgba(4,6,14,0.86) 100%); }
+.pj-idx-row:hover:not([data-open="1"]) .pj-idx-bg-prev { opacity: 1; }
+.pj-idx:has(.pj-idx-row[data-open="1"]) .pj-idx-row:hover:not([data-open="1"]) .pj-idx-bg { opacity: 0; }
+.pj-idx-grow { display: block; height: 0; transition: height 520ms cubic-bezier(0.22,1,0.36,1); }
+.pj-idx-row:hover:not([data-open="1"]) .pj-idx-grow { height: clamp(120px,17vw,250px); }
+.pj-idx:has(.pj-idx-row[data-open="1"]) .pj-idx-row:hover:not([data-open="1"]) .pj-idx-grow { height: 0; }
+
+.pj-idx-row .pj-body { position: relative; z-index: 2; background: #FFFCEE; color: #232323; max-height: 0; border-radius: 0 0 18px 18px; }
+.pj-idx-row[data-open="1"] .pj-body { max-height: 520px; }
+@media (max-width: 1180px) { .pj-idx-frentes > span:nth-child(n+3) { display: none; } }
+@media (max-width: 980px) { .pj-idx-frentes > span:nth-child(n+2) { display: none; } }
+@media (max-width: 820px) { .pj-idx-head { grid-template-columns: auto minmax(0,1fr) auto; } .pj-idx-frentes { display: none; } }
+.pj-gal { position: relative; display: block; overflow: hidden; border: 1px solid #232323; border-radius: 4px; background: #F3EEDC; }
+.pj-gal-view { position: relative; display: block; aspect-ratio: 16/9; overflow: hidden; }
+.pj-gal-track { position: absolute; inset: 0; display: flex; transition: transform 620ms cubic-bezier(0.22,1,0.36,1); }
+.pj-gal-slide { position: relative; flex: 0 0 100%; height: 100%; }
+.pj-gal-slide > image-slot { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pj-gal-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 1px solid #232323; background: #FFFCEE; color: #232323; font-family: OCRB, monospace; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 200ms, color 200ms, transform 240ms cubic-bezier(0.22,1,0.36,1); z-index: 3; }
+.pj-gal-nav:hover { background: #232323; color: #FFFCEE; }
+.pj-gal-prev { left: 14px; }
+.pj-gal-next { right: 14px; }
+.pj-gal-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 16px; border-top: 1px solid #232323; font-family: OCRB, monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.pj-gal-dots { display: flex; gap: 7px; }
+.pj-gal-dots > button { width: 9px; height: 9px; padding: 0; border-radius: 50%; border: 1px solid #232323; background: transparent; cursor: pointer; transition: background 220ms, transform 220ms cubic-bezier(0.22,1,0.36,1); }
+.pj-gal-dots > button[data-on="1"] { background: #232323; transform: scale(1.25); }
+@media (max-width: 620px) { .pj-gal-nav { width: 36px; height: 36px; } }
+.pj-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%,240px), 1fr)); gap: clamp(10px,1.4vw,18px); }
+.pj-row-wrap { position: relative; }
+.pj-row-view { overflow: hidden; padding: 0 26px 26px; margin: 0 -26px -26px; }
+.pj-row-track { display: flex; align-items: flex-start; gap: clamp(10px,1.4vw,18px); transition: transform 620ms cubic-bezier(0.22,1,0.36,1); }
+.pj-row-track > .pj-tile { flex: 0 0 calc((100% - 2 * clamp(10px,1.4vw,18px)) / 3); }
+@media (max-width: 860px) { .pj-row-track > .pj-tile { flex: 0 0 calc((100% - clamp(10px,1.4vw,18px)) / 2); } }
+@media (max-width: 560px) { .pj-row-track > .pj-tile { flex: 0 0 100%; } }
+.pj-row-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 6; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 0; background: rgba(4,6,14,0.34); backdrop-filter: blur(2px); color: #FFFCEE; font-family: OCRB, monospace; font-size: 0.9rem; cursor: pointer; opacity: 0; transition: opacity 260ms ease, background 200ms; }
+.pj-row-wrap:hover .pj-row-nav { opacity: 1; }
+.pj-row-nav:hover { background: rgba(4,6,14,0.62); }
+.pj-row-prev { left: clamp(8px,1vw,14px); }
+.pj-row-next { right: clamp(8px,1vw,14px); }
+.pj-tile-tall { aspect-ratio: 3/4 !important; }
+.pj-tile-916 { aspect-ratio: 9/16 !important; }
+.pj-tile-169 { aspect-ratio: 16/9 !important; }
+.pj-lb-video.is-portrait { flex: 0 1 auto; width: auto; max-width: 100%; height: 100%; margin-inline: auto; aspect-ratio: 9/16; }
+.pj-lb-video { display: block; flex: 1 1 auto; min-width: 0; min-height: 0; height: 100%; width: 100%; max-height: 100%; background: #0B0E18; border: 1px solid rgba(255,252,238,0.25); border-radius: 4px; object-fit: contain; }
+.pj-tile-prev { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 320ms ease; z-index: 2; pointer-events: none; }
+.pj-tile-prev.is-cover { opacity: 1; }
+.pj-tile:hover .pj-tile-prev { opacity: 1; }
+.pj-tile-play { position: absolute; left: 50%; top: 50%; width: clamp(42px,4vw,58px); height: clamp(42px,4vw,58px); transform: translate(-50%,-50%); border-radius: 50%; background: rgba(12,14,24,0.55); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; color: #FFFCEE; font-size: 0.9rem; pointer-events: none; transition: opacity 240ms ease, transform 300ms cubic-bezier(0.22,1,0.36,1); z-index: 3; }
+.pj-tile:hover .pj-tile-play { opacity: 0; transform: translate(-50%,-50%) scale(1.12); }
+.pj-tile { position: relative; display: block; width: 100%; padding: 0; border: 1px solid #232323; border-radius: 3px; overflow: hidden; background: #FFFCEE; cursor: pointer; aspect-ratio: 1/1; transition: transform 320ms cubic-bezier(0.22,1,0.36,1); }
+.pj-tile:hover { transform: translateY(-4px); z-index: 3; }
+.pj-tile > image-slot { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pj-tile-carousel { position: absolute; top: 10px; right: 10px; z-index: 4; display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: rgba(4,6,14,0.72); color: #FFFCEE; font-family: OCRB, monospace; font-size: 0.56rem; letter-spacing: 0.12em; }
+.pj-tile-43 { aspect-ratio: 4/3 !important; }
+.pj-tile-219 { aspect-ratio: 1931/814 !important; }
+.pj-tile-45 { aspect-ratio: 4/5 !important; }
+.pj-tile-shade { position: absolute; inset: 0; z-index: 4; display: flex; flex-direction: column; justify-content: flex-end; gap: 7px; padding: clamp(14px,1.8vw,20px); text-align: left; background: linear-gradient(to top, rgba(6,8,18,0.88) 0%, rgba(6,8,18,0.62) 46%, rgba(6,8,18,0.18) 100%); opacity: 0; transition: opacity 300ms ease; }
+.pj-tile:hover .pj-tile-shade, .pj-tile:focus-visible .pj-tile-shade { opacity: 1; }
+.pj-tile-shade > span { display: block; transform: translateY(8px); transition: transform 360ms cubic-bezier(0.22,1,0.36,1); }
+.pj-tile:hover .pj-tile-shade > span { transform: none; }
+.pj-tile-t { font-family: Workbench, sans-serif; font-variation-settings: 'SCAN' 0, 'BLED' 0; font-size: clamp(0.9rem,1.4vw,1.08rem); line-height: 1.15; color: #FFFCEE; }
+.pj-tile-c { font-family: OCRB, monospace; font-size: 0.64rem; line-height: 1.55; letter-spacing: 0.03em; color: rgba(255,252,238,0.9); }
+.pj-tile.is-stacked { overflow: visible; }
+.pj-tile.is-stacked::before, .pj-tile.is-stacked::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: #0B0E18; border: 1px solid rgba(35,35,35,0.9); z-index: -1; transition: transform 340ms cubic-bezier(0.22,1,0.36,1); }
+.pj-tile.is-stacked::before { transform: translate(7px, 7px) scale(0.985); opacity: 0.75; }
+.pj-tile.is-stacked::after { transform: translate(14px, 14px) scale(0.97); opacity: 0.45; }
+.pj-tile.is-stacked:hover::before { transform: translate(11px, 11px) scale(0.985); }
+.pj-tile.is-stacked:hover::after { transform: translate(22px, 22px) scale(0.97); }
+.pj-tile-badge { position: absolute; left: clamp(12px,1.4vw,16px); bottom: clamp(12px,1.4vw,16px); z-index: 5; display: flex; align-items: center; gap: 10px; transition: opacity 280ms ease, transform 320ms cubic-bezier(0.22,1,0.36,1); }
+.pj-tile:hover .pj-tile-badge { opacity: 0; transform: translateY(6px); }
+.pj-tile-pill { font-family: OCRB, monospace; font-size: clamp(0.68rem,0.85vw,0.76rem); letter-spacing: 0.16em; text-transform: uppercase; color: #FFFCEE; border: 1px solid rgba(255,252,238,0.9); border-radius: 999px; padding: 8px 18px 7px; background: rgba(6,8,18,0.62); backdrop-filter: blur(3px); white-space: nowrap; }
+.pj-tile-yr { font-family: Jersey, monospace; font-size: 1.15rem; color: #FFFCEE; text-shadow: 0 1px 6px rgba(6,8,18,0.6); }
+.pj-tile-k { font-family: OCRB, monospace; font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase; color: #FFBF00; }
+.pj-lb { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: clamp(18px,4vw,56px); background: rgba(4,6,14,0.92); backdrop-filter: blur(3px); animation: pj-lb-in 260ms ease both; }
+@keyframes pj-lb-in { from { opacity: 0; } to { opacity: 1; } }
+.pj-lb-inner { position: relative; display: flex; align-items: stretch; gap: clamp(14px,2vw,26px); width: min(var(--lbw,1180px), 92vw); max-width: 100%; height: 100%; animation: pj-lb-up 420ms cubic-bezier(0.22,1,0.36,1) both; }
+@keyframes pj-lb-up { from { opacity: 0; transform: translateY(18px) scale(0.985); } to { opacity: 1; transform: none; } }
+.pj-lb-img { display: block; flex: 1 1 auto; min-width: 0; min-height: 0; height: 100%; background-color: #0B0E18; background-size: contain; background-repeat: no-repeat; background-position: center; border: 1px solid rgba(255,252,238,0.4); }
+.pj-lb-bar { flex: 0 0 clamp(240px,26vw,320px); display: flex; flex-direction: column; justify-content: space-between; gap: 22px; padding: clamp(14px,1.8vw,20px) 0; overflow-y: auto; font-family: OCRB, monospace; color: #FFFCEE; }
+@media (max-width: 760px) {
+  .pj-lb-inner { flex-direction: column; }
+  .pj-lb-img { flex: 1 1 auto; height: auto; width: 100%; }
+  .pj-lb-bar { flex: 0 0 auto; flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 0; }
+}
+.pj-lb-close { position: absolute; top: -14px; right: -14px; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,252,238,0.45); background: rgba(4,6,14,0.7); color: #FFFCEE; font-family: OCRB, monospace; font-size: 0.85rem; cursor: pointer; transition: background 200ms, transform 240ms cubic-bezier(0.22,1,0.36,1); }
+.pj-lb-close:hover { background: #FF0000; transform: rotate(90deg); }
+.pj-lb-nav { display: flex; gap: 10px; }
+.pj-lb-nav > button { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,252,238,0.45); background: transparent; color: #FFFCEE; font-family: OCRB, monospace; cursor: pointer; transition: background 200ms, color 200ms; }
+.pj-lb-nav > button:hover { background: #FFFCEE; color: #232323; }
+.pj-open { display: none; }
+[data-open="1"] .pj-open { display: inline; }
+[data-open="1"] .pj-closed { display: none; }
+.pj-more { color: #232323; font-family: OCRB, monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; background: #FFFCEE; border: 1px solid #232323; border-radius: 999px; padding: 14px 32px; cursor: pointer; transition: background 240ms cubic-bezier(0.22,1,0.36,1), color 240ms, transform 240ms cubic-bezier(0.22,1,0.36,1); }
+.pj-more:hover { background: #232323; color: #FFFCEE; transform: translateY(-3px); }
+@media (prefers-reduced-motion: reduce) { .js-reveal .dm-split .dm-ch { opacity: 1 !important; transform: none !important; } .js-reveal .dm-type .dm-caret { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1 !important; transform: none !important; } * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#002DD9"/><text x="50" y="62" font-family="monospace" font-size="30" font-weight="700" fill="#FFFCEE" text-anchor="middle">DM</text></svg></template>
+
+<div style="background:#FFFCEE;color:#232323;font-family:OCRB,monospace;min-height:100vh">
+
+  <header data-header="" style="position:sticky;top:0;z-index:20;transition:transform 320ms cubic-bezier(0.22,1,0.36,1);will-change:transform;background:#002DD9;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px clamp(16px,4vw,64px);flex-wrap:wrap">
+    <a href="index.html" style="font-family:EndlessSunrise,cursive;font-size:1.9rem;line-height:1;color:#FFFCEE" style-hover="color:#FFBF00">Deriva.Mente</a>
+    <nav style="display:flex;gap:clamp(16px,3vw,40px);flex-wrap:wrap">
+      <a href="index.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FFBF00">Home</a>
+      <a href="sobre.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#FF00EE">Sobre mim</a>
+      <a href="projetos.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFBF00;border-bottom:1px solid #FFBF00;padding-bottom:2px">Projetos</a>
+      <a href="contato.html" style="font-family:OCRB,monospace;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:#15BF00">Contato</a>
+    </nav>
+  </header>
+
+  <section style="padding:clamp(48px,9vw,120px) clamp(16px,4vw,64px) 40px;border-bottom:1px solid #232323">
+    <p style="margin:0 0 24px;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#002DD9">Índice de trabalhos</p>
+    <h1 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(3rem,11vw,9rem);line-height:0.9;letter-spacing:-0.01em;color:#002DD9">Projetos</h1>
+    <p style="max-width:52ch;margin:28px 0 0;font-size:clamp(0.85rem,1vw,0.95rem);line-height:1.7;letter-spacing:0.02em">Quatro frentes de trabalho, um mesmo método: pensar a imagem como linguagem. Os estudos de caso entram aqui aos poucos.</p>
+  </section>
+
+  <div style="position:sticky;top:var(--dm-bar-top,70px);transition:top 320ms cubic-bezier(0.22,1,0.36,1);z-index:15;background:#FFFCEE;border-bottom:1px solid #232323;padding:14px clamp(16px,4vw,64px);display:flex;gap:10px;flex-wrap:wrap">
+    <button type="button" onClick="{{ showAll }}" style="font-family:OCRB,monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;border:1px solid #232323;border-radius:999px;padding:9px 20px;color:#232323;cursor:pointer;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#232323;color:#FFFCEE">Todos</button>
+    <button type="button" onClick="{{ pickCases }}" style="font-family:OCRB,monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;border:1px solid #232323;border-radius:999px;padding:9px 20px;color:#232323;cursor:pointer;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#002DD9;border-color:#002DD9;color:#FFFCEE">Cases</button>
+    <button type="button" onClick="{{ pickDesign }}" style="font-family:OCRB,monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;border:1px solid #232323;border-radius:999px;padding:9px 20px;color:#232323;cursor:pointer;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FFBF00;border-color:#FFBF00">Design</button>
+    <button type="button" onClick="{{ pickFilm }}" style="font-family:OCRB,monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;border:1px solid #232323;border-radius:999px;padding:9px 20px;color:#232323;cursor:pointer;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF0000;border-color:#FF0000;color:#FFFCEE">Filmmaking</button>
+    <button type="button" onClick="{{ pickMusic }}" style="font-family:OCRB,monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;background:transparent;border:1px solid #232323;border-radius:999px;padding:9px 20px;color:#232323;cursor:pointer;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF00EE;border-color:#FF00EE;color:#FFFCEE">Músicas</button>
+  </div>
+
+  <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+  <section id="{{ g.id }}" style="--acc:{{ g.accent }};--line:{{ g.line }};--card:{{ g.card }};--tabink:{{ g.tabink }};--tabbg:{{ g.tab }};background:{{ g.bg }};color:{{ g.ink }};padding:clamp(40px,6vw,84px) clamp(16px,4vw,64px);border-bottom:1px solid #232323">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,44px)">
+      <h2 data-dm-text="{{ g.title }}" style="margin:0;font-family:Monofett,monospace;font-size:clamp(2.2rem,6vw,4.2rem);line-height:0.95;color:{{ g.ink }}" data-split="">{{ g.title }}</h2>
+      <span data-rule="" style="flex:1;min-width:40px;height:1px;background:{{ g.ink }};opacity:0.6;transform:scaleX(0);transform-origin:left center"></span>
+      <span style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ g.metaItems }}" as="m" hint-placeholder-count="3">
+          <span class="pj-meta" style="background:#FFFCEE;color:#232323;border:1px solid #232323;border-radius:999px;padding:8px 16px;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap">{{ m.t }}</span>
+        </sc-for>
+      </span>
+    </div>
+
+    <sc-if value="{{ g.isIndex }}" hint-placeholder-val="{{ false }}">
+      <div class="pj-idx">
+        <sc-for list="{{ g.items }}" as="p" hint-placeholder-count="4">
+          <article class="pj-idx-row" data-reveal="" data-open="{{ p.open }}" onClick="{{ p.toggle }}" style="--tint:{{ p.tint }}">
+            <span class="pj-idx-media">
+            <span class="pj-idx-bg pj-idx-bg-prev"><image-slot id="{{ p.slot }}" shape="rect" data-vsrc="{{ p.img }}" placeholder=""></image-slot></span>
+            <span class="pj-idx-bg pj-idx-bg-open">
+              <span class="pj-idx-track" style="transform:translateX({{ p.galShift }})">
+                <sc-for list="{{ p.slides }}" as="sl" hint-placeholder-count="3">
+                  <span class="pj-idx-slide">
+                    <sc-if value="{{ sl.isVideo }}" hint-placeholder-val="{{ false }}">
+                      <video class="pj-idx-video" preload="none" data-vsrc="{{ sl.src }}" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline"></video>
+                    </sc-if>
+                    <sc-if value="{{ sl.isImage }}" hint-placeholder-val="{{ true }}">
+                      <image-slot id="{{ sl.id }}" shape="rect" data-vsrc="{{ sl.src }}" placeholder="{{ sl.ph }}"></image-slot>
+                    </sc-if>
+                  </span>
+                </sc-for>
+              </span>
+            </span>
+            <span class="pj-idx-gal">
+              <button type="button" class="pj-idx-nav" aria-label="Anterior" onClick="{{ p.galPrev }}">←</button>
+              <span class="pj-idx-dots">
+                <sc-for list="{{ p.slides }}" as="sl" hint-placeholder-count="3">
+                  <button type="button" aria-label="Ir para imagem" data-on="{{ sl.on }}" onClick="{{ sl.go }}"></button>
+                </sc-for>
+              </span>
+              <button type="button" class="pj-idx-nav" aria-label="Próxima" onClick="{{ p.galNext }}">→</button>
+            </span>
+            <span class="pj-idx-grow"></span>
+            <span class="pj-idx-head">
+              <span class="pj-idx-n">{{ p.n }}</span>
+              <span class="pj-idx-title">{{ p.title }}</span>
+              <span class="pj-idx-frentes">
+                <sc-for list="{{ p.tags }}" as="tag" hint-placeholder-count="3">
+                  <span>{{ tag.t }}</span>
+                </sc-for>
+              </span>
+              <span class="pj-idx-year">{{ p.year }}</span>
+              <span class="pj-idx-plus">+</span>
+            </span>
+            </span>
+            <span class="pj-body">
+              <span style="display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);padding:clamp(20px,2.6vw,32px)">
+                <span style="display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,44px)">
+                  <span style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:14px">
+                    <span style="font-family:OCRB,monospace;font-size:clamp(0.78rem,0.95vw,0.88rem);line-height:1.75;letter-spacing:0.02em;max-width:74ch">{{ p.resumo }}</span>
+                    <sc-if value="{{ p.hasCredito }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-family:OCRB,monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;line-height:1.6;color:#002DD9;border-left:2px solid #002DD9;padding-left:12px">{{ p.credito }}</span>
+                    </sc-if>
+                  </span>
+                  <span style="display:flex;flex-direction:column;gap:10px;font-family:OCRB,monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase">
+                    <span style="opacity:0.6">Função</span>
+                    <span style="font-size:0.72rem;letter-spacing:0.04em;text-transform:none">{{ p.role }}</span>
+                    <sc-if value="{{ p.hasPage }}" hint-placeholder-val="{{ false }}">
+                      <a href="{{ p.page }}" style="margin-top:8px;align-self:flex-start;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid #002DD9;border-radius:999px;padding:9px 18px;color:#002DD9;transition:all 200ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#002DD9;color:#FFFCEE">Saiba mais →</a>
+                    </sc-if>
+                    <sc-if value="{{ p.pageSoon }}" hint-placeholder-val="{{ false }}">
+                      <span style="margin-top:8px;align-self:flex-start;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px dashed #002DD9;border-radius:999px;padding:9px 18px;color:#002DD9;opacity:0.75">Saiba mais · em breve</span>
+                    </sc-if>
+                  </span>
+                </span>
+              </span>
+            </span>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ g.isGallery }}" hint-placeholder-val="{{ false }}">
+      <sc-for list="{{ g.blocks }}" as="b" hint-placeholder-count="1">
+        <div style="margin-bottom:clamp(28px,4vw,52px)">
+          <sc-if value="{{ b.hasLabel }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+              <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.5vw,1.15rem);letter-spacing:0.08em;text-transform:uppercase;color:#232323">{{ b.label }}</span>
+              <span style="flex:1;height:1px;background:#232323;opacity:0.45"></span>
+              <span style="font-family:Jersey,monospace;font-size:1rem;color:#232323">{{ b.count }}</span>
+            </div>
+          </sc-if>
+          <div class="pj-row-wrap">
+            <div class="pj-row-view">
+              <div class="pj-row-track" style="transform:translateX({{ b.shift }})">
+                <sc-for list="{{ b.items }}" as="p" hint-placeholder-count="3">
+                  <button type="button" class="pj-tile {{ p.tileClass }} {{ p.stacked }}" data-reveal="" onClick="{{ p.zoom }}">
+                    <sc-if value="{{ p.hasSlot }}" hint-placeholder-val="{{ true }}">
+                      <image-slot id="{{ p.slot }}" shape="rect" data-vsrc="{{ p.img }}" placeholder="{{ p.ph }}"></image-slot>
+                    </sc-if>
+                    <sc-if value="{{ p.isCarousel }}" hint-placeholder-val="{{ false }}">
+                      <span class="pj-tile-carousel">▤ {{ p.slideCount }}</span>
+                    </sc-if>
+                    <sc-if value="{{ p.hasPreview }}" hint-placeholder-val="{{ false }}">
+                      <video class="pj-tile-prev {{ p.prevClass }}" data-vsrc="{{ p.video }}" preload="metadata" muted="muted" loop="loop" playsinline="playsinline"></video>
+                    </sc-if>
+                    <sc-if value="{{ p.isFilm }}" hint-placeholder-val="{{ false }}">
+                      <span class="pj-tile-play">▶</span>
+                    </sc-if>
+                    <sc-if value="{{ p.isLink }}" hint-placeholder-val="{{ false }}">
+                      <span class="pj-tile-carousel">{{ p.linkLabel }} ↗</span>
+                    </sc-if>
+                    <sc-if value="{{ p.hasTipo }}" hint-placeholder-val="{{ false }}">
+                      <span class="pj-tile-badge">
+                        <span class="pj-tile-pill">{{ p.tipo }}</span>
+                        <span class="pj-tile-yr">{{ p.year }}</span>
+                      </span>
+                    </sc-if>
+                    <span class="pj-tile-shade">
+                      <span class="pj-tile-k">{{ p.kind }} · {{ p.year }}</span>
+                      <span class="pj-tile-t">{{ p.title }}</span>
+                      <span class="pj-tile-c">{{ p.legenda }}</span>
+                    </span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+            <sc-if value="{{ b.hasNav }}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="pj-row-nav pj-row-prev" aria-label="Anterior" onClick="{{ b.prev }}">←</button>
+              <button type="button" class="pj-row-nav pj-row-next" aria-label="Próxima" onClick="{{ b.next }}">→</button>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ g.isCards }}" hint-placeholder-val="{{ true }}">
+      <sc-for list="{{ g.blocks }}" as="b" hint-placeholder-count="1">
+        <div style="margin-bottom:clamp(28px,4vw,52px)">
+          <sc-if value="{{ b.hasLabel }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+              <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.5vw,1.15rem);letter-spacing:0.08em;text-transform:uppercase;color:#232323">{{ b.label }}</span>
+              <span style="flex:1;height:1px;background:#232323;opacity:0.45"></span>
+              <span style="font-family:Jersey,monospace;font-size:1rem;color:#232323">{{ b.count }}</span>
+            </div>
+          </sc-if>
+          <div class="{{ g.gridClass }}" style="display:grid;gap:clamp(20px,2.6vw,34px)">
+            <sc-for list="{{ b.items }}" as="p" hint-placeholder-count="3">
+              <article class="pj-card {{ p.cardClass }}" data-reveal="" data-open="{{ p.open }}" onClick="{{ p.toggle }}" style="cursor:{{ p.cursor }}">
+                <span class="pj-tab">{{ p.kind }}</span>
+                <span class="pj-shell">
+                  <span class="pj-cover pj-cover-thumb {{ p.ratio }}"><image-slot id="{{ p.slot }}" shape="rect" data-vsrc="{{ p.img }}" placeholder="{{ p.ph }}"></image-slot></span>
+                  <sc-if value="{{ p.isCase }}" hint-placeholder-val="{{ false }}">
+                    <span class="pj-cover pj-cover-wide"><image-slot id="{{ p.wide }}" shape="rect" data-vsrc="{{ p.imgWide }}" placeholder="capa panorâmica 21:9 — alta resolução"></image-slot></span>
+                  </sc-if>
+                  <span style="box-sizing:border-box;width:100%;text-align:left;font-family:OCRB,monospace;color:inherit;padding:clamp(18px,2vw,24px) clamp(18px,2.2vw,26px) clamp(16px,1.8vw,20px);display:flex;flex-direction:column;gap:12px;min-width:0">
+                    <span style="display:flex;align-items:baseline;justify-content:space-between;gap:18px;min-width:0">
+                      <span style="font-family:Jersey,monospace;font-size:1.1rem;color:#002DD9">{{ p.n }}</span>
+                      <span style="display:flex;align-items:center;gap:8px;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#002DD9;white-space:nowrap">
+                        <span class="pj-closed">Prévia</span>
+                        <span class="pj-open">Fechar</span>
+                        <span class="pj-arrow">↓</span>
+                      </span>
+                    </span>
+                    <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:1.05rem;line-height:1.2;min-width:0;overflow-wrap:anywhere;text-wrap:pretty">{{ p.title }}</span>
+                    <span style="font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75">{{ p.year }} · {{ p.role }}</span>
+                  </span>
+                  <span class="pj-body">
+                    <span style="display:flex;flex-direction:column;gap:clamp(16px,2vw,24px);padding:clamp(4px,0.6vw,8px) clamp(18px,2.2vw,28px) clamp(22px,2.6vw,32px);border-top:1px solid rgba(35,35,35,0.18);margin-top:clamp(10px,1.4vw,16px)">
+                      <sc-if value="{{ p.isCase }}" hint-placeholder-val="{{ false }}">
+                        <span class="pj-case-media">
+                          <span><image-slot id="{{ p.m1 }}" shape="rect" placeholder="imagem / vídeo"></image-slot></span>
+                          <span><image-slot id="{{ p.m2 }}" shape="rect" placeholder="imagem / vídeo"></image-slot></span>
+                          <span><image-slot id="{{ p.m3 }}" shape="rect" placeholder="imagem / vídeo"></image-slot></span>
+                        </span>
+                      </sc-if>
+                      <span style="font-size:clamp(0.76rem,0.92vw,0.86rem);line-height:1.7;letter-spacing:0.02em;max-width:80ch">{{ p.resumo }}</span>
+                      <sc-if value="{{ p.hasCredito }}" hint-placeholder-val="{{ false }}">
+                        <span style="display:flex;align-items:flex-start;gap:10px;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;line-height:1.6;color:#002DD9;border-left:2px solid #002DD9;padding-left:12px">{{ p.credito }}</span>
+                      </sc-if>
+                      <span style="display:flex;flex-wrap:wrap;gap:7px">
+                        <sc-for list="{{ p.tags }}" as="tag" hint-placeholder-count="2">
+                          <span style="font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid #232323;border-radius:999px;padding:5px 12px;opacity:0.85">{{ tag.t }}</span>
+                        </sc-for>
+                      </span>
+                      <sc-if value="{{ p.hasPage }}" hint-placeholder-val="{{ false }}">
+                        <a href="{{ p.page }}" style="align-self:flex-start;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid #002DD9;border-radius:999px;padding:9px 18px;color:#002DD9;transition:all 200ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#002DD9;color:#FFFCEE">Saiba mais →</a>
+                      </sc-if>
+                      <sc-if value="{{ p.pageSoon }}" hint-placeholder-val="{{ false }}">
+                        <span style="align-self:flex-start;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px dashed #002DD9;border-radius:999px;padding:9px 18px;color:#002DD9;opacity:0.75">Saiba mais · em breve</span>
+                      </sc-if>
+                    </span>
+                  </span>
+                </span>
+              </article>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ g.isList }}" hint-placeholder-val="{{ false }}">
+      <div class="pj-list" style="display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ g.items }}" as="p" hint-placeholder-count="4">
+          <article class="pj-row" data-reveal="" data-open="{{ p.open }}" style="background:#FFFCEE;color:#232323;border:1px solid #232323;border-radius:16px;transition:transform 240ms cubic-bezier(0.22,1,0.36,1),filter 240ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:translateY(-3px);filter:drop-shadow(8px 8px 0 #232323)">
+            <button type="button" onClick="{{ p.toggle }}" style="box-sizing:border-box;width:100%;background:transparent;border:0;cursor:pointer;text-align:left;font-family:OCRB,monospace;color:inherit;padding:clamp(16px,2vw,22px) clamp(18px,2.2vw,26px);display:grid;grid-template-columns:auto 1fr auto auto;gap:clamp(12px,2vw,22px);align-items:center">
+              <span style="font-family:Jersey,monospace;font-size:1.3rem;line-height:1;color:#002DD9">{{ p.n }}</span>
+              <span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.95rem,1.8vw,1.3rem);line-height:1.2">{{ p.title }}</span>
+                <span style="display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+                  <sc-if value="{{ p.hasSelo }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-family:OCRB,monospace;font-size:clamp(0.66rem,0.8vw,0.72rem);letter-spacing:0.12em;text-transform:uppercase;background:#FF00EE;color:#232323;border:1px solid #232323;border-radius:999px;padding:6px 14px;white-space:nowrap">{{ p.selo }}</span>
+                  </sc-if>
+                  <span style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.7">{{ p.trackLabel }} · {{ p.role }}</span>
+                </span>
+              </span>
+              <span style="font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:#002DD9;white-space:nowrap">
+                <span class="pj-closed">Ouvir</span>
+                <span class="pj-open">Fechar</span>
+              </span>
+              <span class="pj-arrow" style="font-size:0.85rem;color:#002DD9">↓</span>
+            </button>
+            <span class="pj-body">
+              <span style="display:flex;flex-direction:column;gap:16px;padding:0 clamp(18px,2.2vw,26px) clamp(20px,2.4vw,26px)">
+                <span style="font-size:clamp(0.78rem,0.95vw,0.88rem);line-height:1.7;letter-spacing:0.02em;max-width:74ch">{{ p.resumo }}</span>
+                <span style="display:flex;flex-direction:column;gap:10px">
+                  <sc-for list="{{ p.tracks }}" as="tr" hint-placeholder-count="2">
+                    <span style="display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;border:1px solid #232323;border-radius:12px;padding:10px 14px">
+                      <button type="button" onClick="{{ tr.toggle }}" aria-label="Tocar faixa" style="width:38px;height:38px;border-radius:50%;border:1px solid #232323;background:{{ tr.btnBg }};color:{{ tr.btnInk }};cursor:{{ tr.cursor }};font-family:OCRB,monospace;font-size:0.7rem;display:flex;align-items:center;justify-content:center;transition:background 200ms,color 200ms">{{ tr.icon }}</button>
+                      <span style="display:flex;flex-direction:column;gap:7px;min-width:0">
+                        <span style="font-size:0.68rem;letter-spacing:0.06em">{{ tr.name }}</span>
+                        <span style="position:relative;display:block;height:22px">
+                          <span style="position:absolute;inset:0;display:flex;align-items:flex-end;gap:2px;opacity:0.35">
+                            <sc-for list="{{ tr.bars }}" as="bar" hint-placeholder-count="28">
+                              <span style="flex:1;background:#232323;height:{{ bar.h }}"></span>
+                            </sc-for>
+                          </span>
+                          <span style="position:absolute;left:0;top:0;bottom:0;width:{{ tr.prog }};overflow:hidden">
+                            <span style="position:absolute;left:0;top:0;bottom:0;width:{{ tr.progInner }};display:flex;align-items:flex-end;gap:2px">
+                              <sc-for list="{{ tr.bars }}" as="bar" hint-placeholder-count="28">
+                                <span style="flex:1;background:#FF00EE;height:{{ bar.h }}"></span>
+                              </sc-for>
+                            </span>
+                          </span>
+                        </span>
+                      </span>
+                      <span style="font-family:Jersey,monospace;font-size:0.95rem;white-space:nowrap;opacity:0.8">{{ tr.time }}</span>
+                    </span>
+                  </sc-for>
+                </span>
+                <span style="display:flex;flex-wrap:wrap;gap:10px">
+                  <sc-if value="{{ p.hasPlatforms }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ p.platforms }}" target="_blank" rel="noopener" style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid #232323;border-radius:999px;padding:9px 18px;color:#232323;transition:all 200ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#232323;color:#FFFCEE">Ouça nas plataformas →</a>
+                  </sc-if>
+                  <sc-if value="{{ p.noPlatforms }}" hint-placeholder-val="{{ true }}">
+                    <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px dashed #232323;border-radius:999px;padding:9px 18px;color:#232323;opacity:0.7">Fora das plataformas</span>
+                  </sc-if>
+                  <sc-if value="{{ p.hasPage }}" hint-placeholder-val="{{ false }}">
+                    <a href="{{ p.page }}" style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid #002DD9;border-radius:999px;padding:9px 18px;color:#002DD9;transition:all 200ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#002DD9;color:#FFFCEE">Saiba mais →</a>
+                  </sc-if>
+                </span>
+              </span>
+            </span>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ g.isGrid }}" hint-placeholder-val="{{ false }}">
+      <div class="{{ g.gridClass }}" style="display:grid;gap:clamp(18px,2.4vw,28px)">
+        <sc-for list="{{ g.items }}" as="p" hint-placeholder-count="3">
+          <article data-reveal="" data-open="{{ p.open }}" style="background:#FFFCEE;color:#232323;border:1px solid #232323;border-radius:4px;overflow:hidden;transition:transform 240ms cubic-bezier(0.22,1,0.36,1),box-shadow 240ms cubic-bezier(0.22,1,0.36,1)" style-hover="transform:translateY(-6px);box-shadow:10px 10px 0 #232323">
+            <span class="pj-cover r11" style="display:block;border-bottom:1px solid #232323"><image-slot id="{{ p.slot }}" shape="rect" placeholder="{{ p.ph }}"></image-slot></span>
+            <button type="button" onClick="{{ p.toggle }}" style="box-sizing:border-box;width:100%;background:transparent;border:0;cursor:pointer;text-align:left;font-family:OCRB,monospace;color:inherit;padding:clamp(16px,1.8vw,22px) clamp(16px,2vw,22px) clamp(16px,1.8vw,20px);display:flex;flex-direction:column;gap:10px">
+              <span style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+                <span style="font-family:Jersey,monospace;font-size:1.1rem;color:#002DD9">{{ p.n }}</span>
+                <span class="pj-arrow" style="font-size:0.8rem;color:#002DD9">↓</span>
+              </span>
+              <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:1.02rem;line-height:1.2;min-width:0;overflow-wrap:anywhere;text-wrap:pretty">{{ p.title }}</span>
+              <span style="font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7">{{ p.kind }}</span>
+            </button>
+            <span class="pj-body">
+              <span style="display:flex;flex-direction:column;gap:12px;padding:0 clamp(16px,2vw,22px) clamp(18px,2vw,22px)">
+                <span style="font-size:0.78rem;line-height:1.7;letter-spacing:0.02em">{{ p.resumo }}</span>
+                <sc-if value="{{ p.hasPage }}" hint-placeholder-val="{{ false }}">
+                  <a href="{{ p.page }}" style="align-self:flex-start;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid #002DD9;border-radius:999px;padding:9px 18px;color:#002DD9;transition:all 200ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#002DD9;color:#FFFCEE">Saiba mais →</a>
+                </sc-if>
+              </span>
+            </span>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ g.hasMore }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;justify-content:center;margin-top:clamp(32px,4.5vw,56px)">
+        <button type="button" class="pj-more" onClick="{{ g.more }}">{{ g.moreLabel }}</button>
+      </div>
+    </sc-if>
+  </section>
+  </sc-for>
+
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="pj-lb" onClick="{{ lbClose }}">
+      <div class="pj-lb-inner" style="--lbw:{{ lbWidth }}">
+        <button type="button" class="pj-lb-close" aria-label="Fechar" onClick="{{ lbClose }}">✕</button>
+        <sc-if value="{{ lbIsVideo }}" hint-placeholder-val="{{ false }}">
+          <video class="pj-lb-video {{ lbVClass }}" ref="{{ lbRef }}" data-vsrc="{{ lbSrc }}" controls="{{ true }}" autoplay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" onLoadedMetadata="{{ lbPlay }}" onClick="{{ lbStop }}"></video>
+        </sc-if>
+        <sc-if value="{{ lbIsImage }}" hint-placeholder-val="{{ true }}">
+          <span class="pj-lb-img" role="img" aria-label="{{ lbTitle }}" style="background-image:url({{ lbSrc }})" onClick="{{ lbStop }}"></span>
+        </sc-if>
+        <div class="pj-lb-bar" onClick="{{ lbStop }}">
+          <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
+            <span style="font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:#FFBF00">{{ lbKind }}</span>
+            <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1rem,2vw,1.5rem);line-height:1.15">{{ lbTitle }}</span>
+            <span style="font-size:0.7rem;line-height:1.6;letter-spacing:0.02em;max-width:70ch;color:rgba(255,252,238,0.88)">{{ lbCaption }}</span>
+          </div>
+          <sc-if value="{{ lbHasLink }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ lbHref }}" target="_blank" rel="noopener" onClick="{{ lbStop }}" style="align-self:flex-start;font-family:OCRB,monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;border:1px solid #FFFCEE;border-radius:999px;padding:10px 20px;color:#FFFCEE;transition:all 200ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:#FF0000;border-color:#FF0000">Assistir no YouTube ↗</a>
+          </sc-if>
+          <div class="pj-lb-nav">
+            <button type="button" aria-label="Anterior" onClick="{{ lbPrev }}">←</button>
+            <span style="display:flex;align-items:center;font-family:Jersey,monospace;font-size:1.05rem;padding:0 4px">{{ lbCount }}</span>
+            <button type="button" aria-label="Próxima" onClick="{{ lbNext }}">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <footer style="background:#002DD9;color:#FFFCEE;padding:clamp(40px,6vw,80px) clamp(16px,4vw,64px);display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+    <div>
+      <p style="margin:0 0 12px;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase">Tem um projeto em mente?</p>
+      <a href="contato.html" style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(1.6rem,4vw,2.6rem);color:#FFFCEE;line-height:1" style-hover="color:#15BF00">Vamos conversar</a>
+    </div>
+    <p style="margin:0;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,252,238,0.8)">Deriva.Mente · Lucas Guedes · 2026</p>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const CATS = [
+  {
+    id: 'cases', key: 'cases', title: 'Cases', accent: '#002DD9',
+    meta: 'Marcas · Projetos completos · Multi-frente', bg: '#002DD9', ink: '#FFFCEE',
+    line: '#FFFCEE', card: '#FFFCEE', tabink: '#232323', tab: '#FFFCEE',
+    ratio: 'r43', ph: 'capa do case', layout: 'index', preview: 4, subs: []
+  },
+  {
+    id: 'design', key: 'design', title: 'Design', accent: '#FFBF00',
+    meta: 'Identidade · Editorial · Capas', bg: '#FFBF00', ink: '#232323',
+    line: '#232323', card: '#FFFCEE', tabink: '#232323', tab: '#FFFCEE',
+    ratio: 'r43', ph: 'arte', layout: 'gallery', preview: 4,
+    subs: [
+      { id: 'id-visual', label: 'ID visual / Branding' },
+      { id: 'artes', label: 'Artes' },
+      { id: 'clothing', label: 'Clothing' },
+      { id: 'stickers', label: 'Stickers' },
+      { id: 'capas', label: 'Capas de álbum' },
+      { id: 'posts', label: 'Posts' }
+    ]
+  },
+  {
+    id: 'filmmaking', key: 'film', title: 'Filmmaking', accent: '#FF0000',
+    meta: 'Vertical · Horizontal', bg: '#FF0000', ink: '#232323',
+    line: '#232323', card: '#FFFCEE', tabink: '#232323', tab: '#FFFCEE',
+    ratio: 'r169', ph: 'still', layout: 'gallery', preview: 4,
+    subs: [
+      { id: 'vertical', label: 'Vertical' },
+      { id: 'horizontal', label: 'Horizontal' }
+    ]
+  },
+  {
+    id: 'musicas', key: 'music', title: 'Músicas', accent: '#FF00EE',
+    meta: 'Composição · Produção · Capas', bg: '#FF00EE', ink: '#232323',
+    line: '#232323', card: '#FFFCEE', tabink: '#232323', tab: '#FFFCEE',
+    ratio: 'r11', ph: 'capa 1:1', layout: 'list', preview: 4, subs: []
+  },
+  {
+    oculto: true,
+    id: 'marketing', key: 'mkt', title: 'Marketing', accent: '#15BF00', preview: 3,
+    meta: 'Campanha · Social · Estratégia', bg: '#15BF00', ink: '#232323',
+    line: '#232323', card: '#FFFCEE', tabink: '#232323', tab: '#FFFCEE',
+    ratio: 'r11', ph: 'peça 1:1', layout: 'grid', subs: []
+  }
+];
+
+const ROLES = {
+  design: 'Direção de arte',
+  film: 'Direção · edição',
+  music: 'Composição · produção',
+  mkt: 'Estratégia · criação'
+};
+
+// Placeholders enquanto os cases reais entram — trocar projeto a projeto.
+function seed(key, subs, perSub) {
+  const out = [];
+  const list = subs.length ? subs : [{ id: key, label: '' }];
+  list.forEach((sub) => {
+    for (let i = 0; i < perSub; i++) {
+      out.push({
+        key: key,
+        sub: sub.id,
+        subLabel: sub.label,
+        slot: 'pj-' + key + '-' + sub.id + '-' + (i + 1),
+        title: 'Projeto a definir',
+        year: '20—',
+        role: ROLES[key],
+        page: null,
+        resumo: 'Resumo do case entra aqui: contexto, o que foi feito e o resultado em duas ou três linhas.',
+        tags: ['A definir', 'A definir']
+      });
+    }
+  });
+  return out;
+}
+
+// Música: um projeto por linha, com faixas empilhadas dentro.
+const MUSIC = [
+  {
+    key: 'music', slot: 'pj-music-manchete', title: 'Manchete Disco Club', year: '2026',
+    role: 'Composição · produção · identidade', page: null, selo: 'EP sai 18 · 09',
+    resumo: 'Meu projeto musical atual. O EP Just for the Record reúne as faixas do Blãnk relançadas — que você ouve na linha abaixo — mais uma inédita e uma demo. Tudo composto, produzido e embalado visualmente por mim.',
+    tracks: [
+      { name: 'Thinking of Me', src: 'img/audio/thinking-of-me.mp3' },
+      { name: 'Stupid Love (demo)', src: 'img/audio/stupid-love-demo.mp3' }
+    ]
+  },
+  {
+    key: 'music', slot: 'pj-music-blank', title: 'Blãnk', year: '2024',
+    role: 'Composição · produção', page: null, selo: 'Antecessor do MDC',
+    resumo: 'Meu primeiro projeto musical, construído de forma amadora: eu tinha conceito e pouco conhecimento da parte burocrática. Ao entender melhor o meio, reestruturei tudo e virou Manchete Disco Club.',
+    tracks: [
+      { name: 'Clear', src: 'img/audio/clear.mp3' },
+      { name: 'Enough', src: 'img/audio/enough.mp3' },
+      { name: 'Seasons', src: 'img/audio/seasons.mp3' }
+    ]
+  },
+  {
+    key: 'music', slot: 'pj-music-demos', title: 'Thnks fr ll th mss', year: '2024 — 2026',
+    role: 'Composição · produção', page: null, selo: 'Demos cruas',
+    resumo: 'Futuro álbum em construção. Aqui ficam as demos, ideias e conceitos que podem ou não virar faixa completa — sem mixagem, sem acabamento, só processo.',
+    tracks: [
+      { name: 'Thnks fr th mss (v1.2)', src: 'img/audio/demo-thnks-fr-th-mss.mp3' },
+      { name: 'Ok, DANCE!', src: 'img/audio/demo-ok-dance.mp3' },
+      { name: 'For Real', src: 'img/audio/demo-for-real.mp3' },
+      { name: 'Funky Groove', src: 'img/audio/demo-funky-groove.mp3' },
+      { name: 'Funn Song', src: 'img/audio/demo-funn-song.mp3' },
+      { name: 'Frail Over', src: 'img/audio/demo-frail-over.mp3' },
+      { name: 'Happyneix', src: 'img/audio/demo-happyneix.mp3' },
+      { name: 'Mksomething', src: 'img/audio/demo-mksomething.mp3' },
+      { name: 'Chap', src: 'img/audio/demo-chap.mp3' },
+      { name: 'Beab', src: 'img/audio/demo-beab.mp3' }
+    ]
+  }
+];
+
+const CASES = [
+  {
+    key: 'cases', slot: 'pj-case-derivamente', tint: '#FFBF00', img: 'img/slots/pj-case-derivamente.png', imgWide: 'img/slots/pj-case-derivamente-wide.png', gal: ['img/slots/pj-case-derivamente-wide.png', 'img/slots/pj-case-derivamente-g2.png', 'img/slots/pj-case-derivamente-g3.mp4'], title: 'Deriva.Mente', year: '2026',
+    role: 'Projeto autoral', page: null, subLabel: 'Identidade visual',
+    credito: 'Projeto integralmente meu',
+    resumo: 'Meu espaço para mostrar o lado profissional sem abrir mão da veia artística. O perfil vive de cultura pop, conteúdo de design e — em breve — filmmaking, com poster arts de filmes como principal linguagem. Experimental e informativo ao mesmo tempo, pensado para atrair quem se interessa pela minha forma de ler o mundo.',
+    frentes: ['Identidade visual', 'Conceito', 'Conteúdo']
+  },
+  {
+    key: 'cases', slot: 'pj-case-manchete', tint: '#FF00EE', img: 'img/slots/pj-case-manchete-preview.png', imgWide: '', gal: ['img/slots/pj-case-manchete-g1.png', 'img/slots/pj-case-manchete-g2.png', 'img/slots/pj-case-manchete-g3.mp4'], title: 'Manchete Disco Club', year: '2026',
+    role: 'Projeto autoral · direção criativa', page: null, subLabel: 'Identidade visual',
+    credito: 'Projeto integralmente meu · sucessor do Blãnk (2024)',
+    resumo: 'Meu projeto musical atual. Nasceu como Blãnk em 2024, de forma amadora: eu tinha conceito e pouca noção da parte burocrática. Ao entender melhor o meio, reestruturei tudo e mudei o nome. Identidade visual, conteúdo, produção fonográfica e toda a base são criados por mim.',
+    frentes: ['Identidade visual', 'Capas', 'Produção fonográfica']
+  },
+  {
+    key: 'cases', slot: 'pj-case-tedx', tint: '#FF0000', img: 'img/slots/pj-case-tedx-preview.png', imgWide: '', gal: ['img/slots/pj-case-tedx-g1.png', 'img/slots/pj-case-tedx-g2.png', 'img/slots/pj-case-tedx-g3.png'], title: 'TEDx IBMEC', year: '2025',
+    role: 'Design · edição de vídeo', page: null, subLabel: 'Multi-frente',
+    credito: 'Design em equipe · brindes, decoração e vídeos de anúncio sob minha responsabilidade',
+    resumo: 'Projeto completo do evento, com o design dividido entre várias pessoas. Cuidei da caracterização de brindes e de itens de decoração, além de editar os vídeos de anúncio do evento.',
+    frentes: ['Brindes', 'Decoração', 'Design', 'Impressos', 'Peças digitais', 'Edição de vídeo']
+  },
+  {
+    key: 'cases', slot: 'pj-case-atletica', tint: '#15BF00', img: 'img/slots/pj-case-atletica-preview.png', imgWide: '', gal: ['img/slots/pj-case-atletica-g1.png', 'img/slots/pj-case-atletica-g2.png', 'img/slots/pj-case-atletica-g3.mp4'], title: 'Atlética IBMEC', year: '2023.2',
+    role: 'Diretor audiovisual', page: null, subLabel: 'Multi-frente',
+    credito: 'Identidade visual em colaboração · direção audiovisual sob minha responsabilidade',
+    resumo: 'Rebranding feito em colaboração e desdobrado em conteúdo. Minha frente principal era o audiovisual, como diretor; nos posts, contribuí com peças individuais dentro da linha criada em equipe.',
+    frentes: ['Direção audiovisual', 'Rebranding', 'Design posts']
+  },
+  {
+    key: 'cases', slot: 'pj-case-nyb', tint: '#15BF00', img: 'img/slots/pj-case-nyb-preview.png', imgWide: '', gal: ['img/slots/pj-case-nyb-g1.mp4', 'img/slots/pj-case-nyb-g2.mp4', 'img/slots/pj-case-nyb-g3.mp4'],
+    title: 'Not Yet Brasil', year: '2026.1',
+    role: 'Editor de vídeo · design', page: null, subLabel: 'Multi-frente',
+    credito: 'Edição de vídeo como frente principal · demandas de design em paralelo',
+    resumo: 'Agência de marketing de influência onde aprendi na prática como o mercado funciona. Cuidei de vídeos de vários formatos — verticais, horizontais para YouTube e institucionais —, participei da gestão de canais e acompanhei eventos, somando ao audiovisual demandas de design.',
+    frentes: ['Edição de vídeo', 'YouTube', 'Reels', 'Gestão de canais', 'Institucional', 'Design']
+  },
+  {
+    key: 'cases', slot: 'pj-case-origem', tint: '#FFBF00', img: 'img/slots/pj-case-origem-preview.png', imgWide: '', gal: ['img/slots/pj-case-origem-g1.png', 'img/slots/pj-case-origem-g2.png', 'img/slots/pj-case-origem-g3.png'], title: 'Origem', year: '2026',
+    role: 'Diretor de arte', page: null, subLabel: 'Design',
+    credito: 'Direção de arte no núcleo da agência-escola da ESPM',
+    resumo: 'Direção de arte na agência-escola da ESPM: reformulação da presença visual, rebranding do perfil principal, linha de posts e apresentações institucionais.',
+    frentes: ['Posts', 'Apresentações', 'Rebranding']
+  }
+];
+
+const catBy = (id) => CATS.find((c) => c.id === id) || { subs: [] };
+
+const CLOTHING = [
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-1', img: 'img/design/clothing-1.png',
+    title: 'RoboCop', year: '20—', role: 'Design de estampa', page: null,
+    legenda: 'Camiseta com pôster do filme reinterpretado em estampa.', resumo: 'Camiseta com pôster do filme reinterpretado em estampa.', tags: ['Estampa', 'Cultura pop'] },
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-2', img: 'img/design/clothing-2.png',
+    title: 'Enough', year: '20—', role: 'Design de estampa', page: null,
+    legenda: 'Lettering em script com estrelas — peça autoral.', resumo: 'Lettering em script com estrelas — peça autoral.', tags: ['Lettering', 'Autoral'] },
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-3', img: 'img/design/clothing-3.png',
+    title: 'Chuck Timely & The Hourglass', year: '20—', role: 'Merch de banda', page: null,
+    legenda: 'Merch de álbum com tracklist nas costas.', resumo: 'Merch de álbum com tracklist nas costas.', tags: ['Merch', 'Música'] },
+  { key: 'design', sub: 'clothing', subLabel: 'Clothing', slot: 'dz-clothing-4', img: 'img/design/clothing-4.png',
+    title: 'BAIT — O espírito habita em vós', year: '20—', role: 'Identidade aplicada', page: null,
+    legenda: 'Frente e costas para a marca BAIT.', resumo: 'Frente e costas para a marca BAIT.', tags: ['Identidade', 'Streetwear'] }
+];
+
+const STICKERS = [
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-1', img: 'img/design/sticker-1.png',
+    title: 'Enough — Blãnk', year: '2024', role: 'Design de stickers', page: null,
+    legenda: 'Cartela de adesivos do lançamento Enough, colados em muro.', resumo: 'Cartela de adesivos do lançamento Enough.', tags: ['Sticker', 'Blãnk'] },
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-2', img: 'img/design/sticker-2.png',
+    title: 'Chuck Timely & The Hourglass', year: '20—', role: 'Design de stickers', page: null,
+    legenda: 'Bumper stickers do álbum, em rosa e amarelo.', resumo: 'Bumper stickers do álbum.', tags: ['Sticker', 'Música'] },
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-3', img: 'img/design/sticker-3.png',
+    title: 'The 1975', year: '20—', role: 'Design de stickers', page: null,
+    legenda: 'Série de adesivos com versos da banda.', resumo: 'Série de adesivos com versos da banda.', tags: ['Sticker', 'Cultura pop'] },
+  { key: 'design', sub: 'stickers', subLabel: 'Stickers', slot: 'dz-sticker-4', img: 'img/design/sticker-4.png',
+    title: 'Atlética IBMEC', year: '2023.2', role: 'Design de stickers', page: null,
+    legenda: 'Adesivos do mascote para a torcida.', resumo: 'Adesivos do mascote para a torcida.', tags: ['Sticker', 'Mascote'] }
+];
+
+const IDVISUAL = [
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-mdc', img: 'img/design/id-mdc.png',
+    title: 'Manchete Disco Club', year: '2026', role: 'Identidade visual', page: null,
+    legenda: 'Estudo de logotipo do MDC: variações, ícone e assinaturas até a versão final.',
+    resumo: 'Estudo de logotipo do MDC: variações, ícone e assinaturas até a versão final.',
+    tags: ["Logotipo","Estudo","Manchete"] },
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-blank', img: 'img/design/id-blank.png',
+    title: 'Blãnk.', year: '2024', role: 'Identidade visual', page: null,
+    legenda: 'Logotipo do Blãnk, projeto musical anterior ao Manchete: tipografia com ruído e aberração cromática.',
+    resumo: 'Logotipo do Blãnk, projeto musical anterior ao Manchete: tipografia com ruído e aberração cromática.',
+    tags: ["Logotipo","Música"] },
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-bossa', img: 'img/design/id-bossa.png',
+    title: 'Bossa', year: '2026', role: 'Identidade visual', page: null,
+    legenda: 'Logo de agência de publicidade criada em trabalho de faculdade. As curvas nasceram da arquitetura de Oscar Niemeyer — traduzir aquela visão única em letra.',
+    resumo: 'Logo de agência de publicidade criada em trabalho de faculdade. As curvas nasceram da arquitetura de Oscar Niemeyer — traduzir aquela visão única em letra.',
+    tags: ["Logotipo","Faculdade","Arquitetura"] },
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-bait', img: 'img/design/id-bait.png',
+    title: 'Bait', year: '2026', role: 'Identidade visual', page: null,
+    legenda: 'Marca para a célula religiosa de um amigo. Bait significa casa em hebraico — parti da forma da letra B hebraica e busquei o calor de um lugar de acolhimento em linguagem jovem.',
+    resumo: 'Marca para a célula religiosa de um amigo. Bait significa casa em hebraico — parti da forma da letra B hebraica e busquei o calor de um lugar de acolhimento em linguagem jovem.',
+    tags: ["Logotipo","Hebraico","Comunidade"] },
+  { key: 'design', sub: 'id-visual', subLabel: 'ID visual / Branding', slot: 'dz-id-fullforce', img: 'img/design/id-fullforce.png',
+    title: 'Full Force Energy Drink', year: '2026', role: 'Identidade visual · packaging', page: null,
+    legenda: 'Trabalho de faculdade: criar uma marca de energético do zero, do logotipo com punho e raio até a aplicação na lata.',
+    resumo: 'Trabalho de faculdade: criar uma marca de energético do zero, do logotipo com punho e raio até a aplicação na lata.',
+    tags: ["Logotipo","Packaging","Faculdade"] }
+];
+
+const FILMES = [
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Visualizer', ar: 'pj-tile-916',
+    slot: 'fm-blank-enough', img: '', video: 'img/film/blank-enough.mp4',
+    title: 'Blãnk — Enough', year: '2024', role: 'Direção · edição', page: null,
+    legenda: 'Visualizer da faixa Enough, do Blãnk.',
+    resumo: 'Visualizer da faixa Enough, do Blãnk.',
+    tags: ['Visualizer', 'Blãnk', 'Música'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Visualizer', ar: 'pj-tile-916',
+    slot: 'fm-blank-clear', img: '', video: 'img/film/blank-clear.mp4',
+    title: 'Blãnk — Clear', year: '2024', role: 'Direção · edição', page: null,
+    legenda: 'Visualizer da faixa Clear, do Blãnk: imagem em movimento construída para acompanhar a música nas plataformas.',
+    resumo: 'Visualizer da faixa Clear, do Blãnk: imagem em movimento construída para acompanhar a música nas plataformas.',
+    tags: ['Visualizer', 'Blãnk', 'Música'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Visualizer', ar: 'pj-tile-916',
+    slot: 'fm-blank-seasons', img: '', video: 'img/film/blank-seasons.mp4',
+    title: 'Blãnk — Seasons', year: '2024', role: 'Direção · edição', page: null,
+    legenda: 'Visualizer da faixa Seasons, do Blãnk.',
+    resumo: 'Visualizer da faixa Seasons, do Blãnk.',
+    tags: ['Visualizer', 'Blãnk', 'Música'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Cortes', ar: 'pj-tile-916',
+    slot: 'fm-nyb-corte-1', img: '', video: 'img/film/nyb-corte-1.mp4',
+    title: 'Not a Creator Yet — corte 01', year: '2026', role: 'Edição', page: null,
+    legenda: 'Corte vertical do programa Not a Creator Yet, da Not Yet Brasil.',
+    resumo: 'Corte vertical do programa Not a Creator Yet, da Not Yet Brasil.',
+    tags: ['Cortes', 'NYB', 'Social'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Cortes', ar: 'pj-tile-916',
+    slot: 'fm-nyb-corte-2', img: '', video: 'img/film/nyb-corte-2.mp4',
+    title: 'Not a Creator Yet — corte 02', year: '2026', role: 'Edição', page: null,
+    legenda: 'Corte vertical do programa Not a Creator Yet, da Not Yet Brasil.',
+    resumo: 'Corte vertical do programa Not a Creator Yet, da Not Yet Brasil.',
+    tags: ['Cortes', 'NYB', 'Social'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Cortes', ar: 'pj-tile-916',
+    slot: 'fm-nyb-corte-3', img: '', video: 'img/film/nyb-corte-3.mp4',
+    title: 'Not a Creator Yet — corte 03', year: '2026', role: 'Edição', page: null,
+    legenda: 'Corte vertical do programa Not a Creator Yet, da Not Yet Brasil.',
+    resumo: 'Corte vertical do programa Not a Creator Yet, da Not Yet Brasil.',
+    tags: ['Cortes', 'NYB', 'Social'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Campanhas', ar: 'pj-tile-916',
+    slot: 'fm-camp-silvagym', img: '', video: 'img/film/camp-silvagym.mp4',
+    title: 'Campanha — Silva Gym', year: '2026', role: 'Edição', page: null,
+    legenda: 'Campanha vertical para a Silva Gym.',
+    resumo: 'Campanha vertical para a Silva Gym.',
+    tags: ['Campanha', 'Social', 'Edição'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Campanhas', ar: 'pj-tile-916',
+    slot: 'fm-camp-sensoria', img: '', video: 'img/film/camp-sensoria.mp4',
+    title: 'Campanha — Sensoria Spa', year: '2026', role: 'Edição', page: null,
+    legenda: 'Campanha vertical para a Sensoria Spa.',
+    resumo: 'Campanha vertical para a Sensoria Spa.',
+    tags: ['Campanha', 'Social', 'Edição'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Campanhas', ar: 'pj-tile-916',
+    slot: 'fm-camp-role', img: '', video: 'img/film/camp-role-carioca.mp4',
+    title: 'Campanha — Rolé Carioca Viagens', year: '2026', role: 'Edição', page: null,
+    legenda: 'Campanha vertical para a Rolé Carioca Viagens.',
+    resumo: 'Campanha vertical para a Rolé Carioca Viagens.',
+    tags: ['Campanha', 'Social', 'Edição'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Reels', ar: 'pj-tile-916',
+    slot: 'fm-reels-nyb', img: '', video: 'img/film/reels-nyb.mp4',
+    title: 'Reels — Not Yet Brasil', year: '2026', role: 'Edição', page: null,
+    legenda: 'Reel para os canais oficiais da Not Yet Brasil.',
+    resumo: 'Reel para os canais oficiais da Not Yet Brasil.',
+    tags: ['Reels', 'NYB', 'Social'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Reels', ar: 'pj-tile-916',
+    slot: 'fm-reels-reinaldo', img: '', video: 'img/film/reels-nyb-reinaldo.mp4',
+    title: 'Reels — Reinaldo (NYB)', year: '2026', role: 'Edição', page: null,
+    legenda: 'Reel do Reinaldo para a Not Yet Brasil.',
+    resumo: 'Reel do Reinaldo para a Not Yet Brasil.',
+    tags: ['Reels', 'NYB', 'Social'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Reels', ar: 'pj-tile-916',
+    slot: 'fm-reels-bia', img: '', video: 'img/film/reels-bia-magalhaes.mp4',
+    title: 'Reels — Bia Magalhães', year: '2026', role: 'Edição', page: null,
+    legenda: 'Reel para a Bia Magalhães.',
+    resumo: 'Reel para a Bia Magalhães.',
+    tags: ['Reels', 'Social', 'Edição'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'TEDx', ar: 'pj-tile-916',
+    slot: 'fm-tedx-reels-1', img: '', video: 'img/film/tedx-reels-1.mp4',
+    title: 'TEDx IBMEC — Reels', year: '2025', role: 'Edição', page: null,
+    legenda: 'Reel de divulgação do TEDx IBMEC.',
+    resumo: 'Reel de divulgação do TEDx IBMEC.',
+    tags: ['Reels', 'TEDx', 'Edição'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'TEDx', ar: 'pj-tile-916',
+    slot: 'fm-tedx-reels-2', img: '', video: 'img/film/tedx-reels-2.mp4',
+    title: 'TEDx IBMEC — Reels 02', year: '2025', role: 'Edição', page: null,
+    legenda: 'Segundo reel de divulgação do TEDx IBMEC.',
+    resumo: 'Segundo reel de divulgação do TEDx IBMEC.',
+    tags: ['Reels', 'TEDx', 'Edição'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'TEDx', ar: 'pj-tile-916',
+    slot: 'fm-tedx-motion', img: '', video: 'img/film/tedx-motion.mp4',
+    title: 'TEDx IBMEC — Motion graphics', year: '2025', role: 'Motion', page: null,
+    legenda: 'Peça de motion graphics para o TEDx IBMEC.',
+    resumo: 'Peça de motion graphics para o TEDx IBMEC.',
+    tags: ['Motion', 'TEDx', 'Animação'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Deriva.Mente', ar: 'pj-tile-916',
+    slot: 'fm-dm-delete-ya', img: '', video: 'img/film/dm-delete-ya.mp4',
+    title: 'Deriva.Mente — Delete Ya', year: '2026', role: 'Direção · edição', page: null,
+    legenda: 'Peça autoral do Deriva.Mente sobre Delete Ya.',
+    resumo: 'Peça autoral do Deriva.Mente sobre Delete Ya.',
+    tags: ['Deriva.Mente', 'Autoral', 'Social'] },
+  { key: 'film', sub: 'vertical', subLabel: 'Vertical', tipo: 'Deriva.Mente', ar: 'pj-tile-916',
+    slot: 'fm-dm-we-belong', img: '', video: 'img/film/dm-we-belong.mp4',
+    title: 'Deriva.Mente — We Belong Together', year: '2026', role: 'Direção · edição', page: null,
+    legenda: 'Peça autoral do Deriva.Mente sobre We Belong Together.',
+    resumo: 'Peça autoral do Deriva.Mente sobre We Belong Together.',
+    tags: ['Deriva.Mente', 'Autoral', 'Social'] },
+
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Deriva.Mente', ar: 'pj-tile-169',
+    slot: 'fm-dm-bumper', img: '', video: 'img/film/dm-bumper-1975.mp4',
+    title: 'Deriva.Mente — Bumper stickers 1975', year: '2026', role: 'Direção · edição', page: null,
+    legenda: 'Processo dos bumper stickers do 1975.',
+    resumo: 'Processo dos bumper stickers do 1975.',
+    tags: ['Deriva.Mente', 'Stickers', 'Autoral'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Deriva.Mente', ar: 'pj-tile-169',
+    slot: 'fm-dm-bttf', img: '', video: 'img/film/dm-bttf-poster.mp4',
+    title: 'Deriva.Mente — Back to the Future poster', year: '2026', role: 'Direção · edição', page: null,
+    legenda: 'Processo do poster de De Volta para o Futuro.',
+    resumo: 'Processo do poster de De Volta para o Futuro.',
+    tags: ['Deriva.Mente', 'Poster art', 'Autoral'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Deriva.Mente', ar: 'pj-tile-169',
+    slot: 'fm-dm-harry', img: '', video: 'img/film/dm-harry-poster.mp4',
+    title: 'Deriva.Mente — Harry poster', year: '2026', role: 'Direção · edição', page: null,
+    legenda: 'Processo do poster do Harry Styles.',
+    resumo: 'Processo do poster do Harry Styles.',
+    tags: ['Deriva.Mente', 'Poster art', 'Autoral'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Reinaldo Tavares', ar: 'pj-tile-169',
+    slot: 'fm-rt-bem-vindos', img: 'img/film/rt-bem-vindos.jpg', href: 'https://www.youtube.com/watch?v=WNbkS4jqxsc',
+    title: 'Reinaldo Tavares — Bem-vindos', year: '2026', role: 'Edição', page: null,
+    legenda: 'Vídeo de estreia do canal do Reinaldo Tavares, CMO da Not Yet Brasil.',
+    resumo: 'Vídeo de estreia do canal do Reinaldo Tavares, CMO da Not Yet Brasil.',
+    tags: ['YouTube', 'NYB', 'Edição'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Reinaldo Tavares', ar: 'pj-tile-169',
+    slot: 'fm-rt-marketing-emocao', img: 'img/film/rt-marketing-emocao.jpg', href: 'https://www.youtube.com/watch?v=OXfkNy6w9RI',
+    title: 'Reinaldo Tavares — Marketing da emoção', year: '2026', role: 'Edição', page: null,
+    legenda: 'Episódio sobre marketing da emoção no canal do Reinaldo Tavares.',
+    resumo: 'Episódio sobre marketing da emoção no canal do Reinaldo Tavares.',
+    tags: ['YouTube', 'NYB', 'Edição'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Reinaldo Tavares', ar: 'pj-tile-169',
+    slot: 'fm-rt-wsl', img: 'img/film/rt-wsl.jpg', href: 'https://www.youtube.com/watch?v=tNMhplRo4yw',
+    title: 'Reinaldo Tavares — WSL', year: '2026', role: 'Edição', page: null,
+    legenda: 'Episódio sobre a WSL no canal do Reinaldo Tavares.',
+    resumo: 'Episódio sobre a WSL no canal do Reinaldo Tavares.',
+    tags: ['YouTube', 'NYB', 'Edição'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Institucional', ar: 'pj-tile-169',
+    slot: 'fm-nyb-institucional', img: '', video: 'img/film/nyb-institucional.mp4',
+    title: 'Not Yet Brasil — institucional', year: '2026', role: 'Edição', page: null,
+    legenda: 'Vídeo institucional da Not Yet Brasil.',
+    resumo: 'Vídeo institucional da Not Yet Brasil.',
+    tags: ['Institucional', 'NYB', 'Edição'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Acadêmico', ar: 'pj-tile-169',
+    slot: 'fm-uva-planos', img: 'img/film/uva-planos-cinema.jpg', href: 'https://www.youtube.com/watch?v=sOhwPyTLstU',
+    title: 'Os 9 principais planos do cinema', year: '2022', role: 'Direção · edição', page: null,
+    legenda: 'Vídeo sobre planos cinematográficos para um canal do YouTube, trabalho da graduação na UVA.',
+    resumo: 'Vídeo sobre planos cinematográficos para um canal do YouTube, trabalho da graduação na UVA.',
+    tags: ['Acadêmico', 'UVA', 'Edição'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Acadêmico', ar: 'pj-tile-169',
+    slot: 'fm-espm-mesa-do-medo', img: 'img/film/espm-mesa-do-medo.jpg', href: 'https://www.youtube.com/watch?v=mPBq8TNBd5M',
+    title: 'O Tiro — Mesa do Medo', year: '2026', role: 'Direção · edição', page: null,
+    legenda: 'Vídeo do canal Mesa do Medo, trabalho da graduação na ESPM.',
+    resumo: 'Vídeo do canal Mesa do Medo, trabalho da graduação na ESPM.',
+    tags: ['Acadêmico', 'ESPM', 'Edição'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Acadêmico', ar: 'pj-tile-169',
+    slot: 'fm-uva-celine', img: 'img/film/uva-celine.jpg', href: 'https://www.youtube.com/watch?v=RI9GgesjWIQ',
+    title: 'Celine (curta)', year: '2022', role: 'Direção · edição', page: null,
+    legenda: 'Curta-metragem produzido na graduação em Cinema e Audiovisual na UVA.',
+    resumo: 'Curta-metragem produzido na graduação em Cinema e Audiovisual na UVA.',
+    tags: ['Acadêmico', 'Curta', 'UVA'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Making of', ar: 'pj-tile-169',
+    slot: 'fm-ceejay-making', img: 'img/film/ceejay-making-of.jpg', href: 'https://www.youtube.com/watch?v=n6wCsaQhkek',
+    title: 'CEEJAY — Aonde Você Vai (making of)', year: '2026', role: 'Direção · edição', page: null,
+    legenda: 'Making of do videoclipe de Aonde Você Vai, do CEEJAY, cantor de R&B brasileiro.',
+    resumo: 'Making of do videoclipe de Aonde Você Vai, do CEEJAY, cantor de R&B brasileiro.',
+    tags: ['Making of', 'Videoclipe', 'Música'] },
+  { key: 'film', sub: 'horizontal', subLabel: 'Horizontal', tipo: 'Lyric video', ar: 'pj-tile-169',
+    slot: 'fm-enough-lyric', img: '', video: 'img/film/enough-lyric-teaser.mp4',
+    title: 'Blãnk — Enough (lyric teaser)', year: '2024', role: 'Direção · edição', page: null,
+    legenda: 'Teaser em lyric video da faixa Enough, do Blãnk.',
+    resumo: 'Teaser em lyric video da faixa Enough, do Blãnk.',
+    tags: ['Lyric video', 'Blãnk', 'Música'] },
+
+];
+
+const CAPAS = [
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-thnks', img: 'img/design/capa-thnks.png',
+    title: 'THNKS FR LL TH MSS — MDC', year: '2026', role: 'Capa de álbum', page: null,
+    legenda: 'Capa do próximo álbum do Manchete Disco Club, ainda em produção.', resumo: 'Capa do próximo álbum do Manchete Disco Club, ainda em produção.', tags: ["Manchete","Álbum","Em produção"] },
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-jftr', img: 'img/design/capa-jftr.png',
+    title: 'JFTR (Just For The Record) — MDC', year: '2026', role: 'Capa de álbum', page: null,
+    legenda: 'Capa do primeiro EP do Manchete Disco Club, que firma a transição do Blãnk para o novo nome: reúne as antigas faixas do Blãnk e duas inéditas.', resumo: 'Capa do primeiro EP do Manchete Disco Club, que firma a transição do Blãnk para o novo nome: reúne as antigas faixas do Blãnk e duas inéditas.', tags: ["Manchete","EP","Transição"] },
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-enough', img: 'img/design/capa-enough.png',
+    title: 'Enough — Blãnk', year: '2024', role: 'Capa de álbum', page: null,
+    legenda: 'Última capa do Blãnk, já com a identidade renovada. O álbum não está mais nas plataformas.', resumo: 'Última capa do Blãnk, já com a identidade renovada. O álbum não está mais nas plataformas.', tags: ["Blãnk","Single"] },
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-seasons', img: 'img/design/capa-seasons.png',
+    title: 'Seasons — Blãnk', year: '2024', role: 'Capa de álbum', page: null,
+    legenda: 'Capa do Blãnk com a identidade antiga. Fora das plataformas.', resumo: 'Capa do Blãnk com a identidade antiga. Fora das plataformas.', tags: ["Blãnk","Identidade antiga"] },
+  { key: 'design', sub: 'capas', subLabel: 'Capas de álbum', slot: 'dz-capa-clear', img: 'img/design/capa-clear.png',
+    title: 'Clear — Blãnk', year: '2024', role: 'Capa de álbum', page: null,
+    legenda: 'Primeira capa do Blãnk, com a identidade visual original do projeto. Fora das plataformas.', resumo: 'Primeira capa do Blãnk, com a identidade visual original do projeto. Fora das plataformas.', tags: ["Blãnk","Identidade antiga"] },
+];
+
+const POSTS = [
+  { key: 'design', sub: 'posts', subLabel: 'Posts', slot: 'dz-post-bir27',
+    img: 'img/design/post-bir27-1.png',
+    title: 'BiR27 — Biomedicina in Rio', year: '20—', role: 'Aplicação de identidade', page: null,
+    legenda: 'Identidade do cliente aplicada em peças: cartões, publicação, papelaria, sinalização, bandeiras e credenciais. A identidade não é minha — o trabalho foi torná-la palpável.',
+    resumo: 'A pedido do cliente, peguei a identidade existente do BiR27 — cores, tipografia e logo — e a transformei em peças palpáveis: cartões, publicação, papelaria, fachada, bandeiras, mural e credenciais. A criação da identidade não é minha; o trabalho aqui é de aplicação e desdobramento.',
+    tags: ['Aplicação', 'Mockup', 'Evento'],
+    slides: [1,2,3,4,5,6,7,8].map((n) => 'img/design/post-bir27-' + n + '.png') },
+  { key: 'design', sub: 'posts', subLabel: 'Posts', slot: 'dz-post-hugoassed',
+    img: 'img/design/post-hugoassed-1.jpg',
+    title: 'A biologia da recuperação — Dr. Hugo Assed', year: '20—', role: 'Design de posts · Eight', page: null,
+    legenda: 'Carrossel de 6 telas para o Dr. Hugo Assed: descansar não é tratar — o que a recuperação real exige.',
+    resumo: 'Carrossel de 6 telas para o Dr. Hugo Assed, cliente atendido na Eight: descansar reduz sintomas, mas não reorganiza tecido — a medicina regenerativa entra onde o repouso não alcança.',
+    tags: ['Carrossel', 'Eight', 'Saúde'],
+    slides: [1,2,3,4,5,6].map((n) => 'img/design/post-hugoassed-' + n + '.jpg') },
+  { key: 'design', sub: 'posts', subLabel: 'Posts', slot: 'dz-post-eight-cirurgias',
+    img: 'img/design/post-eight-cirurgias-1.jpg',
+    title: 'Cirurgias em etapas', year: '20—', role: 'Design de posts · Eight', page: null,
+    legenda: 'Carrossel para cliente de cirurgia plástica: por que alguns procedimentos precisam ser feitos em mais de uma etapa.',
+    resumo: 'Carrossel para cliente de cirurgia plástica atendido na Eight: por que alguns procedimentos precisam ser feitos em mais de uma etapa — o corpo tem limites e precisa de tempo entre as cirurgias.',
+    tags: ['Carrossel', 'Eight', 'Saúde'],
+    slides: [1,2,3].map((n) => 'img/design/post-eight-cirurgias-' + n + '.jpg') },
+  { key: 'design', sub: 'posts', subLabel: 'Posts', slot: 'dz-post-origem-sabor',
+    img: 'img/design/post-origem-sabor-1.png',
+    title: 'O sabor do marketing', year: '2026', role: 'Direção de arte · Origem', page: null,
+    legenda: 'Carrossel de 9 telas para a Origem sobre food marketing: colagem com fruta, papel rasgado e etiquetas.',
+    resumo: 'Carrossel de 9 telas para a Origem sobre food marketing: como a comida virou linguagem de conexão para marcas de moda, beleza e varejo.',
+    tags: ['Carrossel', 'Origem', 'Colagem'],
+    slides: [1,2,3,4,5,6,7,8,9].map((n) => 'img/design/post-origem-sabor-' + n + '.png') }
+];
+
+const ARTES = [
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-1984', img: 'img/design/arte-1984.jpg',
+    title: '1984 — Netflix Original Series', year: '2023', role: 'Poster art · campanha', page: null,
+    legenda: 'Trabalho de faculdade em Marketing: campanha para uma série fictícia da Netflix a partir do 1984 de Orwell.',
+    resumo: 'Trabalho de faculdade em Marketing: campanha para uma série fictícia da Netflix a partir do 1984 de Orwell.',
+    tags: ["Poster art","Campanha","Faculdade"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-spiderman2', img: 'img/design/arte-spiderman2.png',
+    title: 'Spider-Man — Brand New Day', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Pôster em duotone vermelho com trama de teia desenhada à mão.', resumo: 'Pôster em duotone vermelho com trama de teia desenhada à mão.', tags: ["Poster art","Marvel"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-postfolio', img: 'img/design/arte-postfolio.png',
+    title: 'Postfólio @deriva.mente', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Capa de série do perfil: pasta de arquivo em rosa e vermelho.', resumo: 'Capa de série do perfil: pasta de arquivo em rosa e vermelho.', tags: ["Poster art","Deriva.Mente"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-doom', img: 'img/design/arte-doom.png',
+    title: 'Avengers: Doomsday — DOOM', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Duotone verde com tipografia comprimida atrás da figura.', resumo: 'Duotone verde com tipografia comprimida atrás da figura.', tags: ["Poster art","Marvel"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-control-eye', img: 'img/design/arte-control-eye.png',
+    title: 'The Grumes — Control (olho)', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz de single: tipografia condensada sobre macro de íris.', resumo: 'Cartaz de single: tipografia condensada sobre macro de íris.', tags: ["Poster art","Música"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-odisseia', img: 'img/design/arte-odisseia.png',
+    title: 'A Odisseia', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Releitura do filme de Nolan em colagem azul e laranja.', resumo: 'Releitura do filme de Nolan em colagem azul e laranja.', tags: ["Poster art","Cinema"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-webelong', img: 'img/design/arte-webelong.png',
+    title: 'We Belong Together — Tour', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz de show com bloco de letra e texto corrido ao fundo.', resumo: 'Cartaz de show com bloco de letra e texto corrido ao fundo.', tags: ["Poster art","Show"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-terminei', img: 'img/design/arte-terminei.png',
+    title: 'Terminei! (só falta ajeitar uma coisinha)', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Peça bem-humorada sobre o processo criativo.', resumo: 'Peça bem-humorada sobre o processo criativo.', tags: ["Poster art","Autoral"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-mdc-boasvindas', img: 'img/design/arte-mdc-boasvindas.png',
+    title: 'MDC — Boas vindas', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Peça de boas-vindas do Manchete Disco Club em azul cromado.', resumo: 'Peça de boas-vindas do Manchete Disco Club em azul cromado.', tags: ["Poster art","Manchete"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-marianne', img: 'img/design/arte-marianne.png',
+    title: 'Fontaines D.C. — Marianne', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Lettering gótico sobre gradiente azul.', resumo: 'Lettering gótico sobre gradiente azul.', tags: ["Poster art","Música"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-realidade', img: 'img/design/arte-realidade.png',
+    title: 'A realidade é um alívio', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz sobre ansiedade: cérebro em magenta sobre vermelho.', resumo: 'Cartaz sobre ansiedade: cérebro em magenta sobre vermelho.', tags: ["Poster art","Autoral"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-terra', img: 'img/design/arte-terra.png',
+    title: 'Isso aqui tá uma p*rra', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Perspectiva cósmica sobre problemas terrestres.', resumo: 'Perspectiva cósmica sobre problemas terrestres.', tags: ["Poster art","Autoral"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-alien', img: 'img/design/arte-alien.png',
+    title: 'Alien', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Releitura minimalista em verde fosforescente.', resumo: 'Releitura minimalista em verde fosforescente.', tags: ["Poster art","Cinema"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-keyboard', img: 'img/design/arte-keyboard.png',
+    title: 'Why you have such CTRL', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Peça tipográfica montada com teclas de teclado.', resumo: 'Peça tipográfica montada com teclas de teclado.', tags: ["Poster art","Tipografia"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-balu', img: 'img/design/arte-balu.png',
+    title: 'Balu Brigada — Bedhead', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz de faixa em duotone azul.', resumo: 'Cartaz de faixa em duotone azul.', tags: ["Poster art","Música"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-mdc-poster', img: 'img/design/arte-mdc-poster.png',
+    title: 'Manchete Disco Club — Thnks fr ll th mss', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz monocromático azul com lettering em script.', resumo: 'Cartaz monocromático azul com lettering em script.', tags: ["Poster art","Manchete"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-chuck', img: 'img/design/arte-chuck.png',
+    title: 'Chuck Timely & The Hourglass', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz do projeto em amarelo e magenta, com espelhamento.', resumo: 'Cartaz do projeto em amarelo e magenta, com espelhamento.', tags: ["Poster art","Música"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-lanternas', img: 'img/design/arte-lanternas.png',
+    title: 'Lanternas', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz da série em verde com halftone pesado.', resumo: 'Cartaz da série em verde com halftone pesado.', tags: ["Poster art","Série"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-xmen', img: 'img/design/arte-xmen.png',
+    title: 'Astonishing X-Men', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Elenco em halftone amarelo e preto com logo em vermelho.', resumo: 'Elenco em halftone amarelo e preto com logo em vermelho.', tags: ["Poster art","Marvel"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-grumes', img: 'img/design/arte-grumes.png',
+    title: 'The Grumes — Control (banda)', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Versão fotográfica do cartaz, em blocos preto e branco.', resumo: 'Versão fotográfica do cartaz, em blocos preto e branco.', tags: ["Poster art","Música"] },
+  { key: 'design', sub: 'artes', subLabel: 'Artes', tall: true, slot: 'dz-arte-djo', img: 'img/design/arte-djo.png',
+    title: 'Djo — Delete Ya', year: '2026', role: 'Poster art', page: null,
+    legenda: 'Cartaz editorial em amarelo com letra da faixa.', resumo: 'Cartaz editorial em amarelo com letra da faixa.', tags: ["Poster art","Música"] }
+];
+
+const PROJECTS = {
+  cases: CASES,
+  design: IDVISUAL.concat(ARTES).concat(CLOTHING).concat(STICKERS).concat(CAPAS).concat(POSTS),
+  film: FILMES,
+  music: MUSIC,
+  mkt: seed('mkt', [], 6)
+};
+
+const PREVIEW_COUNT = 4;
+const GAL_N = 3;
+const BARS = [34,58,42,76,50,88,44,62,96,54,70,38,84,48,66,92,40,74,56,82,46,68,90,52,78,44,60,86];
+
+
+class Component extends DCLogic {
+  state = { filter: 'all', openPj: {}, playing: null, prog: {}, gal: {}, lb: null, row: {} };
+
+  moveRow(key, dir, len) {
+    return (e) => {
+      if (e) e.stopPropagation();
+      this.setState((st) => {
+        const per = 3;
+        const max = Math.max(0, len - per);
+        const cur = st.row[key] || 0;
+        let next = cur + dir;
+        if (next < 0) next = max;
+        if (next > max) next = 0;
+        return { row: Object.assign({}, st.row, { [key]: next }) };
+      });
+    };
+  }
+
+  keepVideo = (el) => { this.lbVideo = el; if (el) this.seen.add(el); };
+
+  audioSweep() {
+    const lbOpen = !!this.state.lb;
+    document.querySelectorAll('video').forEach((v) => this.seen.add(v));
+    const live = document.querySelector('.pj-lb-video');
+    (this.seen || new Set()).forEach((v) => {
+      const isLive = lbOpen && v === live && document.contains(v);
+      if (isLive) return;
+      if (!v.muted) v.muted = true;
+      if (v.volume !== 0) v.volume = 0;
+      if (!document.contains(v) && !v.paused) v.pause();
+    });
+  }
+
+  killVideo(v) {
+    if (!v) return;
+    try { v.pause(); v.muted = true; v.removeAttribute('src'); v.load(); } catch (err) {}
+  }
+
+  stopAllVideos() {
+    document.querySelectorAll('.pj-tile-prev').forEach((v) => { v.muted = true; v.pause(); });
+  }
+
+  openLightbox(list, index) {
+    return (e) => { if (e) e.stopPropagation(); this.stopAllVideos(); this.setState({ lb: { list: list, i: index } }); };
+  }
+
+  moveLightbox(dir) {
+    return (e) => {
+      if (e) e.stopPropagation();
+      const cur = document.querySelector('.pj-lb-video') || this.lbVideo;
+      if (cur) { try { cur.pause(); cur.muted = true; } catch (err) {} }
+      this.setState((st) => {
+        if (!st.lb) return {};
+        const n = st.lb.list.length;
+        return { lb: { list: st.lb.list, i: (st.lb.i + dir + n) % n } };
+      });
+    };
+  }
+
+  componentDidMount() {
+    document.body.classList.add('js-reveal');
+    this.applySrcs = () => {
+      document.querySelectorAll('[data-vsrc]').forEach((el) => {
+        const v = el.getAttribute('data-vsrc');
+        if (!v || v.indexOf('{{') !== -1) return;
+        el.removeAttribute('data-vsrc');
+        el.setAttribute('src', v);
+        if (el.tagName === 'VIDEO') { try { el.load(); } catch (err) {} }
+      });
+    };
+    this.applySrcs();
+    this.revealTimer = setInterval(() => {
+      this.applySrcs();
+      const h = window.innerHeight;
+      document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < h * 1.1 && r.bottom > -120) el.classList.add('is-in');
+      });
+      document.querySelectorAll('.dm-split:not(.is-in)').forEach((el) => {
+        if (el.getBoundingClientRect().top < h) (el.dmStart || (() => el.classList.add('is-in')))();
+      });
+    }, 300);
+    this.headerMotion();
+    this.onTileOver = (e) => {
+      const t = e.target.closest && e.target.closest('.pj-tile');
+      if (!t) return;
+      const v = t.querySelector('.pj-tile-prev');
+      if (!v) return;
+      v.muted = true;
+      v.currentTime = 0;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+    this.onTileOut = (e) => {
+      const t = e.target.closest && e.target.closest('.pj-tile');
+      if (!t || (e.relatedTarget && t.contains(e.relatedTarget))) return;
+      const v = t.querySelector('.pj-tile-prev');
+      if (v) { v.pause(); v.currentTime = 0; }
+    };
+    this.onAnyClick = () => {
+      if (this.state.lb) return;
+      document.querySelectorAll('video').forEach((v) => { if (!v.paused && v.classList.contains('pj-lb-video')) { v.pause(); v.muted = true; } });
+    };
+    this.seen = this.seen || new Set();
+    this.onAnyPlay = (e) => {
+      const v = e.target;
+      if (!v || v.tagName !== 'VIDEO') return;
+      this.seen.add(v);
+      this.audioSweep();
+    };
+    this.sweepTimer = setInterval(() => this.audioSweep(), 700);
+    document.addEventListener('play', this.onAnyPlay, true);
+    document.addEventListener('click', this.onAnyClick, true);
+    document.addEventListener('mouseover', this.onTileOver, true);
+    document.addEventListener('mouseout', this.onTileOut, true);
+    this.motionReady = false;
+    const go = () => {
+      this.motionReady = true;
+      try { this.splitTitles(); } catch (err) {}
+      try { this.observe(); } catch (err) {}
+      try { this.sweep(); } catch (err) {}
+    };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
+    this.observe();
+    this.onScroll = () => this.sweep();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+  }
+  sweep() {
+    if (!this.motionReady) return;
+    const h = window.innerHeight;
+    document.querySelectorAll('.dm-split:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 || r.bottom < 0) { (el.dmStart || (() => el.classList.add('is-in')))(); }
+    });
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 && r.bottom > -80) el.classList.add('is-in');
+    });
+  }
+
+  splitTitles() {
+    if (!this.motionReady) return;
+    const targets = document.querySelectorAll('#dc-root h1, #dc-root h2, #dc-root [data-split]');
+    targets.forEach((el) => {
+      const want = el.getAttribute('data-dm-text');
+      if (el.dataset.dmSplit && (!want || el.dataset.dmSplit === want)) return;
+      const text = want || el.textContent;
+      if (!text || !text.trim()) return;
+      el.dataset.dmSplit = want || '1';
+      el.classList.add('dm-split');
+      const typing = el.hasAttribute('data-split');
+      if (typing) el.classList.add('dm-type');
+      const step = typing ? 65 : 35;
+      el.textContent = '';
+      let n = 0;
+      text.split(/(\s+)/).forEach((word) => {
+        if (!word) return;
+        if (/^\s+$/.test(word)) { el.appendChild(document.createTextNode(' ')); return; }
+        const w = document.createElement('span');
+        w.style.display = 'inline-block';
+        w.style.whiteSpace = 'nowrap';
+        Array.from(word).forEach((ch) => {
+          const c = document.createElement('span');
+          c.className = 'dm-ch';
+          c.textContent = ch;
+          c.style.transitionDelay = (n * step) + 'ms';
+          n += 1;
+          w.appendChild(c);
+        });
+        el.appendChild(w);
+      });
+      if (typing) {
+        const caret = document.createElement('span');
+        caret.className = 'dm-caret';
+        el.appendChild(caret);
+      }
+      if (!this.titleIo) {
+        this.titleIo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { (e.target.dmStart || (() => e.target.classList.add('is-in')))(); this.titleIo.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      }
+      const start = () => {
+        el.classList.add('is-in');
+        if (typing) {
+          const rule = el.parentElement && el.parentElement.querySelector('[data-rule]');
+          if (rule) {
+            rule.style.transition = 'transform 2000ms cubic-bezier(0.05,0.85,0.2,1)';
+            requestAnimationFrame(() => { rule.style.transform = 'scaleX(1)'; });
+          }
+          const head = el.parentElement;
+          if (head) {
+            const pills = head.querySelectorAll('.pj-meta:not(.is-in)');
+            const typed = el.querySelectorAll('.dm-ch').length * step + 140;
+            pills.forEach((pill, k) => setTimeout(() => pill.classList.add('is-in'), typed + k * 160));
+          }
+          setTimeout(() => { const c = el.querySelector('.dm-caret'); if (c) c.remove(); }, 3000);
+        }
+      };
+      el.dmStart = start;
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.95) start();
+      else this.titleIo.observe(el);
+    });
+  }
+
+  componentDidUpdate() { try { this.applySrcs(); } catch (err) {} try { this.observe(); } catch (err) {} try { this.splitTitles(); } catch (err) {} requestAnimationFrame(() => { this.animateOpenTitle(); this.playVideos(); this.resumeLb(); }); }
+
+  resumeLb() {
+    const v = document.querySelector('.pj-lb-video');
+    if (!v || !this.state.lb) return;
+    v.volume = 1;
+    if (v.paused) { v.muted = false; const p = v.play(); if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); }); }
+  }
+
+  playVideos() {
+    document.querySelectorAll('.pj-idx-video').forEach((v) => {
+      v.muted = true;
+      v.loop = true;
+      v.playsInline = true;
+      const ativo = !!v.closest('.pj-idx-row[data-open="1"]');
+      if (ativo) { if (v.paused) { const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); } }
+      else if (!v.paused) { v.pause(); v.currentTime = 0; }
+    });
+  }
+
+  observe() {
+    if (!this.motionReady) return;
+    if (!this.io) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el, i) => {
+      el.style.transitionDelay = (i % 6) * 60 + 'ms';
+      this.io.observe(el);
+    });
+  }
+
+  headerMotion() {
+    const h = document.querySelector('[data-header]');
+    if (!h) return;
+    let last = window.scrollY;
+    let hidden = false;
+    const show = () => { if (hidden) { hidden = false; h.style.transform = 'none'; document.documentElement.style.setProperty('--dm-bar-top', '70px'); } };
+    const hide = () => { if (!hidden) { hidden = true; h.style.transform = 'translateY(-105%)'; document.documentElement.style.setProperty('--dm-bar-top', '0px'); } };
+    this.onHeaderScroll = () => {
+      const y = window.scrollY;
+      if (y < 90) show();
+      else if (y > last + 6) hide();
+      else if (y < last - 6) show();
+      last = y;
+    };
+    this.onHeaderMove = (e) => { if (e.clientY < 90) show(); };
+    window.addEventListener('scroll', this.onHeaderScroll, { passive: true });
+    window.addEventListener('mousemove', this.onHeaderMove, { passive: true });
+  }
+
+  animateOpenTitle() {
+    const row = document.querySelector('.pj-idx-row[data-open="1"]');
+    if (!row) return;
+    const el = row.querySelector('.pj-idx-title');
+    if (!el) return;
+    const key = Object.keys(this.state.openPj).filter((k) => this.state.openPj[k]).join('|');
+    if (this._animKey === key && el.querySelector('.pj-ch')) return;
+    this._animKey = key;
+    const text = el.textContent;
+    el.textContent = '';
+    let n = 0;
+    text.split(/(\s+)/).forEach((word) => {
+      if (!word) return;
+      if (/^\s+$/.test(word)) { el.appendChild(document.createTextNode(' ')); return; }
+      const w = document.createElement('span');
+      w.style.display = 'inline-block';
+      w.style.whiteSpace = 'nowrap';
+      Array.from(word).forEach((c) => {
+        const sp = document.createElement('span');
+        sp.className = 'pj-ch is-anim';
+        sp.textContent = c;
+        sp.style.animationDelay = (n * 38) + 'ms';
+        n += 1;
+        w.appendChild(sp);
+      });
+      el.appendChild(w);
+    });
+  }
+
+  moveGal(id, dir) {
+    this.setState((st) => {
+      const cur = st.gal[id] || 0;
+      const next = (cur + dir + GAL_N) % GAL_N;
+      return { gal: Object.assign({}, st.gal, { [id]: next }) };
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.sweepTimer);
+    clearInterval(this.revealTimer);
+    document.removeEventListener('play', this.onAnyPlay, true);
+    document.removeEventListener('click', this.onAnyClick, true);
+    document.removeEventListener('mouseover', this.onTileOver, true);
+    document.removeEventListener('mouseout', this.onTileOut, true);
+    if (this.io) this.io.disconnect();
+    if (this.titleIo) this.titleIo.disconnect();
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onHeaderScroll);
+    window.removeEventListener('mousemove', this.onHeaderMove);
+    window.removeEventListener('resize', this.onScroll);
+  }
+
+  set(filter) { return () => this.setState({ filter }); }
+
+  trackId(p, i) { return p.slot + '-' + i; }
+
+  toggleTrack(id, src) {
+    return (e) => {
+      if (e) e.stopPropagation();
+      if (!src) return;
+      if (!this.audio) {
+        this.audio = new Audio();
+        this.audio.addEventListener('timeupdate', () => {
+          const a = this.audio;
+          const pct = a.duration ? (a.currentTime / a.duration) * 100 : 0;
+          const cur = this.state.playing;
+          if (cur) this.setState((st) => ({ prog: Object.assign({}, st.prog, { [cur]: pct }) }));
+        });
+        this.audio.addEventListener('ended', () => this.setState({ playing: null }));
+      }
+      const a = this.audio;
+      if (this.state.playing === id) { a.pause(); this.setState({ playing: null }); return; }
+      a.pause();
+      if (a.getAttribute('src') !== src) { a.src = src; }
+      a.currentTime = 0;
+      const p = a.play();
+      if (p && p.catch) p.catch(() => {});
+      this.setState((st) => ({ playing: id, prog: Object.assign({}, st.prog, { [id]: 0 }) }));
+    };
+  }
+
+
+  renderVals() {
+    const f = this.state.filter;
+    const visiveis = CATS.filter((c) => !c.oculto);
+    const cats = f === 'all' ? visiveis : visiveis.filter((c) => c.key === f);
+    const bars = BARS.map((h) => ({ h: h + '%' }));
+    const lb = this.state.lb;
+    const lbCur = lb ? lb.list[lb.i] : null;
+    return {
+      lbOpen: !!lb,
+      lbSrc: lbCur ? lbCur.src : '',
+      lbPlay: (e) => {
+        const v = e && e.target;
+        if (!v) return;
+        v.volume = 1;
+        v.muted = false;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
+      },
+      lbWidth: lbCur && lbCur.ar === 'pj-tile-916' ? '900px' : '1180px',
+      lbVClass: lbCur && lbCur.ar === 'pj-tile-916' ? 'is-portrait' : '',
+      lbHref: lbCur && lbCur.href ? lbCur.href : '',
+      lbHasLink: !!(lbCur && lbCur.href),
+      lbIsVideo: !!(lbCur && /\.(mp4|webm)$/i.test(lbCur.src)),
+      lbIsImage: !!(lbCur && !/\.(mp4|webm)$/i.test(lbCur.src)),
+      lbTitle: lbCur ? lbCur.title : '',
+      lbKind: lbCur ? lbCur.kind : '',
+      lbCaption: lbCur ? lbCur.legenda : '',
+      lbCount: lb ? String(lb.i + 1).padStart(2, '0') + ' / ' + String(lb.list.length).padStart(2, '0') : '',
+      lbRef: this.keepVideo,
+      lbClose: () => { this.killVideo(document.querySelector('.pj-lb-video')); this.killVideo(this.lbVideo); this.lbVideo = null; this.setState({ lb: null }); },
+      lbStop: (e) => { if (e) e.stopPropagation(); },
+      lbPrev: this.moveLightbox(-1),
+      lbNext: this.moveLightbox(1),
+      showAll: this.set('all'),
+      pickCases: this.set('cases'),
+      pickDesign: this.set('design'),
+      pickFilm: this.set('film'),
+      pickMusic: this.set('music'),
+      pickMkt: this.set('mkt'),
+      groups: cats.map((c) => {
+        const all = PROJECTS[c.key] || [];
+        const overview = f === 'all';
+        const previewCount = c.preview || PREVIEW_COUNT;
+        // Na aba "Todos", categorias com subcategorias mostram 2 itens de cada — uma coletânea.
+        const sampled = () => {
+          if (!c.subs.length) return all.slice(0, previewCount);
+          const out = [];
+          c.subs.forEach((sub) => {
+            all.filter((p) => p.sub === sub.id).slice(0, 2).forEach((p) => out.push(p));
+          });
+          if (!out.length) return all.slice(0, previewCount);
+          // ordem embaralhada, mas estável entre renders
+          const seeded = out.map((p, k) => ({ p: p, r: ((k + 1) * 2654435761 % 1013904223) % 997 }));
+          seeded.sort((a, b) => a.r - b.r);
+          return seeded.map((x) => x.p);
+        };
+        const items = overview ? sampled() : all;
+
+        const mapItem = (p, i) => {
+          const id = c.key + '-' + p.slot;
+          const base = {
+            n: String(i + 1).padStart(2, '0'),
+            slot: p.slot,
+            title: p.title,
+            year: p.year,
+            role: p.role,
+            resumo: p.resumo,
+            ratio: c.ratio,
+            ph: c.ph,
+            kind: p.subLabel || c.title,
+            tags: (p.tags || p.frentes || []).map((t) => ({ t })),
+            cardClass: c.key === 'cases' ? 'pj-case' : '',
+            pageSoon: c.key === 'cases' && !p.page,
+            isCase: c.key === 'cases',
+            tint: p.tint || c.accent,
+            teaser: (p.resumo || '').split('. ')[0] + '.',
+            legenda: p.legenda || p.resumo || '',
+            tileClass: overview ? '' : (p.ar || (p.tall ? 'pj-tile-tall' : '')),
+            fmt: p.ar || '',
+            isFilm: !!(p.video || p.href),
+            hasPreview: !!p.video,
+            hasSlot: !(p.video && !p.img),
+            tipo: p.tipo || '',
+            stacked: (p.stack || 1) > 1 ? 'is-stacked' : '',
+            isCarousel: (p.stack || 1) > 1 || !!(p.slides && p.slides.length),
+            slideCount: (p.stack || 1) > 1 ? String(p.stack).padStart(2, '0') : (p.slides ? String(p.slides.length).padStart(2, '0') : ''),
+            hasTipo: !!p.tipo,
+            prevClass: p.video && !p.img ? 'is-cover' : '',
+            video: p.video || '',
+            href: p.href || '',
+            isLink: !!p.href && !(p.hrefs && p.hrefs.length > 1),
+            linkLabel: p.linkLabel || 'YouTube',
+            postSlides: p.covers && p.covers.length ? p.covers : (p.group && p.group.length ? p.group : (p.video ? [p.video] : (p.slides || null))),
+            hrefs: p.hrefs || null,
+            parts: p.parts || null,
+            selo: p.selo || '',
+            hasSelo: !!p.selo,
+            isLinkGroup: !!(p.hrefs && p.hrefs.some(Boolean)),
+            partLeg: p.partLeg || null,
+
+            galShift: (-100 * (this.state.gal[id] || 0)) + '%',
+            galCount: String((this.state.gal[id] || 0) + 1).padStart(2, '0') + ' / ' + String(GAL_N).padStart(2, '0'),
+            galPrev: (e) => { if (e) e.stopPropagation(); this.moveGal(id, -1); },
+            galNext: (e) => { if (e) e.stopPropagation(); this.moveGal(id, 1); },
+            slides: Array.from({ length: GAL_N }, (_, k) => ({
+              id: p.slot + '-g' + (k + 1),
+              src: ((p.gal && p.gal[k]) || ''),
+              ph: 'imagem ' + (k + 1),
+              isVideo: /\.(mp4|webm)$/i.test((p.gal && p.gal[k]) || ''),
+              isImage: !/\.(mp4|webm)$/i.test((p.gal && p.gal[k]) || ''),
+              on: (this.state.gal[id] || 0) === k ? '1' : '0',
+              go: (e) => { if (e) e.stopPropagation(); this.setState((st) => ({ gal: Object.assign({}, st.gal, { [id]: k }) })); }
+            })),
+            credito: p.credito || '',
+            hasCredito: !!p.credito,
+            wide: p.slot + '-wide',
+            gal: p.gal || [],
+            img: p.img || '',
+            imgWide: p.imgWide || '',
+            m1: p.slot + '-m1',
+            m2: p.slot + '-m2',
+            m3: p.slot + '-m3',
+            hasPage: !!p.page,
+            page: p.page || '#',
+            platforms: p.platforms || '',
+            hasPlatforms: !!p.platforms,
+            noPlatforms: c.key === 'music' && !p.platforms,
+            open: this.state.openPj[id] ? '1' : '0',
+            cursor: c.key === 'cases' ? 'pointer' : 'default',
+            toggle: (e) => {
+              if (e && e.target && e.target.closest && (e.target.closest('a') || e.target.closest('image-slot'))) return;
+              this.setState((st) => ({ openPj: Object.assign({}, st.openPj, { [id]: !st.openPj[id] }) }));
+            }
+          };
+          if (p.tracks) {
+            base.trackLabel = p.tracks.length === 1 ? '1 prévia' : p.tracks.length + ' prévias';
+            base.tracks = p.tracks.map((t, k) => {
+              const tid = this.trackId(p, k);
+              const playing = this.state.playing === tid;
+              const pct = this.state.prog[tid] || 0;
+              return {
+                name: t.name,
+                bars: bars,
+                icon: t.src ? (playing ? '❚❚' : '▶') : '·',
+                btnBg: playing ? '#FF00EE' : 'transparent',
+                btnInk: playing ? '#FFFCEE' : '#232323',
+                cursor: t.src ? 'pointer' : 'not-allowed',
+                prog: pct + '%',
+                progInner: pct > 0 ? (10000 / pct) + '%' : '0%',
+                time: t.src ? 'prévia' : 'em breve',
+                toggle: this.toggleTrack(tid, t.src)
+              };
+            });
+          }
+          return base;
+        };
+
+        const withZoom = (block, bi) => {
+          const list = block.items.map((it) => ({ src: it.img, title: it.title, kind: it.kind, legenda: it.legenda }));
+          block.items = block.items.map((it, k) => {
+            if (it.href && !it.isLinkGroup) {
+              return Object.assign({}, it, { zoom: (e) => { if (e) e.stopPropagation(); window.open(it.href, '_blank', 'noopener'); } });
+            }
+            if (it.postSlides && it.postSlides.length) {
+              const own = it.postSlides.map((src, si) => ({ src: src, title: (it.parts && it.parts[si]) || it.title, kind: it.kind + ' · ' + (si + 1) + '/' + it.postSlides.length, legenda: (it.partLeg && it.partLeg[si]) || it.legenda, ar: it.fmt, href: (it.hrefs && it.hrefs[si]) || '' }));
+              return Object.assign({}, it, { zoom: this.openLightbox(own, 0) });
+            }
+            return Object.assign({}, it, { zoom: this.openLightbox(list, k) });
+          });
+          const key = c.key + '-' + (block.label || 'all') + '-' + bi;
+          const len = block.items.length;
+          const idx = this.state.row[key] || 0;
+          block.hasNav = len > 3;
+          block.shift = 'calc(' + (-100 * idx / 3) + '% - ' + idx + ' * clamp(10px,1.4vw,18px) / 3)';
+          block.prev = this.moveRow(key, -1, len);
+          block.next = this.moveRow(key, 1, len);
+          return block;
+        };
+
+        const blocks = ((overview || !c.subs.length)
+          ? [{ hasLabel: false, label: '', count: '', items: items.map(mapItem) }]
+          : c.subs.map((sub) => {
+              let subItems = all.filter((p) => p.sub === sub.id);
+              if (c.key === 'film') {
+                const order = [];
+                const bag = {};
+                subItems.forEach((p) => {
+                  const t = p.tipo || 'Outros';
+                  if (!bag[t]) { bag[t] = []; order.push(t); }
+                  bag[t].push(p);
+                });
+                subItems = order.map((t) => {
+                  const g = bag[t];
+                  const head = g[0];
+                  return Object.assign({}, head, {
+                    title: t,
+                    slot: 'fmg-' + sub.id + '-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+                    legenda: g.length > 1 ? g.length + ' vídeos · ' + g.map((x) => x.title.replace(/^[^—]*—\s*/, '')).join(', ') : head.legenda,
+                    stack: g.length,
+                    parts: g.map((x) => x.title),
+                    hrefs: g.map((x) => x.href || ''),
+                    covers: g.map((x) => x.img || ''),
+                    partLeg: g.map((x) => x.legenda),
+                    group: g.map((x) => x.video || x.href).filter(Boolean)
+                  });
+                });
+              }
+              return {
+                hasLabel: true,
+                label: sub.label,
+                count: String(subItems.length).padStart(2, '0'),
+                items: subItems.map(mapItem)
+              };
+            }).filter((b) => b.items.length)).map(withZoom);
+
+        return {
+          id: c.id,
+          title: c.title,
+          accent: c.accent,
+          meta: c.meta,
+          metaItems: c.meta.split(' · ').map((t) => ({ t })),
+          bg: c.bg,
+          ink: c.ink,
+          line: c.line,
+          card: c.card,
+          tabink: c.tabink,
+          tab: c.tab,
+          gridClass: (overview ? 'pj-grid-3' : 'pj-grid-auto') + (c.key === 'cases' ? ' pj-cases' : ''),
+          isIndex: c.layout === 'index',
+          isGallery: c.layout === 'gallery',
+          isCards: c.layout === 'cards',
+          isList: c.layout === 'list',
+          isGrid: c.layout === 'grid',
+          hasMore: overview && all.length > items.length,
+          moreLabel: 'Ver todos de ' + c.title + ' (' + all.length + ')',
+          more: this.set(c.key),
+          items: items.map(mapItem),
+          blocks: blocks
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preload" href="fonts/Workbench-Variable.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/OCRB.otf" as="font" type="font/otf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/EndlessSunriseAlternative.otf" as="font" type="font/otf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/Jersey20.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/Monofett.ttf" as="font" type="font/ttf" crossorigin="anonymous" />
+<link rel="preload" href="fonts/DogmaOutline.otf" as="font" type="font/otf" crossorigin="anonymous" />
+<style>
+@font-face { font-family: "Workbench"; src: url("fonts/Workbench-Variable.ttf") format("truetype-variations"); font-weight: 100 900; font-display: block; }
+@font-face { font-family: "OCRB"; src: url("fonts/OCRB.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "EndlessSunrise"; src: url("fonts/EndlessSunriseAlternative.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "DogmaOutline"; src: url("fonts/DogmaOutline.otf") format("opentype"); font-display: block; }
+@font-face { font-family: "Monofett"; src: url("fonts/Monofett.ttf") format("truetype"); font-display: block; }
+@font-face { font-family: "Jersey"; src: url("fonts/Jersey20.ttf") format("truetype"); font-display: block; }
+html, body { margin: 0; padding: 0; background: #002DD9; }
+a { color: #FFFCEE; text-decoration: none; }
+a:hover { color: var(--dm-yellow,#FFBF00); }
+@keyframes dm-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes dm-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dm-logo { from { opacity: 0; transform: translate(-50%,-50%) scale(1.05); } to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+@keyframes dm-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+.js-reveal [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1); }
+.js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+.js-reveal #projetos [data-reveal] { transition-duration: 500ms; transition-timing-function: ease; }
+.js-reveal .dm-split .dm-ch { display: inline-block; opacity: 0; transform: translateY(0.45em); transition: opacity 420ms cubic-bezier(0.22,1,0.36,1), transform 420ms cubic-bezier(0.22,1,0.36,1); }
+.js-reveal .dm-split.is-in .dm-ch { opacity: 1; transform: none; }
+.js-reveal .dm-type .dm-ch { transform: none; transition: opacity 1ms linear; }
+.js-reveal .dm-type .dm-caret { display: inline-block; width: 0.06em; min-width: 3px; height: 0.82em; margin-left: 0.08em; vertical-align: -0.06em; background: currentColor; opacity: 0; }
+.js-reveal .dm-type.is-in .dm-caret { animation: dm-blink 640ms steps(1) infinite; }
+@keyframes dm-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .js-reveal .dm-split .dm-ch { opacity: 1 !important; transform: none !important; } .js-reveal .dm-type .dm-caret { animation: none !important; opacity: 1 !important; } }
+@media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1 !important; transform: none !important; } * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+<div style="background:#002DD9;color:#FFFCEE;font-family:OCRB,monospace">
+
+  <header data-header="" style="position:sticky;top:0;z-index:30;transition:transform 320ms cubic-bezier(0.22,1,0.36,1);will-change:transform;background:#002DD9;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px clamp(16px,4vw,64px);flex-wrap:wrap">
+    <a href="index.html" style="font-family:OCRB,monospace;font-size:clamp(0.66rem,0.9vw,0.76rem);letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE;border-bottom:1px solid #FFFCEE;padding-bottom:3px" style-hover="color:var(--dm-yellow,#FFBF00);border-color:var(--dm-yellow,#FFBF00)">Home</a>
+    <a href="sobre.html" style="font-family:OCRB,monospace;font-size:clamp(0.66rem,0.9vw,0.76rem);letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:var(--dm-pink,#FF00EE)">Sobre mim</a>
+    <a href="projetos.html" style="font-family:OCRB,monospace;font-size:clamp(0.66rem,0.9vw,0.76rem);letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:var(--dm-yellow,#FFBF00)">Projetos</a>
+    <a href="contato.html" style="font-family:OCRB,monospace;font-size:clamp(0.66rem,0.9vw,0.76rem);letter-spacing:0.14em;text-transform:uppercase;color:#FFFCEE" style-hover="color:var(--dm-green,#15BF00)">Contato</a>
+  </header>
+
+  <section data-screen-label="Hero" style="position:relative;overflow:hidden;min-height:calc(100vh - 68px);display:flex;flex-direction:column;background:#002DD9">
+    <div style="position:absolute;inset:0;pointer-events:none;opacity:var(--dm-grid-op,0.16);background-image:repeating-linear-gradient(to right, rgba(255,252,238,0.55) 0 1px, transparent 1px 56px), repeating-linear-gradient(to bottom, rgba(255,252,238,0.55) 0 1px, transparent 1px 56px)"></div>
+    <div style="position:absolute;inset:0;pointer-events:none;opacity:var(--dm-noise-op,0.09);background-image:radial-gradient(rgba(0,0,0,0.9) 1px, transparent 1px);background-size:3px 3px;mix-blend-mode:multiply"></div>
+
+    <div style="position:relative;flex:1;min-height:calc(100vh - 122px);overflow:hidden">
+      <img src="logo-derivamente.svg" alt="Deriva.Mente — Lucas Guedes Portfolio" style="position:absolute;top:50%;left:50%;width:min(124vw,(100vh - 96px)*2.12);height:auto;animation:dm-logo 1200ms cubic-bezier(0.22,1,0.36,1) both;transform:translate(-50%,-50%)">
+    </div>
+
+    <div style="position:relative;z-index:7;background:#002DD9;border-top:1px solid rgba(255,252,238,0.28);overflow:hidden;padding:12px 0">
+      <div style="display:flex;width:max-content;animation:dm-marquee var(--dm-marquee-dur,26s) linear infinite">
+        <div style="display:flex;gap:40px;padding-right:40px;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.6vw,1.4rem);color:#FFFCEE;white-space:nowrap">
+          <span>Identidade visual</span><span style="color:var(--dm-yellow,#FFBF00)">✳</span><span>Direção de arte</span><span style="color:var(--dm-red,#FF0000)">✳</span><span>Filmmaking</span><span style="color:var(--dm-pink,#FF00EE)">✳</span><span>Música</span><span style="color:var(--dm-green,#15BF00)">✳</span><span>Marketing</span><span style="color:var(--dm-yellow,#FFBF00)">✳</span>
+        </div>
+        <div style="display:flex;gap:40px;padding-right:40px;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.6vw,1.4rem);color:#FFFCEE;white-space:nowrap">
+          <span>Identidade visual</span><span style="color:var(--dm-yellow,#FFBF00)">✳</span><span>Direção de arte</span><span style="color:var(--dm-red,#FF0000)">✳</span><span>Filmmaking</span><span style="color:var(--dm-pink,#FF00EE)">✳</span><span>Música</span><span style="color:var(--dm-green,#15BF00)">✳</span><span>Marketing</span><span style="color:var(--dm-green,#15BF00)">✳</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Sobre (prévia)" style="background:#FFFCEE;color:#232323;padding:clamp(48px,8vw,110px) clamp(16px,4vw,64px);border-bottom:1px solid #232323;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(28px,5vw,72px);align-items:start">
+    <div data-reveal="">
+      <p style="margin:0 0 20px;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dm-pink,#FF00EE)">01 · Sobre mim</p>
+      <h2 style="margin:0;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(2rem,6vw,4.2rem);line-height:0.95;color:#002DD9">BEM VINDOS AO PENSAMENTO EM DERIVA.</h2>
+      
+      
+      <p style="max-width:52ch;margin:28px 0 0;font-size:clamp(0.88rem,1.05vw,1rem);line-height:1.75;letter-spacing:0.02em">LUCAS GUEDES é Designer, Filmmaker e Graduando em Publicidade e Propaganda (ESPM) do Rio de Janeiro.<br><br>Entre música, cinema e cultura visual, desenvolve trabalhos guiados por tipografias carismáticas, textura e composições de impacto.</p>
+      <a href="sobre.html" style="display:inline-flex;align-items:center;gap:clamp(16px,2.5vw,28px);margin-top:40px;padding:16px clamp(20px,3vw,32px);border:2px solid #002DD9;border-radius:14px;font-family:DogmaOutline,sans-serif;text-transform:uppercase;color:#002DD9;transition:background 220ms cubic-bezier(0.22,1,0.36,1),color 220ms,transform 220ms cubic-bezier(0.22,1,0.36,1),box-shadow 220ms" style-hover="background:#002DD9;color:#FFFCEE;transform:translateY(-4px);box-shadow:8px 8px 0 var(--dm-pink,#FF00EE)">
+        <span style="display:flex;flex-direction:column;gap:2px;align-items:flex-start">
+          <span style="font-size: 26px; line-height: 1; letter-spacing: 0.06em">Conheça minha</span>
+          <span style="font-size:clamp(2.2rem,5vw,3.6rem);line-height:0.92;letter-spacing:0.01em">História</span>
+        </span>
+        <svg viewBox="0 0 64 40" aria-hidden="true" style="width:clamp(44px,6vw,68px);height:auto;flex:0 0 auto;overflow:visible">
+          <path d="M2 20 H58 M42 6 L58 20 L42 34" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"></path>
+          <path d="M2 20 H58 M42 6 L58 20 L42 34" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" transform="translate(0,7)" opacity="0.55"></path>
+        </svg>
+      </a>
+    </div>
+    <div data-reveal="" style="position:relative;aspect-ratio:4/5;border:1px solid #232323">
+      <image-slot id="home-retrato" shape="rect" src="img/slots/home-retrato.webp" placeholder="retrato — 4:5"></image-slot>
+    </div>
+  </section>
+
+  <section data-screen-label="Projetos (destaques)" id="projetos" style="background:var(--dm-proj-bg,#232323);color:var(--dm-proj-ink,#FFFCEE);padding:clamp(48px,8vw,110px) clamp(16px,4vw,64px)">
+    <div data-reveal="" style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(32px,5vw,64px)">
+      <div>
+        <p style="margin:0 0 20px;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dm-yellow,#FFBF00)">02 · Projetos</p>
+        <h2 style="margin: 0; font-family: Workbench,sans-serif; font-variation-settings: 'SCAN' 0,'BLED' 0; font-size: clamp(2rem,6vw,4.2rem); line-height: 0.95; color: #FEBF00">SELEÇÃO DE TRABALHOS</h2>
+      </div>
+      <p style="max-width:38ch;margin:0;font-size:clamp(0.85rem,1vw,0.95rem);line-height:1.7;letter-spacing:0.02em;color:var(--dm-proj-dim,rgba(255,252,238,0.85))">Alguns dos meus projetos recentes.</p>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+      <span style="width:12px;height:12px;border-radius:50%;background:var(--dm-yellow,#FFBF00)"></span>
+      <span data-split="" style="font-family: Monofett,monospace; font-size: 70px; line-height: 1; letter-spacing: 0.01em">Design</span>
+      <span data-rule="" style="flex:1;height:1px;background:var(--dm-proj-line,rgba(255,252,238,0.35));transform:scaleX(0);transform-origin:left center"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px;margin-bottom:clamp(36px,5vw,64px)">
+      <sc-for list="{{ designHighlights }}" as="p" hint-placeholder-count="3">
+        <a href="projetos.html#design" data-reveal="" style="display:flex;flex-direction:column;color:var(--dm-proj-ink,#FFFCEE);transition:opacity 500ms ease,transform 500ms ease;position:relative" style-hover="transform:translateY(-10px)">
+          <span style="align-self:flex-start;display:flex;align-items:center;gap:8px;padding:7px 20px 6px;border:1px solid var(--dm-proj-line,rgba(255,252,238,0.45));border-bottom:0;border-radius:10px 14px 0 0;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--dm-yellow,#FFBF00);color:#232323;transform:translateY(1px)">{{ p.cat }}</span>
+          <span style="display:flex;flex-direction:column;border:1px solid var(--dm-proj-line,rgba(255,252,238,0.45));border-radius:0 10px 10px 10px;overflow:hidden;transition:border-color 240ms,box-shadow 240ms cubic-bezier(0.22,1,0.36,1)" style-hover="border-color:var(--dm-yellow,#FFBF00);box-shadow:10px 12px 0 var(--dm-yellow,#FFBF00)">
+            <span style="position:relative;display:block;aspect-ratio:3/4;border-bottom:1px solid var(--dm-proj-line,rgba(255,252,238,0.45))">
+              <image-slot id="{{ p.slot }}" data-vsrc="{{ p.src }}" shape="rect" placeholder="{{ p.ph }}"></image-slot>
+            </span>
+            <span style="padding:16px 18px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px">
+              <span style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                <span style="font-family:Jersey,monospace;font-size:1.1rem;color:var(--dm-yellow,#FFBF00)">{{ p.n }}</span>
+                <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:1.05rem;line-height:1.2">{{ p.title }}</span>
+              </span>
+              <span style="font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dm-yellow,#FFBF00);white-space:nowrap">Ver case →</span>
+            </span>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px">
+      <span style="width:12px;height:12px;border-radius:50%;background:var(--dm-red,#FF0000)"></span>
+      <span data-split="" style="font-family: Monofett,monospace; font-size: 70px; line-height: 1; letter-spacing: 0.01em">Filmmaking</span>
+      <span data-rule="" style="flex:1;height:1px;background:var(--dm-proj-line,rgba(255,252,238,0.35));transform:scaleX(0);transform-origin:left center"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
+      <sc-for list="{{ filmHighlights }}" as="p" hint-placeholder-count="3">
+        <a href="projetos.html#filmmaking" data-reveal="" style="display:flex;flex-direction:column;color:var(--dm-proj-ink,#FFFCEE);transition:opacity 500ms ease,transform 500ms ease;position:relative" style-hover="transform:translateY(-10px)">
+          <span style="align-self:flex-start;display:flex;align-items:center;gap:8px;padding:7px 20px 6px;border:1px solid var(--dm-proj-line,rgba(255,252,238,0.45));border-bottom:0;border-radius:10px 14px 0 0;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--dm-red,#FF0000);color:#232323;transform:translateY(1px)">{{ p.cat }}</span>
+          <span style="display:flex;flex-direction:column;border:1px solid var(--dm-proj-line,rgba(255,252,238,0.45));border-radius:0 10px 10px 10px;overflow:hidden;transition:border-color 240ms,box-shadow 240ms cubic-bezier(0.22,1,0.36,1)" style-hover="border-color:var(--dm-red,#FF0000);box-shadow:10px 12px 0 var(--dm-red,#FF0000)">
+            <span style="position:relative;display:block;aspect-ratio:16/9;border-bottom:1px solid var(--dm-proj-line,rgba(255,252,238,0.45))">
+              <image-slot id="{{ p.slot }}" shape="rect" placeholder="{{ p.ph }}"></image-slot>
+            </span>
+            <span style="padding:16px 18px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px">
+              <span style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                <span style="font-family:Jersey,monospace;font-size:1.1rem;color:var(--dm-red,#FF0000)">{{ p.n }}</span>
+                <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:1.05rem;line-height:1.2">{{ p.title }}</span>
+              </span>
+              <span style="font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--dm-red,#FF0000);white-space:nowrap">Ver case →</span>
+            </span>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+
+    <div data-reveal="" style="display:flex;justify-content:center;margin-top:clamp(40px,6vw,72px)">
+      <a href="projetos.html" style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid var(--dm-proj-ink,#FFFCEE);border-radius:999px;padding:15px 34px;color:var(--dm-proj-ink,#FFFCEE);transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:var(--dm-yellow,#FFBF00);border-color:var(--dm-yellow,#FFBF00);color:var(--dm-proj-bg,#232323);transform:translateY(-3px)">Ver todos os projetos →</a>
+    </div>
+  </section>
+
+  <section data-screen-label="Contato (fecho)" style="background:#002DD9;color:#FFFCEE;padding:clamp(48px,8vw,110px) clamp(16px,4vw,64px) 0">
+    <div data-reveal="">
+      <p style="margin:0 0 20px;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dm-green,#15BF00)">03 · Contato</p>
+      <h2 style="margin:0;max-width:22ch;font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(2.2rem,8vw,6rem);line-height:0.92">Vamos criar algo juntos?</h2>
+      <p style="max-width:48ch;margin:28px 0 0;font-size:clamp(0.88rem,1.05vw,1rem);line-height:1.75;letter-spacing:0.02em">Identidade visual, direção de arte, videoclipe, campanha ou trilha — me conte o que você quer construir e eu respondo com um caminho.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;margin-top:clamp(36px,5vw,64px);border-top:1px solid rgba(255,252,238,0.35)">
+      <a href="mailto:Lukguedes28@gmail.com" data-reveal="" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:var(--dm-red,#FF0000);padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">E-mail</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem);min-width:0;overflow-wrap:anywhere">Lukguedes28@gmail.com</span>
+        <span>↗</span>
+      </a>
+      <a href="https://wa.me/5521982095118" target="_blank" rel="noopener" data-reveal="" style="display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; padding: 22px 4px; border-bottom: 1px solid rgba(255,252,238,0.35); color: #FFFCEE; transition: all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:var(--dm-green,#15BF00);padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">WhatsApp</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">(21) 98209-5118</span>
+        <span>↗</span>
+      </a>
+      <a href="https://instagram.com/deriva.mente" target="_blank" rel="noopener" data-reveal="" style="display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:22px 4px;border-bottom:1px solid rgba(255,252,238,0.35);color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:var(--dm-pink,#FF00EE);padding-left:18px">
+        <span style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;opacity:0.75">Instagram</span>
+        <span style="font-family:Workbench,sans-serif;font-variation-settings:'SCAN' 0,'BLED' 0;font-size:clamp(0.9rem,1.7vw,1.25rem)">@deriva.mente</span>
+        <span>↗</span>
+      </a>
+    </div>
+
+    <div data-reveal="" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:clamp(32px,5vw,56px) 0">
+      <a href="contato.html" style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;border:1px solid #FFFCEE;border-radius:999px;padding:15px 34px;color:#FFFCEE;transition:all 220ms cubic-bezier(0.22,1,0.36,1)" style-hover="background:var(--dm-green,#15BF00);border-color:var(--dm-green,#15BF00);transform:translateY(-3px)">Todos os canais →</a>
+      <span style="font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,252,238,0.8)">ATÉ MAIS E OBRIGADO PELOS PEIXES.</span>
+    </div>
+
+    <div style="border-top:1px solid rgba(255,252,238,0.28);padding:22px 0 28px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <span style="font-family:EndlessSunrise,cursive;font-size:1.7rem;line-height:1">Deriva.Mente</span>
+      <span style="font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,252,238,0.8)">Lucas Guedes · Designer gráfico &amp; filmmaker · 2026</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;paleta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Completa (4 acentos)&quot;,&quot;Duotone amarelo&quot;,&quot;Ácido (verde + rosa)&quot;,&quot;Mono creme&quot;],&quot;default&quot;:&quot;Completa (4 acentos)&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identidade visual&quot;},&quot;tomProjetos&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Grafite&quot;,&quot;Creme&quot;,&quot;Azul&quot;],&quot;default&quot;:&quot;Grafite&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identidade visual&quot;},&quot;textura&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Atmosfera&quot;},&quot;velocidadeFaixa&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:26,&quot;min&quot;:8,&quot;max&quot;:60,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Atmosfera&quot;}}">
+const PALETAS = {
+  'Completa (4 acentos)': { yellow: '#FFBF00', red: '#FF0000', pink: '#FF00EE', green: '#15BF00' },
+  'Duotone amarelo': { yellow: '#FFBF00', red: '#FFBF00', pink: '#FFBF00', green: '#FFBF00' },
+  'Ácido (verde + rosa)': { yellow: '#15BF00', red: '#FF00EE', pink: '#FF00EE', green: '#15BF00' },
+  'Mono creme': { yellow: '#FFFCEE', red: '#FFFCEE', pink: '#FFFCEE', green: '#FFFCEE' }
+};
+
+const TONS = {
+  'Grafite': { bg: '#232323', ink: '#FFFCEE', line: 'rgba(255,252,238,0.45)', dim: 'rgba(255,252,238,0.85)' },
+  'Creme': { bg: '#FFFCEE', ink: '#232323', line: 'rgba(35,35,35,0.45)', dim: 'rgba(35,35,35,0.8)' },
+  'Azul': { bg: '#002DD9', ink: '#FFFCEE', line: 'rgba(255,252,238,0.45)', dim: 'rgba(255,252,238,0.85)' }
+};
+
+class Component extends DCLogic {
+  applyTheme() {
+    const r = document.documentElement.style;
+    const p = PALETAS[this.props.paleta] || PALETAS['Completa (4 acentos)'];
+    const t = TONS[this.props.tomProjetos] || TONS['Grafite'];
+    r.setProperty('--dm-yellow', p.yellow);
+    r.setProperty('--dm-red', p.red);
+    r.setProperty('--dm-pink', p.pink);
+    r.setProperty('--dm-green', p.green);
+    r.setProperty('--dm-proj-bg', t.bg);
+    r.setProperty('--dm-proj-ink', t.ink);
+    r.setProperty('--dm-proj-line', t.line);
+    r.setProperty('--dm-proj-dim', t.dim);
+    const tex = this.props.textura ?? 1;
+    r.setProperty('--dm-grid-op', String(0.16 * tex));
+    r.setProperty('--dm-noise-op', String(0.09 * tex));
+    r.setProperty('--dm-marquee-dur', (this.props.velocidadeFaixa ?? 26) + 's');
+  }
+
+  splitTitles() {
+    if (!this.motionReady) return;
+    const targets = document.querySelectorAll('#dc-root h2, #dc-root [data-split]');
+    targets.forEach((el) => {
+      if (el.dataset.dmSplit) return;
+      const text = el.textContent;
+      if (!text || !text.trim()) return;
+      el.dataset.dmSplit = '1';
+      el.classList.add('dm-split');
+      const typing = el.hasAttribute('data-split');
+      if (typing) el.classList.add('dm-type');
+      const step = typing ? 65 : 35;
+      el.textContent = '';
+      let n = 0;
+      text.split(/(\s+)/).forEach((word) => {
+        if (!word) return;
+        if (/^\s+$/.test(word)) { el.appendChild(document.createTextNode(' ')); return; }
+        const w = document.createElement('span');
+        w.style.display = 'inline-block';
+        w.style.whiteSpace = 'nowrap';
+        Array.from(word).forEach((ch) => {
+          const c = document.createElement('span');
+          c.className = 'dm-ch';
+          c.textContent = ch;
+          c.style.transitionDelay = (n * step) + 'ms';
+          n += 1;
+          w.appendChild(c);
+        });
+        el.appendChild(w);
+      });
+      if (typing) {
+        const caret = document.createElement('span');
+        caret.className = 'dm-caret';
+        el.appendChild(caret);
+      }
+      if (!this.titleIo) {
+        this.titleIo = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { (e.target.dmStart || (() => e.target.classList.add('is-in')))(); this.titleIo.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+      }
+      const start = () => {
+        el.classList.add('is-in');
+        if (typing) {
+          const dur = 2000;
+          const rule = el.parentElement && el.parentElement.querySelector('[data-rule]');
+          if (rule) {
+            rule.style.transition = 'transform ' + dur + 'ms cubic-bezier(0.05,0.85,0.2,1)';
+            requestAnimationFrame(() => { rule.style.transform = 'scaleX(1)'; });
+          }
+          setTimeout(() => { const c = el.querySelector('.dm-caret'); if (c) c.remove(); }, 3000);
+        }
+      };
+      el.dmStart = start;
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.95) start();
+      else this.titleIo.observe(el);
+    });
+  }
+
+  applySrcs() {
+    document.querySelectorAll('[data-vsrc]').forEach((el) => {
+      const v = el.getAttribute('data-vsrc');
+      if (!v || v.indexOf('{{') !== -1) return;
+      el.removeAttribute('data-vsrc');
+      el.setAttribute('src', v);
+    });
+  }
+
+  componentDidMount() {
+    this.applyTheme();
+    this.applySrcs();
+    this.srcTimer = setInterval(() => this.applySrcs(), 300);
+    document.body.classList.add('js-reveal');
+    this.headerMotion();
+    this.motionReady = false;
+    const go = () => { this.motionReady = true; this.splitTitles(); this.observe(); this.sweep(); };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(go));
+    this.observe();
+    this.onScroll = () => this.sweep();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+  }
+  delayFor(el, i) {
+    if (el.closest('#projetos') && el.parentElement) {
+      const sibs = Array.from(el.parentElement.children).filter((c) => c.hasAttribute('data-reveal'));
+      const k = sibs.indexOf(el);
+      if (k > -1) return k * 100 + 'ms';
+    }
+    return (i % 4) * 70 + 'ms';
+  }
+
+  sweep() {
+    if (!this.motionReady) return;
+    const h = window.innerHeight;
+    document.querySelectorAll('.dm-split:not(.is-in)').forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 || r.bottom < 0) { (el.dmStart || (() => el.classList.add('is-in')))(); }
+    });
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.95 && r.bottom > -80) { el.style.transitionDelay = this.delayFor(el, i); el.classList.add('is-in'); }
+    });
+  }
+
+  componentDidUpdate() { this.applyTheme(); this.applySrcs(); this.observe(); this.splitTitles(); }
+  headerMotion() {
+    const h = document.querySelector('[data-header]');
+    if (!h) return;
+    let last = window.scrollY;
+    let hidden = false;
+    const show = () => { if (hidden) { hidden = false; h.style.transform = 'none'; } };
+    const hide = () => { if (!hidden) { hidden = true; h.style.transform = 'translateY(-105%)'; } };
+    this.onHeaderScroll = () => {
+      const y = window.scrollY;
+      if (y < 90) show();
+      else if (y > last + 6) hide();
+      else if (y < last - 6) show();
+      last = y;
+    };
+    this.onHeaderMove = (e) => { if (e.clientY < 90) show(); };
+    window.addEventListener('scroll', this.onHeaderScroll, { passive: true });
+    window.addEventListener('mousemove', this.onHeaderMove, { passive: true });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.srcTimer);
+    if (this.io) this.io.disconnect();
+    if (this.titleIo) this.titleIo.disconnect();
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('scroll', this.onHeaderScroll);
+    window.removeEventListener('mousemove', this.onHeaderMove);
+    window.removeEventListener('resize', this.onScroll);
+  }
+
+  observe() {
+    if (!this.motionReady) return;
+    if (!this.io) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); this.io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    document.querySelectorAll('[data-reveal]:not(.is-in)').forEach((el, i) => {
+      el.style.transitionDelay = this.delayFor(el, i);
+      this.io.observe(el);
+    });
+  }
+
+  renderVals() {
+    return {
+      designHighlights: [
+        { n: '01', title: 'A realidade é um alívio', cat: 'Cartaz', slot: 'home-design-1', ph: 'cartaz 3:4', src: 'img/realidade-alivio.png' },
+        { n: '02', title: 'Delete Ya — Djo', cat: 'Cartaz editorial', slot: 'home-design-2', ph: 'cartaz 3:4', src: 'img/poster-djo.png' },
+        { n: '03', title: 'Terminei!', cat: 'Cartaz', slot: 'home-design-3', ph: 'cartaz 3:4', src: 'img/terminei.png' }
+      ],
+      filmHighlights: [
+        { n: '01', title: 'Projeto a definir', cat: 'Videoclipe', slot: 'home-film-1', ph: 'still 16:9' },
+        { n: '02', title: 'Projeto a definir', cat: 'Branded content', slot: 'home-film-2', ph: 'still 16:9' },
+        { n: '03', title: 'Projeto a definir', cat: 'Curta / doc', slot: 'home-film-3', ph: 'still 16:9' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
